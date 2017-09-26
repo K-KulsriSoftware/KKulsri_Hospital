@@ -20,6 +20,15 @@ class API :
 			else :
 				return False
 
+	def display_doctor_filter(self, doctor) :
+		display_doctor = {}
+		display_doctor['username'] = doctor['username']
+		display_doctor['doctor_name'] = doctor['doctor_name']
+		display_doctor['doctor_surname'] = doctor['doctor_surname']
+		display_doctor['department'] = doctor['department']
+		display_doctor['doctor_img'] = doctor['doctor_img']
+		return display_doctor
+		
 	# input : package_id(str), day(list of str), time('ช่วงเช้า'  or 'ช่วงบ่าย'), doctor_firstname(str), doctor_lastname(str), gender('ชาย' or 'หญิง')
 	def find_doctors(self, package_id=None, days=None, time=None, doctor_firstname=None, doctor_lastname=None, gender=None) :
 		if package_id == None :
@@ -72,7 +81,7 @@ class API :
 				if check :
 					continue
 
-			result_doctors.append(doctor)
+			result_doctors.append(self.display_doctor_filter(doctor))
 		return True, result_doctors
 
 	# input : username(str)

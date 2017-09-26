@@ -1,21 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from API import API
+from pprint import pprint
 
 api = API()
 
-status, doctors = api.find_doctors(package_id='p00001')
+#test find_doctors
+status, result = api.find_doctors(package_id='p00001')
 if status :
-	print(doctors)
+	pprint(result)
 else :
-	print('error' + doctors)
-
+	print('error' + result)
 
 #test show_profile
-#status , patient = api.show_profile(username='ekekjubjub')
-#print (status ," : ", patient)
+#status , result = api.show_profile(username='ekekjubjub')
+#print (status ," : ", result)
 
 #test show_detail
-#status , doctor = api.show_detail(doctor_name= "จักรพงษ์" , doctor_surname='คล้ายหนองสรวง')
-#status , doctor = api.show_detail('jakapong' ,'klainongsuang')
-#print (status ," : ", doctor)
+#status , result = api.show_detail(doctor_name= "จักรพงษ์" , doctor_surname='คล้ายหนองสรวง')
+#status , result = api.show_detail('jakapong' ,'klainongsuang')
+#print (status ," : ", result)
+
