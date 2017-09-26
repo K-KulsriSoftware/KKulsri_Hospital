@@ -87,3 +87,17 @@ class API :
 			return True, (list_patient)
 		else:
 			return False, "No username"
+	# input :doctor_name, doctor_surname
+	def show_detail(self, doctor_name=None, doctor_surname=None) :
+		list_detail = []
+		if doctor_name == None :
+			return False, 'no input doctor_name'
+
+	#	doctors = self.db.doctors.find(	[{'$match':{'doctor_name':doctor_name}},{'$match':{"doctor_surname":doctor_surname}}])
+		doctors = self.db.doctors.find({'doctor_name':doctor_name,"doctor_surname":doctor_surname})
+		for doctor in doctors:
+			list_detail.append(doctor)
+		if (len(list_detail) != 0):
+			return True, (list_detail)
+		else:
+			return False, "No doctor_name"
