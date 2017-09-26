@@ -156,20 +156,6 @@ def doctor(request):
     )
 
 
-def doctor_details(request):
-    """Renders the about page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/about.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
-    )
-
-
 def confirm(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)

@@ -19,7 +19,6 @@ urlpatterns = [
     url(r'^$', app.views.home, name='home'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),
-    url(r'^doctor_detail', app.views.doctor_detail, name='doctor_detail '),
     url(r'^register', app.views.register, name='register '),
     url(r'^member', app.views.member, name='member '),
     url(r'^departments', app.views.departments, name='departments '),
