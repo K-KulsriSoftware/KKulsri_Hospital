@@ -6,6 +6,14 @@ nav.navbar.navbar-default.custom-header{
   background-color:white;
 }
 
+.custom-header ul.nav.navbar-nav.links li {
+  transition: all 0.2s ease;
+}
+
+.custom-header ul.nav.navbar-nav.links li:hover {
+  background-color: #EEEEEE;
+}
+
 .custom-header ul.nav.navbar-nav.links li a{
   background-color:Transparent;
   color:black;
