@@ -44,3 +44,155 @@ def about(request):
             'year':datetime.now().year,
         }
     )
+
+
+def doctor_detail(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/doctor-detail.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+
+def register(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+def member(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+
+def departments(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+
+def regular_packages(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+
+def special_packages(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+
+def search_for_doctor(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+def doctor(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+
+def doctor_details(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+
+def confirm(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
+
+
+def payment(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/about.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )
