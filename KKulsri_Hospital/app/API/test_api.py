@@ -7,6 +7,8 @@ api = API()
 
 #test find_doctors
 status, result = api.find_doctors(package_id='p00001')
+#test auto_find_doctors
+status, result = api.auto_find_doctors(package_id='p00001')
 if status :
 	pprint(result)
 else :

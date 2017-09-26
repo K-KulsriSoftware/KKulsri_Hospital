@@ -84,6 +84,11 @@ class API :
 			result_doctors.append(self.display_doctor_filter(doctor))
 		return True, result_doctors
 
+	# input : package_id(str), user_id(str)
+	def auto_find_doctors(self, package_id=None, user_id=None) :
+		# use user_id in phase II
+		return self.find_doctors(package_id=package_id)
+
 	# input : username(str)
 	def show_profile(self, username=None) :
 		list_patient = []
