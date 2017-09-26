@@ -5,6 +5,7 @@ footer {
     height: 30px;
     width: 100%;
     position: absolute;
+    bottom: 0px;
 }
 
 footer > p {
