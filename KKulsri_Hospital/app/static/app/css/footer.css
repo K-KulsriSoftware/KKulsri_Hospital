@@ -3,6 +3,9 @@ footer {
     background-color: #3b3a36;
     font-size: 12px;
     height: 30px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
 }
 
 footer > p {
