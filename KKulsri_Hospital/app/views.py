@@ -65,7 +65,7 @@ def register(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/register.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -78,7 +78,7 @@ def member(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/member.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -92,7 +92,7 @@ def departments(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/departments.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -106,7 +106,7 @@ def regular_packages(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/regular-package.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -120,7 +120,7 @@ def special_packages(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/special-package.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -134,7 +134,7 @@ def search_for_doctor(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/doctor-search.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -147,7 +147,7 @@ def doctor(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/doctor.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -161,7 +161,7 @@ def confirm(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/confirm.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -175,7 +175,7 @@ def payment(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/payment.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
