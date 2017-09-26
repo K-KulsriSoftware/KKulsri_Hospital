@@ -1,13 +1,13 @@
 from pymongo import MongoClient
-import find_doctors
+#import find_doctors
 
 class API :
-	
+
 	def __init__(self) :
 		self.client = MongoClient()
 		self.client = MongoClient("kkulsri.cloudapp.net:27017")
 		self.db = self.client.kkulsridb
-	
+
 	def translate_gender(self, gender) :
 		if type(gender) == type(True) :
 			if gender :
@@ -74,3 +74,16 @@ class API :
 
 			result_doctors.append(doctor)
 		return True, result_doctors
+
+	# input : username(str)
+	def show_profile(self, username=None) :
+		list_patient = []
+		if username == None :
+			return False, 'no input username'
+		patients = self.db.patients.find({'username':username})
+		for patient in patients:
+			list_patient.append(patient)
+		if (len(list_patient) != 0):
+			return True, (list_patient)
+		else:
+			return False, "No username"
