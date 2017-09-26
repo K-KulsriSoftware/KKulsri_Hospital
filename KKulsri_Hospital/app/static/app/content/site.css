@@ -3,6 +3,7 @@ body {
     padding-bottom: 20px; */
     min-height: 100vh;
     padding-bottom: 30px;
+    position: relative;
 }
 
 /* Set padding to keep content from hitting the edges */
