@@ -13,12 +13,34 @@ div#allpage {
 	text-align: center;
 }
     
-span2 {
+div#p1 {
+	width: 10px;
+	height: 100%;
+	background: #8dd9ca;
+	display: inline-block;
+	float: left;
+	margin: auto;
+}
+    
+div#p2 {
+	width: 990px;
+	height: auto;
+	display: inline-block;
+	float: left;
+	margin: auto;
+}
+    
+div#span0 {
+	font-size: 20px;
+	margin: auto;
+}
+    
+div#span1 {
 	font-size: 18px;
 	margin: auto;
 }
     
-span3 {
+div#span2 {
 	font-size: 16px;
 	margin: auto;
 }
