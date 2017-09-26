@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+	{% load staticfiles %}
+	
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/departments.css' %}" />
+	
+	<div>
+	<div id="allpage">
+		<div id="box">
+			<div id="span1">หู คอ จมูก</div>
+			<div id="crossline"></div>
+			<ul>
+				<li><a href="#">แพ็กเกจตรวจโรคในหู</a></li>
+				<li><a href="#">แพ็กเกจตรวจโรคในคอ </a></li>
+				<li><a href="#">แพ็กเกจตรวจโรคในจมูก</a></li>
+		</div>
+	</div>
+	</ul>
+	</div>
+
+{% endblock %}
