@@ -251,14 +251,65 @@ class API :
 		for temp in cursor:
 			temp.pop('_id',None)
 			return True,temp
-	#input: order_id,package_id,doctor_id,patient_id,cost,time,notice UNFINISHED
-	def show_confirmation_info(self,package_id=None, doctor_id=None, username=None, notice='', time=None) :
+	#input: package_id,doctor_id,patient_id,time
+	def show_confirmation_info(self,package_id=None, doctor_id=None, username=None, time=None) :
 		if package_id == None or doctor_id == None or package_id == None or time == None :
 			return False,'Not enough input to proceed'
-		cursor = self.db.orders.aggregate([
+		cursor = self.db.packages.aggregate([
+			{
+				'$match' : {
+            		'package_id' : package_id
+            	}
+			},
+			{
+				'$project' : {
+            	'package_name' : '$package_name',
+				'package_cost' : '$package_cost'
+            	}
+			},
 		])
-		#o000001
-		return True,order_id
+		result = []
+		for temp in cursor:
+			temp.pop('_id',None)
+			result.append(temp)
+		cursor = self.db.doctors.aggregate([
+			{
+				'$match' : {
+            		'username' : doctor_id
+            	}
+			},
+			{
+				'$project' : {
+				'doctor_name_title' : '$doctor_name_title',
+            	'doctor_name' : '$doctor_name',
+				'doctor_surname' : '$doctor_surname',
+				'office_phone_number' : '$office_phone_number'
+            	}
+			},
+		])
+		for temp in cursor:
+			temp.pop('_id',None)
+			result.append(temp)
+		cursor = self.db.patients.aggregate([
+			{
+				'$match' : {
+            		'username' : username
+            	}
+			},
+			{
+				'$project' : {
+				'patient_name_title' : '$patient_name_title',
+            	'patient_name' : '$patient_name',
+				'patient_surname' : '$patient_surname',
+            	}
+			},
+		])
+		for temp in cursor:
+			temp.pop('_id',None)
+			result.append(temp)
+		#dateandtime = "time" : {'start':datetime(time['year'],time['month'],time['date'],time['start_hr'],0),'finish':datetime(time['year'],time['month'],time['date'],time['finish_hr'],0)}
+		result.append(time)
+		return True,result
 
 
 	def generate_orderid(self):
@@ -302,7 +353,7 @@ class API :
 		for temp in cursor:
 			return temp['package_cost']
 
-	#input: order_id,package_id,doctor_id,patient_id,cost,time,notice UNFINISHED
+	#input: package_id,doctor_id,patient_id,time,notice
 	def create_order(self,package_id=None, doctor_id=None, username=None, notice='', time=None) :
 		if package_id == None or doctor_id == None or package_id == None or time == None :
 			return False,'Not enough input to proceed'
