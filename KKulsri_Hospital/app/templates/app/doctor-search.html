@@ -4,7 +4,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/doctor-search.css' %}" />
     <div id="all-page">
-        <div id="head"><span id="heading">เลือกแพทย์ที่จะเข้าพบ </span></div>
+        <div id="head"><span id="headpage" class="span-heading">เลือกแพทย์ที่จะเข้าพบ </span></div>
         <div id="crossline"></div>
         <div id="choose-manual">
             <ul class="nav nav-tabs">
@@ -72,47 +72,23 @@
                         </div>
                     </form>
                     <form id="confirm" class="form-inline">
-                        <button class="btn btn-default" type="button" id="summit">ค้นหาแพทย์ </button>
+                        <button class="btn btn-default btn-summit" type="button" id="summit">ค้นหาแพทย์ </button>
                     </form>
                 </div>
-                <div class="container" id="result">
+                <div class="container container-set" id="result">
                     <div class="result-block">
                         <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
-                        <div class="div-name"><span>นายแพทย์กนกพล กุลศรี </span></div><span>แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
-                        <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์</button>
-                        <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
-                    </div>
-                    <div class="result-block">
-                        <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
-                        <div class="div-name"><span>นายแพทย์กนกพล กุลศรี </span></div><span>แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
-                        <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์</button>
-                        <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
-                    </div>
-                    <div class="result-block">
-                        <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
-                        <div class="div-name"><span>นายแพทย์กนกพล กุลศรี </span></div><span>แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
+                        <div class="div-name"><span class="span-detail">นายแพทย์กนกพล กุลศรี </span></div><span class="span-detail">แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
                         <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์</button>
                         <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
                     </div>
                 </div>
             </div>
             <div id="auto-page">
-                <div class="container" id="auto-result">
+                <div class="container container-set" id="auto-result">
                     <div class="auto-result-block">
                         <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
-                        <div class="div-name"><span>นายแพทย์กนกพล กุลศรี</span></div><span>แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
-                        <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์ </button>
-                        <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
-                    </div>
-                    <div class="auto-result-block">
-                        <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
-                        <div class="div-name"><span>นายแพทย์กนกพล กุลศรี</span></div><span>แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
-                        <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์ </button>
-                        <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
-                    </div>
-                    <div class="auto-result-block">
-                        <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
-                        <div class="div-name"><span>นายแพทย์กนกพล กุลศรี</span></div><span>แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
+                        <div class="div-name"><span class="span-detail">นายแพทย์กนกพล กุลศรี</span></div><span class="span-detail">แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
                         <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์ </button>
                         <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
                     </div>

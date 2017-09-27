@@ -158,11 +158,6 @@ div.plamimg{
   background-color:transparent;
 }
 
-span{
-  font-size:70%;
-  width:100%;
-}
-
 div.result-block{
   width:30%;
   display:inline-block;
@@ -214,4 +209,24 @@ div.div-name{
 
 span#heading{
   font-size:20px;
+}
+
+span.span-heading{
+  font-size:20px;
+}
+
+span.span-detail{
+  font-size:70%;
+  width:100%;
+}
+
+button.btn.btn-default.btn-summit{
+  width:150px;
+  font-size:16px;
+}
+
+div.container.container-set{
+  padding:10px;
+  width:100%;
+  text-align:center;
 }
