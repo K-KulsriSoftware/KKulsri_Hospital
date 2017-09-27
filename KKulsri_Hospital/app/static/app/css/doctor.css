@@ -1,0 +1,85 @@
+div#department{
+  background-color:#8dd9ca;
+}
+
+img#doc-img{
+  width:150px;
+  border-radius:100%;
+  border:2px solid #8dd9ca;
+  height:150px;
+  margin-top:50px;
+  margin-bottom:10px;
+}
+
+div#depart.row{
+  border-bottom:5px solid #8dd9ca;
+}
+
+div#con_dep.row{
+  border-left:10px solid #8dd9ca;
+  background-color:#e8f6f3;
+}
+
+p.doc-page{
+  font-family:sans-serif;
+  font-size:20px;
+  margin-top:10px;
+}
+
+div.container{
+  margin-top:40px;
+}
+
+button.btn.btn-default.my-btn{
+  font-size:20px;
+  width:200px;
+  border:2px solid #8dd9ca;
+  border-radius:7px;
+  margin-top:5px;
+  text-align:center;
+}
+
+p#name_doc{
+  text-align:center;
+}
+
+t{
+}
+
+div.doctor-card{
+  text-align:center;
+}
+
+div.col-md-12.doc_info{
+  text-align:center;
+}
+
+div.col-md-3{
+}
+
+div.col-md-3.person{
+  border-right:2px solid #8dd9ca;
+}
+
+p@media{
+}
+
+div#button.col-md-12.doc_info{
+  margin-bottom:20px;
+}
+
+div#buttton.col-md-12.doc_info{
+  margin-bottom:20px;
+}
+
+div#button2.col-md-12.doc_info{
+  margin-bottom:20px;
+}
+
+div#button3.col-md-12.doc_info{
+  margin-bottom:20px;
+}
+
+div#button4.col-md-12.doc_info{
+  margin-bottom:20px;
+}

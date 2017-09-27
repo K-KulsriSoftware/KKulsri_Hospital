@@ -1,0 +1,32 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/confirm.css' %}" />
+    <div class="container">
+        <div class="row head">
+            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                <h1>ยืนยันการซื้อแพคเกจ </h1></div>
+        </div>
+        <div id="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>แพคเกจ : ตรวจสายตาในเด็ก<br>
+    ราคา : 2500 บาท<br>
+    แพทย์ที่ต้องพบ<br>
+    เวลานัดหมาย : 20 สิงหาคม 2560<br>
+    ชื่อผู้นัดหมาย : นายกนกพล กุลศรี<br>
+    วันเกิด : 14 มีนาคม 2539<br>
+    เบอร์โทรศัพท์ : 084-685-7867</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 button">
+                    <button class="confirm-button" type="button">ยืนยันข้อมูล </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+{% endblock %}
