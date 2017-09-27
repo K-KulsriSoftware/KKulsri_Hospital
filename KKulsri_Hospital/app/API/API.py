@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from pymongo import MongoClient
 #import find_doctors
 
@@ -115,3 +117,25 @@ class API :
 			return True, (list_detail)
 		else:
 			return False, "No doctor_name"
+	#Watcharachat	
+	def general_package_filter(self,temp) :
+		result = {}
+		result['package_id'] = temp['package_id']
+		result['package_name'] = temp['package_name']
+		result['package_cost'] = temp['package_cost']
+		result['description'] = temp['description']
+		return result
+		
+	#input : -		
+	def show_general_list(self) :
+		cursor = self.db.packages.find({'general_inspection' : True })
+		result = []
+		for temp in cursor:
+			result.append(self.general_package_filter(temp))
+		return True,result
+		
+	
+	
+	
+	
+	

@@ -6,13 +6,13 @@ from pprint import pprint
 api = API()
 
 #test find_doctors
-status, result = api.find_doctors(package_id='p00001')
+#status, result = api.find_doctors(package_id='p00001')
 #test auto_find_doctors
-status, result = api.auto_find_doctors(package_id='p00001')
-if status :
-	pprint(result)
-else :
-	print('error' + result)
+#status, result = api.auto_find_doctors(package_id='p00001')
+#if status :
+#	pprint(result)
+#else :
+#	print('error' + result)
 
 #test show_profile
 #status , result = api.show_profile(username='ekekjubjub')
@@ -23,3 +23,7 @@ else :
 #status , result = api.show_detail('jakapong' ,'klainongsuang')
 #print (status ," : ", result)
 
+status,result = api.show_general_list()
+
+if status : 
+	pprint (result)
