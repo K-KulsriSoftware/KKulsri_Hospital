@@ -1,499 +1,83 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-from datetime import datetime
-#import find_doctors
+from find_doctors_api import find_doctors_api
+from show_profile_api import show_profile_api
+from show_detail_api import show_detail_api
+from edit_profile_api import edit_profile_api
+from register_api import register_api
+from show_general_list_api import show_general_list_api
+from show_departments_api import show_departments_api
+from show_special_package_info_api import show_special_package_info_api
+from create_order_api import create_order_api
+from show_confirmation_info_api import show_confirmation_info_api
 
 class API :
 
 	def __init__(self) :
-		self.client = MongoClient()
 		self.client = MongoClient("kkulsri.cloudapp.net:27017")
 		self.db = self.client.kkulsridb
-
-	def translate_gender(self, gender) :
-		if type(gender) == type(True) :
-			if gender :
-				return 'ชาย'
-			else :
-				return 'หญิง'
-		else :
-			if gender == 'ชาย' :
-				return True
-			else :
-				return False
-
-	def display_doctor_filter(self, doctor) :
-		display_doctor = {}
-		display_doctor['username'] = doctor['username']
-		display_doctor['doctor_name'] = doctor['doctor_name']
-		display_doctor['doctor_surname'] = doctor['doctor_surname']
-		display_doctor['department'] = doctor['department']
-		display_doctor['doctor_img'] = doctor['doctor_img']
-		return display_doctor
+		self.find_doctors_api = find_doctors_api(self.db)
+		self.show_profile_api = show_profile_api(self.db)
+		self.show_detail_api = show_detail_api(self.db)
+		self.edit_profile_api = edit_profile_api(self.db)
+		self.register_api = register_api(self.db)
+		self.show_general_list_api = show_general_list_api(self.db)
+		self.show_departments_api = show_departments_api(self.db)
+		self.show_special_package_info_api = show_special_package_info_api(self.db)
+		self.create_order_api = create_order_api(self.db)
+		self.show_confirmation_info_api = show_confirmation_info_api(self.db)
 
 	# input : package_id(str), day(list of str), time('ช่วงเช้า'  or 'ช่วงบ่าย'), doctor_firstname(str), doctor_lastname(str), gender('ชาย' or 'หญิง')
 	def find_doctors(self, package_id=None, days=None, time=None, doctor_firstname=None, doctor_lastname=None, gender=None) :
-		if package_id == None :
-			return False, 'no input package id'
-		department = self.db.packages.aggregate([{'$match':{'package_id':package_id}},{'$project':{'department':1}}])
-		for tmp in department :
-			department = tmp['department']
-			break
-		if type(department) != type('') :
-			return False, 'no package or department'
-		doctors = self.db.doctors.find({'department':department})
-		result_doctors = []
-		for doctor in doctors :
-			if doctor_firstname != None :
-				if not doctor_firstname in doctor['doctor_name'] :
-					continue
-			if doctor_lastname != None :
-				if not doctor_lastname in doctor['doctor_surname'] :
-					continue
-			if gender != None :
-				if self.translate_gender(gender) != doctor['gender'] :
-					continue
-			if days != None and time != None :
-				check = True
-				for day in days :
-					if day in doctor['working_time'] :
-						for working_time in doctor['working_time'][day] :
-							for now_check_time in range(working_time['start'], working_time['stop']) :
-								if (time == 'ช่วงเช้า' and 9 <= now_check_time <= 12) or (time == 'ช่วงบ่าย' and 13 <= now_check_time <= 17) :
-									check = False
-									break
-				if check :
-					continue
-			elif days != None :
-				check = True
-				for day in days :
-					if day in doctor['working_time'] :
-						check = False
-						break
-				if check :
-					continue
-			elif time != None :
-				check = True
-				for day in doctor['working_time'] :
-					for working_time in doctor['working_time'][day] :
-						for now_check_time in range(working_time['start'], working_time['stop']) :
-							if (time == 'ช่วงเช้า' and 9 <= now_check_time <= 12) or (time == 'ช่วงบ่าย' and 13 <= now_check_time <= 17) :
-								check = False
-								break
-				if check :
-					continue
-
-			result_doctors.append(self.display_doctor_filter(doctor))
-		return True, result_doctors
-
+		return self.find_doctors_api.find_doctors(package_id,days,time,doctor_firstname,doctor_lastname,gender)
+		
 	# input : package_id(str), user_id(str)
 	def auto_find_doctors(self, package_id=None, user_id=None) :
 		# use user_id in phase II
 		return self.find_doctors(package_id=package_id)
 
-		# Jakapong Mo Begin
 	# input : username(str)
-	def show_profile(self, username = None) :
-		list_patient = []
-		if username == None :
-			return False, 'No Input Username'
-		#patients = self.db.patients.find({'username' : username})
-		patients = self.db.patients.aggregate([
-    		{
-        		'$match':{
-            		'username' : username,
-        		}
-    		},
-    		{
-        		'$project':{
-            		'username' : '$username',
-	    			'patient_name_title' : '$patient_name_title',
-	    			'patient_name' : '$patient_name',
-	    			'patient_surname' : '$patient_surname',
-	    			'patient_img' : '$patient_img',
-	    			'id_card_number' : '$id_card_number',
-	    			'gender' : '$gender',
-					'order_ids' : '$order_ids',
-					'birthday' : '$birthday',
-					'blood_group_abo' : '$blood_group_abo',
-					'blood_group_rh' : '$blood_group_rh',
-					'race' : '$race',
-					'nationallity' : '$nationallity',
-					'Religion' : '$Religion',
-					'Status' : '$Status',
-					'pateint_address' : '$pateint_address',
-					'occupy' : '$occupy',
-					'telphone_number' : '$telphone_number',
-					'father_name' : '$father_name',
-					'mother_name' : '$mother_name',
-					'emergency_name' : '$emergency_name',
-					'emergency_phone' : '$emergency_phone',
-					'emergency_addr' : '$emergency_addr',
-					'email' : '$email',
-					'congenital disease' : '$congenital disease'
-        		}
-     		}
-		])
-		'''
-		if patients == None :
-			return False,'No Profile'
-		else :
-			for patient in patients:
-				patient.pop('_id',None)
-				list_patient.append(patient)
-				return True, (list_patient)
-		'''
-		for patient in patients :
-			list_patient.append(patient)
-		if len(list_patient) != 0 :
-			return True, (list_patient)
-		else :
-			return False, 'No Profile'
+	def show_profile(self, username=None) :
+		return self.show_profile_api.show_profile(username)
 
 	# input :doctor_name(str), doctor_surname(str)
-	def show_detail(self, doctor_name = None, doctor_surname = None) :
-		list_detail = []
-		if doctor_name == None :
-			return False, 'no input doctor_name'
-		doctors = self.db.doctors.aggregate([
-    		{
-        		'$match':{
-            		'doctor_name' : doctor_name,
-					'doctor_surname' : doctor_surname
-        		}
-    		},
-    		{
-        		'$project':{
-            		'doctor_name' : '$doctor_name',
-            		'doctor_surname': '$doctor_surname',
-            		'doctor_img': '$doctor_img',
-					'doctor_img': '$doctor_img',
-					'expertises': '$expertises',
-					'educations' : '$educations',
-					'language' : '$language',
-					'working_time' : '$working_time',
-        		}
-     		}
-		])
-		'''
-		if doctors == None :
-			return False,'No doctor name specified'
-		else :
-			for doctor in doctors:
-				doctor.pop('_id',None)
-				list_detail.append(doctor)
-				return True, (list_detail)
-		'''
-		for doctor in doctors :
-			list_detail.append(doctor)
-		if len(list_detail) != 0 :
-			return True, (list_detail)
-		else :
-			return False, 'No doctor name specified'
-
+	def show_detail(self, doctor_name=None, doctor_surname=None) :
+		return self.show_detail_api.show_detail(doctor_name,doctor_surname)
+		
 	# input : email(str), telphone_number(str), emergency_phone(str), sumit(bool)
-	def edit_profile(self, email=None, telphone_number=None, emergency_phone = None, submit= False ) :
-		if email == None or telphone_number == None or emergency_phone == None :
-			return False, "Incommplete Input"
-		if submit :
-			self.db.patients.update_one(
-    			{
-        			'username': 'admao'
-    			},
-    			{
-        			'$set': {
-	                	'email': email,
-		                'telphone_number' : telphone_number ,
-		                'emergency_phone' : emergency_phone
-        			}
-    			}
-			)
-			return True,'successfully Updated'
-		else :
-			return False, 'Incommplete'
+	def edit_profile(self, email=None, telphone_number=None, emergency_phone=None, submit=False) :
+		return self.edit_profile_api.edit_profile(email,telphone_number,emergency_phone,submit)
 
-
-	# username(str), patient_name_title(str), patient_name(str), patient_surname(str), patient_img(str), id_card_number(str), gender(bool), order_ids(list),
+	# input : username(str), patient_name_title(str), patient_name(str), patient_surname(str), patient_img(str), id_card_number(str), gender(bool), order_ids(list),
 	# birthday_year(int), birthday_month(int), birthday_day(int), blood_group_abo(int), blood_group_rh(int), race(str), nationallity(str), Religion(str), Status(int), pateint_address(str), occupy(str),
 	# telphone_number(str), father_name(str), mother_name(str), emergency_name(str), emergency_phone(str), mergency_addr(str), email(str), congenital_disease(list)
-	def register(self, username = None, patient_name_title = None,  patient_name = None, patient_surname = None, patient_img = None,
-	 			id_card_number = None, gender = None, order_ids = None, birthday_year = None, birthday_month = None, birthday_day = None,
-				blood_group_abo = None, blood_group_rh = None, race = None, nationallity = None, Religion = None,
-				Status = None, pateint_address = None, occupy = None, telphone_number = None, father_name = None,
-				mother_name = None,  emergency_name = None, emergency_phone = None, emergency_addr = None, email = None,
-				congenital_disease = None, submit = False) :
-		if username == None or patient_name_title == None or patient_name == None or patient_surname == None or patient_img == None or id_card_number == None or gender == None or order_ids == None :
-			return False, 'Incommplete Input 1'
-		if birthday_year == None or birthday_month == None or birthday_day == None or blood_group_abo == None or blood_group_rh == None or race == None or nationallity == None or Religion == None or Status == None or pateint_address == None or occupy == None :
-			return False, 'Incommplete Input 2'
-		if telphone_number == None or father_name == None or mother_name == None or emergency_name == None or  emergency_phone == None or emergency_addr == None or email == None or congenital_disease == None :
-			return False, 'Incommplete Input 3'
-		if submit :
-			self.db.patients.insert(
-				{
-	    			'username' : username,
-	    			'patient_name_title' : patient_name_title,
-	    			'patient_name' : patient_name,
-	    			'patient_surname' : patient_surname,
-	    			'patient_img' : patient_img,
-	    			'id_card_number' : id_card_number,
-	    			'gender' : gender,
-					'order_ids' : order_ids,
-					'birthday' : datetime(birthday_year, birthday_month, birthday_day),
-					'blood_group_abo' : blood_group_abo,
-					'blood_group_rh' : blood_group_rh,
-					'race' : race,
-					'nationallity' : nationallity,
-					'Religion' : Religion,
-					'Status' : Status,
-					'pateint_address' : pateint_address,
-					'occupy' : occupy,
-					'telphone_number' : telphone_number,
-					'father_name' : father_name,
-					'mother_name' : mother_name,
-					'emergency_name' : emergency_name,
-					'emergency_phone' : emergency_phone,
-					'emergency_addr' : emergency_addr,
-					'email' : email,
-					'congenital disease' : congenital_disease
-				}
-	    	)
-			return True,'successfully Added'
-		else :
-			return False, 'Incommplete'
+	def register(self, username=None, patient_name_title=None, patient_name=None, patient_surname=None, patient_img=None,
+				 id_card_number=None, gender=None, order_ids=None, birthday_year=None, birthday_month=None, birthday_day=None,
+				 blood_group_abo=None, blood_group_rh=None, race=None, nationallity=None, Religion=None, Status=None, 
+				 pateint_address=None, occupy=None, telphone_number=None, father_name=None, mother_name=None, emergency_name=None,
+				 emergency_phone=None, emergency_addr=None, email=None, congenital_disease=None, submit=False) :
+		return self.register_api.register(username, patient_name_title, patient_name, patient_surname, patient_img, 
+			   id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo, 
+			   blood_group_rh, race, nationallity, Religion, Status, pateint_address, occupy, telphone_number, 
+			   father_name, mother_name, emergency_name, emergency_phone, emergency_addr, email, congenital_disease,submit)
 
-	#Jakapong  Mo End
-
-	#Watcharachat	TAY Begin
 	#input : -
 	def show_general_list(self) :
-		#cursor = self.db.packages.find({'general_inspection' : True })
-		cursor = self.db.packages.aggregate([
-    		{
-        		'$lookup':{
-        		    'from': 'departments',
-        		    'localField': 'department_id',
-        	   		'foreignField': 'department_id',
-            		'as': 'department'
-                }
-    		},
-    		{
-        		'$match': {
-            	'department.department_name': 'อายุรกรรม'
-            	}
-    		},
-    		{
-        		'$project': {
-            		'package_id': '$package_id',
-            		'package_name': '$package_name',
-            		'package_cost': '$package_cost',
-            		'description': '$description'
-            	}
-    		}
-		])
-		result = []
-		for temp in cursor:
-			temp.pop('_id',None)
-			result.append(temp)
-		return True,result
+		return self.show_general_list_api.show_general_list()
 
 	#input : -
 	def show_departments(self) :
-		cursor = self.db.packages.aggregate([
-    		{
-        		'$lookup' : {
-            		'from' : 'departments',
-            		'localField': 'department_id',
-            		'foreignField': 'department_id',
-            		'as': 'department'
-        		}
-    		},
-    		{
-        		'$group' : {
-            		'_id' : '$department',
-            		'package_list' : {
-                		'$push': {
-                    		'package_id': '$package_id',
-                    		'package_name': '$package_name'
-                		}
-           			}
-        		}
-    		},
-    		{
-        		'$project' : {
-            		'department_id' : '$_id.department_id',
-            		'department_name' : '$_id.department_name',
-            		'package_list' : '$package_list'
-        		}
-    		}
-		])
-		result = []
-		for temp in cursor:
-			temp.pop('_id',None)
-			result.append(temp)
-
-		return True,result
+		return self.show_departments_api.show_departments()
 
 	#input : package_id(string)
-	def show_special_package_info(self,package_id=None) :
-		if package_id == None :
-			return False,'No input package ID specified'
+	def show_special_package_info(self, package_id=None) :
+		return self.show_special_package_info_api.show_special_package_info(package_id)
 
-		cursor = self.db.packages.aggregate([
-			{
-        		'$lookup' : {
-                	'from' : 'buildings',
-                	'localField' : 'building_id',
-                	'foreignField' : 'building_id',
-                	'as' : 'building'
-            	}
-    		},
-    		{
-        		'$match' : {
-            		'package_id' : package_id
-            	}
-    		},
-    		{
-        		'$project' : {
-            		'package_name' : '$package_name',
-            		'package_cost' : '$package_cost',
-            		'description' : '$description',
-            		'conditions' : '$conditions',
-            		'package_notice' : '$package_notice',
-            		'building_name' : '$building.building_name'
-            	}
-    		},
-    		{
-        		'$unwind' : '$building_name'
-    		},
-
-		])
-		for temp in cursor:
-			temp.pop('_id',None)
-			return True,temp
-	'''
 	#input: package_id,doctor_id,patient_id,time
 	def show_confirmation_info(self,package_id=None, doctor_id=None, username=None, time=None) :
-		if package_id == None or doctor_id == None or package_id == None or time == None :
-			return False,'Not enough input to proceed'
-		cursor = self.db.packages.aggregate([
-			{
-				'$match' : {
-            		'package_id' : package_id
-            	}
-			},
-			{
-				'$project' : {
-            	'package_name' : '$package_name',
-				'package_cost' : '$package_cost'
-            	}
-			},
-		])
-		result1st = []
-		for temp in cursor:
-			temp.pop('_id',None)
-			result1st.append(temp)
-		cursor = self.db.doctors.aggregate([
-			{
-				'$match' : {
-            		'username' : doctor_id
-            	}
-			},
-			{
-				'$project' : {
-				'doctor_name_title' : '$doctor_name_title',
-            	'doctor_name' : '$doctor_name',
-				'doctor_surname' : '$doctor_surname',
-				'office_phone_number' : '$office_phone_number'
-            	}
-			},
-		])
-		result2nd = []
-		for temp in cursor:
-			temp.pop('_id',None)
-			result2nd.append(temp)
-		cursor = self.db.patients.aggregate([
-			{
-				'$match' : {
-            		'username' : username
-            	}
-			},
-			{
-				'$project' : {
-				'patient_name_title' : '$patient_name_title',
-            	'patient_name' : '$patient_name',
-				'patient_surname' : '$patient_surname',
-            	}
-			},
-		])
-		result3rd = []
-		for temp in cursor:
-			temp.pop('_id',None)
-			result3rd.append(temp)
-		#dateandtime = "time" : {'start':datetime(time['year'],time['month'],time['date'],time['start_hr'],0),'finish':datetime(time['year'],time['month'],time['date'],time['finish_hr'],0)}
-		result1st = result1st[0]
-		result2nd = result2nd[0]
-		result3rd = result3rd[0]
-		result = {**result1st,**result2nd,**result3rd,**time}
-		return True,result
-	'''
-	def generate_orderid(self):
-		cursor = self.db.orders.aggregate([
-			{
-            	'$count' : 'counting'
-        	}
-		])
-		total_order = 0
-		for temp in cursor:
-			total_order = temp['counting']
-		orderamount = total_order + 1
-		if orderamount < 10 :
-			return 'o0000' + str(orderamount)
-		elif orderamount < 100 :
-			return 'o000' + str(orderamount)
-		elif orderamount < 1000 :
-			return 'o00' + str(orderamount)
-		elif orderamount < 10000 :
-			return 'o0' + str(orderamount)
-		elif orderamount < 100000 :
-			return 'o' + str(orderamount)
-		else :
-			return 'o000000'
-
-	def get_package_cost(self,package_id) :
-		if package_id == None :
-			return 'No input package ID specified'
-		cursor = self.db.packages.aggregate([
-    		{
-        		'$match' : {
-            		'package_id' : package_id
-            	}
-    		},
-    		{
-        		'$project' : {
-            		'package_cost' : '$package_cost'
-            	}
-    		},
-		])
-		for temp in cursor:
-			return temp['package_cost']
+		return self.show_confirmation_info_api.show_confirmation_info(package_id, doctor_id, username, time)
 
 	#input: package_id,doctor_id,patient_id,time,notice
 	def create_order(self,package_id=None, doctor_id=None, username=None, notice='', time=None) :
-		if package_id == None or doctor_id == None or package_id == None or time == None :
-			return False,'Not enough input to proceed'
-		self.db.orders.insert(
-			{
-    			"order_id" : self.generate_orderid(),
-    			"package_id" : package_id,
-    			"doctor_id" : doctor_id,
-    			"user_id" : username,
-    			"cost" : self.get_package_cost(package_id),
-    			"time" : {'start':datetime(time['year'],time['month'],time['date'],time['start_hr'],0),'finish':datetime(time['year'],time['month'],time['date'],time['finish_hr'],0)},
-    			"notice" : notice
-			}
-    	)
-		#o00000
-		return True,'successfully added'
-	#Watcharachat End
+		return self.create_order_api.create_order(package_id, doctor_id, username, notice, time)
