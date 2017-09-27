@@ -120,7 +120,7 @@ def special_packages(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/special-package.html',
+        'app/special_packages.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
