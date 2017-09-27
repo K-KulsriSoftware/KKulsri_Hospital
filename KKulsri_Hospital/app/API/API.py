@@ -31,7 +31,7 @@ class API :
 		display_doctor['department'] = doctor['department']
 		display_doctor['doctor_img'] = doctor['doctor_img']
 		return display_doctor
-		
+
 	# input : package_id(str), day(list of str), time('ช่วงเช้า'  or 'ช่วงบ่าย'), doctor_firstname(str), doctor_lastname(str), gender('ชาย' or 'หญิง')
 	def find_doctors(self, package_id=None, days=None, time=None, doctor_firstname=None, doctor_lastname=None, gender=None) :
 		if package_id == None :
@@ -92,15 +92,16 @@ class API :
 		# use user_id in phase II
 		return self.find_doctors(package_id=package_id)
 
+	# Jakapong begin
 	# input : username(str)
 	def show_profile(self, username=None) :
 		list_patient = []
 		if username == None :
 			return False, 'no input username'
-		patients = self.db.patients.find({'username':username})
-		for patient in patients:
+		patients = self.db.patients.find({'username' : username})
+		for patient in patients :
 			list_patient.append(patient)
-		if (len(list_patient) != 0):
+		if len(list_patient) != 0 :
 			return True, (list_patient)
 		else:
 			return False, "No username"
@@ -114,13 +115,14 @@ class API :
 		doctors = self.db.doctors.find({'doctor_name':doctor_name,"doctor_surname":doctor_surname})
 		for doctor in doctors:
 			list_detail.append(doctor)
-		if (len(list_detail) != 0):
+		if len(list_detail) != 0 :
 			return True, (list_detail)
 		else:
 			return False, "No doctor_name"
 
-	#Watcharachat	TAY		
-	#input : -		
+	#Jakapong End
+	#Watcharachat	TAY
+	#input : -
 	def show_general_list(self) :
 		#cursor = self.db.packages.find({'general_inspection' : True })
 		cursor = self.db.packages.aggregate([
@@ -152,7 +154,7 @@ class API :
 			result.append(temp)
 		return True,result
 
-	#input : -		
+	#input : -
 	def show_departments(self) :
 		cursor = self.db.packages.aggregate([
     		{
@@ -186,14 +188,14 @@ class API :
 		for temp in cursor:
 			temp.pop('_id',None)
 			result.append(temp)
-		
+
 		return True,result
-	
+
 	#input : package_id(string)
 	def show_special_package_info(self,package_id=None) :
 		if package_id == None :
 			return False,'No input package ID specified'
-		
+
 		cursor = self.db.packages.aggregate([
 			{
         		'$lookup' : {
@@ -282,7 +284,7 @@ class API :
 		if package_id == None or doctor_id == None or package_id == None or time == None :
 			return False,'Not enough input to proceed'
 		self.db.orders.insert(
-			{	
+			{
     			"order_id" : self.generate_orderid(),
     			"package_id" : package_id,
     			"doctor_id" : doctor_id,
@@ -295,7 +297,3 @@ class API :
 		#o00000
 		return True,'successfully added'
 	#Watcharachat End
-	
-	
-	
-	
