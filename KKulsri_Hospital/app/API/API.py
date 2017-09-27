@@ -117,22 +117,40 @@ class API :
 			return True, (list_detail)
 		else:
 			return False, "No doctor_name"
-	#Watcharachat	
-	def general_package_filter(self,temp) :
-		result = {}
-		result['package_id'] = temp['package_id']
-		result['package_name'] = temp['package_name']
-		result['package_cost'] = temp['package_cost']
-		result['description'] = temp['description']
-		return result
-		
+
+	#Watcharachat	TAY		
 	#input : -		
 	def show_general_list(self) :
-		cursor = self.db.packages.find({'general_inspection' : True })
+		#cursor = self.db.packages.find({'general_inspection' : True })
+		cursor = self.db.packages.aggregate([
+    {
+        '$lookup':{
+            'from': 'departments',
+            'localField': 'department_id',
+            'foreignField': 'department_id',
+            'as': 'department'
+                }
+    },
+    {
+        '$match': {
+            'department.department_name': 'อายุรกรรม'
+            }
+    },
+    {
+        '$project': {
+            'package_id': '$package_id',
+            'package_name': '$package_name',
+            'package_cost': '$package_cost',
+            'description': '$description'
+            }
+    }
+])
 		result = []
 		for temp in cursor:
-			result.append(self.general_package_filter(temp))
+			result.append(temp)
 		return True,result
+
+
 		
 	#Watcharachat End
 	

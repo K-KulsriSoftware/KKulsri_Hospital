@@ -26,4 +26,4 @@ api = API()
 status,result = api.show_general_list()
 
 if status : 
-	pprint (result)
+	print (str(result).encode("utf-8"))
