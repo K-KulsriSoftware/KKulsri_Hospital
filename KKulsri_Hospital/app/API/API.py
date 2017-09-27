@@ -268,10 +268,10 @@ class API :
             	}
 			},
 		])
-		result = []
+		result1st = []
 		for temp in cursor:
 			temp.pop('_id',None)
-			result.append(temp)
+			result1st.append(temp)
 		cursor = self.db.doctors.aggregate([
 			{
 				'$match' : {
@@ -287,9 +287,10 @@ class API :
             	}
 			},
 		])
+		result2nd = []
 		for temp in cursor:
 			temp.pop('_id',None)
-			result.append(temp)
+			result2nd.append(temp)
 		cursor = self.db.patients.aggregate([
 			{
 				'$match' : {
@@ -304,11 +305,15 @@ class API :
             	}
 			},
 		])
+		result3rd = []
 		for temp in cursor:
 			temp.pop('_id',None)
-			result.append(temp)
+			result3rd.append(temp)
 		#dateandtime = "time" : {'start':datetime(time['year'],time['month'],time['date'],time['start_hr'],0),'finish':datetime(time['year'],time['month'],time['date'],time['finish_hr'],0)}
-		result.append(time)
+		result1st = result1st[0]
+		result2nd = result2nd[0]
+		result3rd = result3rd[0]
+		result = {**result1st,**result2nd,**result3rd,**time}
 		return True,result
 
 
