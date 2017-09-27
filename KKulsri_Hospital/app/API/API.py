@@ -120,6 +120,29 @@ class API :
 		else:
 			return False, "No doctor_name"
 
+	# input : email(str), telphone_number(str), emergency_phone(str), sumit(bool)
+	def edit_profile(self, email=None, telphone_number=None, emergency_phone = None, submit= False ) :
+		if email == None or telphone_number == None or emergency_phone == None:
+			return False, "Incommplete Input"
+		if submit :
+			self.db.patients.update_one(
+    			{
+        			'username': 'admao'
+    			},
+    			{
+        			'$set': {
+	                	'email': email,
+		                'telphone_number' : telphone_number ,
+		                'emergency_phone' : emergency_phone
+        			}
+    			}
+			)
+			return True,'successfully Updated'
+		else :
+			return False, "Incommplete"
+
+
+
 	#Jakapong End
 	#Watcharachat	TAY
 	#input : -
