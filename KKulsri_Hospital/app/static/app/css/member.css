@@ -1,0 +1,371 @@
+@media (min-width:361px) {
+  div.col-md-5.col-md-offset-1.col-sm-6.col-sm-offset-1.regisheader{
+    width:20%;
+    background-color:#c1ebe6;
+    border-radius:5px;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inuser{
+    width:30%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inpassword{
+    width:50%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.us{
+    width:77%;
+    height:40px;
+  }
+}
+
+@media (min-width:1024px) {
+  input.incon{
+    width:50%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.plamm{
+    height:45px;
+    margin-left:8%;
+    width:22%;
+    background-color:#c0dfd9;
+    margin-top:5%;
+    text-align:center;
+    border-radius:5%;
+  }
+}
+
+@media (min-width:1024px) {
+  h1{
+    margin:0 0;
+    font-size:78%;
+    text-align:center;
+    background-color:#c0dfd9;
+    width:90%;
+    margin-left:6%;
+    padding-top:3%;
+    margin-top:2%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inid{
+    width:30%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inmr{
+    width:75%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.ddmr{
+    width:9.5%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.mr{
+    width:12%;
+    float:left;
+    display:inline-block;
+  }
+}
+
+@media (min-width:1024px) {
+  div.name{
+    width:37%;
+    float:left;
+    display:inline-block;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inname{
+    width:70%;
+    margin:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.surname{
+    width:40%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.insurname{
+    width:70%;
+    margin:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.col1{
+    width:94%;
+    height:40px;
+    position:relative;
+  }
+}
+
+@media (min-width:1024px) {
+  div.marr{
+    width:100%;
+    height:auto;
+    margin-left:50px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.ddend{
+    width:7%;
+    background-color:#000;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inbirth{
+    width:77%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dbir{
+    width:25%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inold{
+    width:49%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dold{
+    width:18%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dsex{
+    width:19%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.insex{
+    width:49%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inblood{
+    width:63%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dblood{
+    width:24%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.innational{
+    width:75%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dnational{
+    width:15%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.innationn{
+    width:52%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dnationn{
+    width:26%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inregion{
+    width:53%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dregion{
+    width:24%;
+  }
+}
+
+@media (min-width:1024px) {
+  select#iNow.innow{
+    font-size:16px;
+    margin-left:10px;
+    color:#3b3a36;
+    width:42.5%;
+    border-radius:5px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dnow{
+    width:25%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.incareer{
+    width:80%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dcareer{
+    width:26%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inlive{
+    width:86.5%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dlive{
+    width:62%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inlive2{
+    width:93.6%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inlok{
+    width:60%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dlok{
+    width:43%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inemail{
+    width:82.6%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.demail{
+    width:54%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inemername{
+    width:52.3%;
+    margin-left:13.3px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.demername{
+    width:63%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.intelmer{
+    margin-left:10px;
+    width:55.6%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.dtelmer{
+    width:35%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inemerlive{
+    margin-left:10px;
+    width:65.4%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.demerlive{
+    width:99.5%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.daccept{
+    width:680px;
+    margin-left:33%;
+    height:60px;
+  }
+}
+
+@media (min-width:1024px) {
+  span.plamplamplam{
+    display:inline-block;
+    float:left;
+    margin:8px 0 0 10px;
+    font-size:16px;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inputplamplamplam{
+    display:inline-block;
+    float:left;
+    width:20px;
+  }
+}
+
+@media (min-width:768px) {
+  button.btn.btn-default.button{
+    margin-left:37%;
+    color:#3b3a36;
+    width:15%;
+    height:50px;
+    font-size:13px;
+  }
+}
+
