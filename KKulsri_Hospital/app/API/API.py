@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
+from datetime import datetime
 #import find_doctors
 
 class API :
@@ -225,7 +226,74 @@ class API :
 		for temp in cursor:
 			temp.pop('_id',None)
 			return True,temp
-		
+	#input: order_id,package_id,doctor_id,patient_id,cost,time,notice UNFINISHED
+	def show_confirmation_info(self,package_id=None, doctor_id=None, username=None, notice='', time=None) :
+		if package_id == None or doctor_id == None or package_id == None or time == None :
+			return False,'Not enough input to proceed'
+		cursor = self.db.orders.aggregate([
+		])
+		#o000001
+		return True,order_id
+
+
+	def generate_orderid(self):
+		cursor = self.db.orders.aggregate([
+			{
+            	'$count' : 'counting'
+        	}
+		])
+		total_order = 0
+		for temp in cursor:
+			total_order = temp['counting']
+		orderamount = total_order + 1
+		if orderamount < 10 :
+			return 'o0000' + str(orderamount)
+		elif orderamount < 100 :
+			return 'o000' + str(orderamount)
+		elif orderamount < 1000 :
+			return 'o00' + str(orderamount)
+		elif orderamount < 10000 :
+			return 'o0' + str(orderamount)
+		elif orderamount < 100000 :
+			return 'o' + str(orderamount)
+		else :
+			return 'o000000'
+
+	def get_package_cost(self,package_id) :
+		if package_id == None :
+			return 'No input package ID specified'
+		cursor = self.db.packages.aggregate([
+    		{
+        		'$match' : {
+            		'package_id' : package_id
+            	}
+    		},
+    		{
+        		'$project' : {
+            		'package_cost' : '$package_cost'
+            	}
+    		},
+		])
+		for temp in cursor:
+			return temp['package_cost']
+
+	#input: order_id,package_id,doctor_id,patient_id,cost,time,notice UNFINISHED
+	def create_order(self,package_id=None, doctor_id=None, username=None, notice='', time=None) :
+		if package_id == None or doctor_id == None or package_id == None or time == None :
+			return False,'Not enough input to proceed'
+		self.db.orders.insert(
+			{	
+    			"order_id" : self.generate_orderid(),
+    			"package_id" : package_id,
+    			"doctor_id" : doctor_id,
+    			"user_id" : username,
+    			"cost" : self.get_package_cost(package_id),
+    			"time" : {'start':datetime(time['year'],time['month'],time['date'],time['start_hr'],0),'finish':datetime(time['year'],time['month'],time['date'],time['finish_hr'],0)},
+    			"notice" : notice
+			}
+    	)
+		#o00000
+		return True,'successfully added'
 	#Watcharachat End
 	
 	

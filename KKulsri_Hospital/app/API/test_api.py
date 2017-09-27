@@ -23,7 +23,7 @@ api = API()
 #status , result = api.show_detail('jakapong' ,'klainongsuang')
 #print (status ," : ", result)
 
-
+'''
 #test show_general_list
 status,result = api.show_general_list()
 
@@ -38,6 +38,19 @@ if status :
 
 #test show_special_package_info
 status,result = api.show_special_package_info('p00002')
+
+if status : 
+	pprint (result)
+'''
+#test create_order
+status,result = api.create_order('p00003','d002', 'admao', 'very test', 
+				{
+    	    		"year" : 2017,
+					"date" : 12,
+					"month" : 11,
+					"start_hr" : 9,
+					"finish_hr" : 10,
+    			})
 
 if status : 
 	pprint (result)
