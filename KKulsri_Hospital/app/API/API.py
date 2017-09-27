@@ -150,7 +150,79 @@ class API :
 			result.append(temp)
 		return True,result
 
+	#input : -		
+	def show_departments(self) :
+		cursor = self.db.packages.aggregate([
+    		{
+        		'$lookup' : {
+            		'from' : 'departments',
+            		'localField': 'department_id',
+            		'foreignField': 'department_id',
+            		'as': 'department'
+        		}
+    		},
+    		{
+        		'$group' : {
+            		'_id' : '$department',
+            		'package_list' : {
+                		'$push': {
+                    		'package_id': '$package_id',
+                    		'package_name': '$package_name'
+                		}
+           			}
+        		}
+    		},
+    		{
+        		'$project' : {
+            		'department_id' : '$_id.department_id',
+            		'department_name' : '$_id.department_name',
+            		'package_list' : '$package_list'
+        		}
+    		}
+		])
+		result = []
+		for temp in cursor:
+			result.append(temp)
+		
+		return True,result
+	
+	#input : package_id(string)
+	def show_special_package_info(self,package_id=None) :
+		if package_id == None :
+			return False,'No input package ID specified'
+		
+		cursor = self.db.packages.aggregate([
+			{
+        		'$lookup' : {
+                	'from' : 'buildings',
+                	'localField' : 'building_id',
+                	'foreignField' : 'building_id',
+                	'as' : 'building'
+            	}
+    		},
+    		{
+        		'$match' : {
+            		'package_id' : package_id
+            	}
+    		},
+    		{
+        		'$project' : {
+            		'package_name' : '$package_name',
+            		'package_cost' : '$package_cost',
+            		'description' : '$description',
+            		'conditions' : '$conditions',
+            		'package_notice' : '$package_notice',
+            		'building_name' : '$building.building_name'
+            	}
+    		},
+    		{
+        		'$unwind' : '$building_name'
+    		},
 
+		])
+		for temp in cursor:
+			temp.pop('_id',None)
+			return True,temp
 		
 	#Watcharachat End
 	

@@ -23,7 +23,9 @@ api = API()
 #status , result = api.show_detail('jakapong' ,'klainongsuang')
 #print (status ," : ", result)
 
-status,result = api.show_general_list()
+
+#test show_special_package_info
+status,result = api.show_special_package_info('p00002')
 
 if status : 
-	print (str(result).encode("utf-8"))
+	pprint (result)
