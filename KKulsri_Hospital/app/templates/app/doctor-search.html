@@ -1,0 +1,100 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/doctor-search.css' %}" />
+    <div id="all-page">
+        <div id="head"><span id="headpage" class="span-heading">เลือกแพทย์ที่จะเข้าพบ </span></div>
+        <div id="crossline"></div>
+        <div id="choose-manual">
+            <ul class="nav nav-tabs">
+                <li id="auto" class="nav-head"><a href="#">ค้นหาแพทย์อัตโนมัติ </a></li>
+                <li class="active nav-head"  id="manual"><a href="#">ค้นหาแพทย์ด้วยตนเอง </a></li>
+            </ul>
+            <div id="manual-page">
+                <div class="container auto-set">
+                    <div class="col-md-2 info">
+                        <h3 id="day">วันทำงาน </h3></div>
+                    <div class="col-md-4 col-md-offset-0 info">
+                        <div class="checkbox">
+                            <label class="set-first-check">
+                                <input type="checkbox" id="monday">วันจันทร์</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="tuesday">วันอังคาร</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="wednesday">วันพุธ</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="thursday">วันพฤหัสบดี</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="friday">วันศุกร์</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 info">
+                        <h3 id="time">ช่วงเวลา </h3></div>
+                    <div class="col-md-4 col-md-offset-0 info">
+                        <div class="checkbox">
+                            <label class="set-first-check">
+                                <input type="checkbox" id="morning">ช่วงเช้า</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="afternoon">ช่วงบ่าย</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="allday">ทั้งวัน</label>
+                        </div>
+                    </div>
+                    <form id="name" class="form-inline">
+                        <div class="form-group" id="firstname"><span class="label label-default">ชื่อ </span>
+                            <input class="form-control name" type="text" id="in-firstname">
+                        </div>
+                        <div class="form-group" id="lastname"><span class="label label-default">นามสกุล </span>
+                            <input class="form-control name" type="text" id="in-lastday">
+                        </div>
+                    </form>
+                    <form id="gender" class="form-inline">
+                        <span class="label label-default span-styled">เพศ </span>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="gender-male" class="checkbox-styled">ชาย</label>
+                        </div>
+                        <div class="checkbox">
+                            <label id="female">
+                                <input type="checkbox" id="gender-female" class="checkbox-styled">หญิง</label>
+                        </div>
+                    </form>
+                    <form id="confirm" class="form-inline">
+                        <button class="btn btn-default btn-summit" type="button" id="summit">ค้นหาแพทย์ </button>
+                    </form>
+                </div>
+                <div class="container container-set" id="result">
+                    <div class="result-block">
+                        <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
+                        <div class="div-name"><span class="span-detail">นายแพทย์กนกพล กุลศรี </span></div><span class="span-detail">แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
+                        <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์</button>
+                        <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
+                    </div>
+                </div>
+            </div>
+            <div id="auto-page">
+                <div class="container container-set" id="auto-result">
+                    <div class="auto-result-block">
+                        <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
+                        <div class="div-name"><span class="span-detail">นายแพทย์กนกพล กุลศรี</span></div><span class="span-detail">แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
+                        <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์ </button>
+                        <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

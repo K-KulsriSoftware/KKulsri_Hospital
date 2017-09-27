@@ -46,12 +46,29 @@ li:before {
 	display: block;  
 	height: 0;  
 	width: 0;  
+<<<<<<< HEAD
 	left: 2em;  
 	top: 1em;  
 	position: relative;  
 } 
     
 span2 {
+=======
+	left: -1em;  
+	top: 0.9em;  
+	position: relative;  
+} 
+    
+div#span1 {
+	background-color: #c0dfd9;
+	font-size: 20px;
+	text-align: center;
+	width: 300px;
+	height: 30px;
+}
+    
+div#span2 {
+>>>>>>> 685983407efc8303290c6ec53d65a0eac90a92a7
 	font-size: 18px;
 }
     
