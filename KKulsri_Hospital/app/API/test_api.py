@@ -7,6 +7,11 @@ api = API()
 
 #test find_doctors
 #status, result = api.find_doctors(package_id='p00001')
+#status, result = api.find_doctors(package_id='p00001',days=['mon'])
+#status, result = api.find_doctors(package_id='p00001',days=['mon','tue'],time='ช่วงเช้า')
+#status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
+#status, result = api.find_doctors(days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
+#status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
 
 #test auto_find_doctors
 #status, result = api.auto_find_doctors(package_id='p00001')
