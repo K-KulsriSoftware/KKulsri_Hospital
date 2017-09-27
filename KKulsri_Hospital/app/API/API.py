@@ -92,37 +92,111 @@ class API :
 		# use user_id in phase II
 		return self.find_doctors(package_id=package_id)
 
-	# Jakapong begin
+	# Jakapong Mo Begin
 	# input : username(str)
-	def show_profile(self, username=None) :
+	def show_profile(self, username = None) :
 		list_patient = []
 		if username == None :
-			return False, 'no input username'
-		patients = self.db.patients.find({'username' : username})
+			return False, 'No Input Username'
+		#patients = self.db.patients.find({'username' : username})
+		patients = self.db.patients.aggregate([
+    		{
+        		'$match':{
+            		'username' : username,
+        		}
+    		},
+    		{
+        		'$project':{
+            		'username' : '$username',
+	    			'patient_name_title' : '$patient_name_title',
+	    			'patient_name' : '$patient_name',
+	    			'patient_surname' : '$patient_surname',
+	    			'patient_img' : '$patient_img',
+	    			'id_card_number' : '$id_card_number',
+	    			'gender' : '$gender',
+					'order_ids' : '$order_ids',
+					'birthday' : '$birthday',
+					'blood_group_abo' : '$blood_group_abo',
+					'blood_group_rh' : '$blood_group_rh',
+					'race' : '$race',
+					'nationallity' : '$nationallity',
+					'Religion' : '$Religion',
+					'Status' : '$Status',
+					'pateint_address' : '$pateint_address',
+					'occupy' : '$occupy',
+					'telphone_number' : '$telphone_number',
+					'father_name' : '$father_name',
+					'mother_name' : '$mother_name',
+					'emergency_name' : '$emergency_name',
+					'emergency_phone' : '$emergency_phone',
+					'emergency_addr' : '$emergency_addr',
+					'email' : '$email',
+					'congenital disease' : '$congenital disease'
+        		}
+     		}
+		])
+		'''
+		if patients == None :
+			return False,'No Profile'
+		else :
+			for patient in patients:
+				patient.pop('_id',None)
+				list_patient.append(patient)
+				return True, (list_patient)
+		'''
 		for patient in patients :
+			patient.pop('_id',None)
 			list_patient.append(patient)
 		if len(list_patient) != 0 :
 			return True, (list_patient)
-		else:
-			return False, "No username"
-	# input :doctor_name, doctor_surname
-	def show_detail(self, doctor_name=None, doctor_surname=None) :
+		else :
+			return False, 'No Profile'
+
+	# input :doctor_name(str), doctor_surname(str)
+	def show_detail(self, doctor_name = None, doctor_surname = None) :
 		list_detail = []
 		if doctor_name == None :
 			return False, 'no input doctor_name'
-
-	#	doctors = self.db.doctors.find(	[{'$match':{'doctor_name':doctor_name}},{'$match':{"doctor_surname":doctor_surname}}])
-		doctors = self.db.doctors.find({'doctor_name':doctor_name,"doctor_surname":doctor_surname})
-		for doctor in doctors:
+		doctors = self.db.doctors.aggregate([
+    		{
+        		'$match':{
+            		'doctor_name' : doctor_name,
+					'doctor_surname' : doctor_surname
+        		}
+    		},
+    		{
+        		'$project':{
+            		'doctor_name' : '$doctor_name',
+            		'doctor_surname': '$doctor_surname',
+            		'doctor_img': '$doctor_img',
+					'doctor_img': '$doctor_img',
+					'expertises': '$expertises',
+					'educations' : '$educations',
+					'language' : '$language',
+					'working_time' : '$working_time',
+        		}
+     		}
+		])
+		'''
+		if doctors == None :
+			return False,'No doctor name specified'
+		else :
+			for doctor in doctors:
+				doctor.pop('_id',None)
+				list_detail.append(doctor)
+				return True, (list_detail)
+		'''
+		for doctor in doctors :
+			doctor.pop('_id',None)
 			list_detail.append(doctor)
 		if len(list_detail) != 0 :
 			return True, (list_detail)
-		else:
-			return False, "No doctor_name"
+		else :
+			return False, 'No doctor name specified'
 
 	# input : email(str), telphone_number(str), emergency_phone(str), sumit(bool)
 	def edit_profile(self, email=None, telphone_number=None, emergency_phone = None, submit= False ) :
-		if email == None or telphone_number == None or emergency_phone == None:
+		if email == None or telphone_number == None or emergency_phone == None :
 			return False, "Incommplete Input"
 		if submit :
 			self.db.patients.update_one(
@@ -139,12 +213,61 @@ class API :
 			)
 			return True,'successfully Updated'
 		else :
-			return False, "Incommplete"
+			return False, 'Incommplete'
 
 
+	# username(str), patient_name_title(str), patient_name(str), patient_surname(str), patient_img(str), id_card_number(str), gender(bool), order_ids(list),
+	# birthday_year(int), birthday_month(int), birthday_day(int), blood_group_abo(int), blood_group_rh(int), race(str), nationallity(str), Religion(str), Status(int), pateint_address(str), occupy(str),
+	# telphone_number(str), father_name(str), mother_name(str), emergency_name(str), emergency_phone(str), mergency_addr(str), email(str), congenital_disease(list)
+	def register(self, username = None, patient_name_title = None,  patient_name = None, patient_surname = None, patient_img = None,
+	 			id_card_number = None, gender = None, order_ids = None, birthday_year = None, birthday_month = None, birthday_day = None,
+				blood_group_abo = None, blood_group_rh = None, race = None, nationallity = None, Religion = None,
+				Status = None, pateint_address = None, occupy = None, telphone_number = None, father_name = None,
+				mother_name = None,  emergency_name = None, emergency_phone = None, emergency_addr = None, email = None,
+				congenital_disease = None, submit = False) :
+		if username == None or patient_name_title == None or patient_name == None or patient_surname == None or patient_img == None or id_card_number == None or gender == None or order_ids == None :
+			return False, 'Incommplete Input 1'
+		if birthday_year == None or birthday_month == None or birthday_day == None or blood_group_abo == None or blood_group_rh == None or race == None or nationallity == None or Religion == None or Status == None or pateint_address == None or occupy == None :
+			return False, 'Incommplete Input 2'
+		if telphone_number == None or father_name == None or mother_name == None or emergency_name == None or  emergency_phone == None or emergency_addr == None or email == None or congenital_disease == None :
+			return False, 'Incommplete Input 3'
+		if submit :
+			self.db.patients.insert(
+				{
+	    			'username' : username,
+	    			'patient_name_title' : patient_name_title,
+	    			'patient_name' : patient_name,
+	    			'patient_surname' : patient_surname,
+	    			'patient_img' : patient_img,
+	    			'id_card_number' : id_card_number,
+	    			'gender' : gender,
+					'order_ids' : order_ids,
+					'birthday' : datetime(birthday_year, birthday_month, birthday_day),
+					'blood_group_abo' : blood_group_abo,
+					'blood_group_rh' : blood_group_rh,
+					'race' : race,
+					'nationallity' : nationallity,
+					'Religion' : Religion,
+					'Status' : Status,
+					'pateint_address' : pateint_address,
+					'occupy' : occupy,
+					'telphone_number' : telphone_number,
+					'father_name' : father_name,
+					'mother_name' : mother_name,
+					'emergency_name' : emergency_name,
+					'emergency_phone' : emergency_phone,
+					'emergency_addr' : emergency_addr,
+					'email' : email,
+					'congenital disease' : congenital_disease
+				}
+	    	)
+			return True,'successfully Added'
+		else :
+			return False, 'Incommplete'
 
-	#Jakapong End
-	#Watcharachat	TAY
+	#Jakapong  Mo End
+
+	#Watcharachat	TAY Begin
 	#input : -
 	def show_general_list(self) :
 		#cursor = self.db.packages.find({'general_inspection' : True })
@@ -251,6 +374,7 @@ class API :
 		for temp in cursor:
 			temp.pop('_id',None)
 			return True,temp
+	'''
 	#input: package_id,doctor_id,patient_id,time
 	def show_confirmation_info(self,package_id=None, doctor_id=None, username=None, time=None) :
 		if package_id == None or doctor_id == None or package_id == None or time == None :
@@ -315,8 +439,7 @@ class API :
 		result3rd = result3rd[0]
 		result = {**result1st,**result2nd,**result3rd,**time}
 		return True,result
-
-
+	'''
 	def generate_orderid(self):
 		cursor = self.db.orders.aggregate([
 			{
