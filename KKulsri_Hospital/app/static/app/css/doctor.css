@@ -22,16 +22,16 @@ div#con_dep.row{
 
 p.doc-page{
   font-family:sans-serif;
-  font-size:20px;
+  /*font-size:20px;*/
   margin-top:10px;
 }
 
 div.container{
-  margin-top:40px;
+  margin-top:20px;
 }
 
 button.btn.btn-default.my-btn{
-  font-size:20px;
+  /*font-size:20px;*/
   width:200px;
   border:2px solid #8dd9ca;
   border-radius:7px;

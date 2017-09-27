@@ -3,7 +3,7 @@ div#department.col-md-4.head{
 }
 
 div#depart.row{
-  margin-top:40px;
+  margin-top:20px;
 }
 
 div.container{
@@ -26,7 +26,6 @@ div.col-md-12.button{
 button.confirm-button{
   background-color:#8dd9ca;
   border-radius:8px;
-  font-size:20px;
   margin-top:20px;
 }
 
@@ -34,10 +33,11 @@ div.row.head{
   border-bottom:4px solid #8dd9ca;
 }
 
-p{
+p.confirm-page{
   margin-top:10px;
   margin-left:20px;
-  font-size:20px;
+  font-size: 14px;
+
 }
 
 div#content{
@@ -51,4 +51,3 @@ div#content{
   margin-left:-15px;
   margin-right:-15px;
 }
-
