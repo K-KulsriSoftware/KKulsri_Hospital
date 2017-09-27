@@ -14,6 +14,7 @@ api = API()
 #else :
 #	print('error' + result)
 
+
 #test show_profile
 status , result = api.show_profile(username='ekekjubjub')
 if status :
@@ -31,8 +32,8 @@ else :
 	print('error ' + result)
 '''
 
-#test edit_profile
 '''
+#test edit_profile
 status , result = api.edit_profile(email="eiei@gmail.com", telphone_number="0923485995", emergency_phone = "0653251554", submit=True)
 if status :
 	pprint(result)

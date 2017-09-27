@@ -92,7 +92,7 @@ class API :
 		# use user_id in phase II
 		return self.find_doctors(package_id=package_id)
 
-	# Jakapong Mo Begin
+		# Jakapong Mo Begin
 	# input : username(str)
 	def show_profile(self, username = None) :
 		list_patient = []
@@ -145,7 +145,6 @@ class API :
 				return True, (list_patient)
 		'''
 		for patient in patients :
-			patient.pop('_id',None)
 			list_patient.append(patient)
 		if len(list_patient) != 0 :
 			return True, (list_patient)
@@ -187,7 +186,6 @@ class API :
 				return True, (list_detail)
 		'''
 		for doctor in doctors :
-			doctor.pop('_id',None)
 			list_detail.append(doctor)
 		if len(list_detail) != 0 :
 			return True, (list_detail)
