@@ -147,6 +147,7 @@ class API :
 		])
 		result = []
 		for temp in cursor:
+			temp.pop('_id',None)
 			result.append(temp)
 		return True,result
 
@@ -182,6 +183,7 @@ class API :
 		])
 		result = []
 		for temp in cursor:
+			temp.pop('_id',None)
 			result.append(temp)
 		
 		return True,result

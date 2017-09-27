@@ -24,6 +24,18 @@ api = API()
 #print (status ," : ", result)
 
 
+#test show_general_list
+status,result = api.show_general_list()
+
+if status : 
+	pprint (result)
+
+#test show_departments
+status,result = api.show_departments()
+
+if status : 
+	pprint (result)
+
 #test show_special_package_info
 status,result = api.show_special_package_info('p00002')
 
