@@ -173,7 +173,8 @@ div#manual-page{
 }
 
 div#auto-page{
-  display:none;
+  width:100%;
+  height:100%;
 }
 
 img.img-cir{
@@ -250,4 +251,8 @@ li.nav-head{
 
 a{
   color: black;
+}
+
+.hide {
+  display: none;
 }
