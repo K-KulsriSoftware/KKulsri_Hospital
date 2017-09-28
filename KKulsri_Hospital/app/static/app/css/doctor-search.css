@@ -180,6 +180,7 @@ img.img-cir{
   border-radius:100%;
   width:100px;
   height:100px;
+  background-color: #c0d9df;
 }
 
 div.container{
@@ -212,8 +213,12 @@ span.span-heading{
   font-size:20px;
 }
 
+span.span-normal{
+  font-size: 16px;
+}
+
 span.span-detail{
-  font-size:70%;
+  font-size:85%;
   width:100%;
 }
 
@@ -241,4 +246,8 @@ li.nav-head{
 .span-styled {
   position: relative;
   top: 2px;
+}
+
+a{
+  color: black;
 }

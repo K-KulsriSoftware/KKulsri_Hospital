@@ -8,8 +8,8 @@
         <div id="crossline"></div>
         <div id="choose-manual">
             <ul class="nav nav-tabs">
-                <li id="auto" class="nav-head"><a href="#">ค้นหาแพทย์อัตโนมัติ </a></li>
-                <li class="active nav-head"  id="manual"><a href="#">ค้นหาแพทย์ด้วยตนเอง </a></li>
+                <li id="auto" class="nav-head"><a>ค้นหาแพทย์อัตโนมัติ </a></li>
+                <li class="active nav-head"  id="manual"><a>ค้นหาแพทย์ด้วยตนเอง </a></li>
             </ul>
             <div id="manual-page">
                 <div class="container auto-set">
@@ -78,7 +78,7 @@
                 </div>
                 <div class="container container-set" id="result">
                     <div class="result-block">
-                        <div class="div-img-circle"><img src="assets/img/pexels-photo.jpg" class="img-cir"></div>
+                        <div class="div-img-circle"><img src="" class="img-cir"></div>
                         <div class="div-name"><span class="span-detail">นายแพทย์กนกพล กุลศรี </span></div><span class="span-detail">แพทย์เชี่ยวชาญชำนาญพิเศษ </span>
                         <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์</button>
                         <button class="btn btn-default btn-res" type="button">ดูรายละเอียด </button>
@@ -97,4 +97,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'app/scripts/doctor-search.js' %}"></script>
 {% endblock %}
