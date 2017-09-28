@@ -4,86 +4,103 @@ div#head {
 	text-align: center;
 	width: 300px;
 }
-    
+
 span#head {
 	font-size: 20px;
 	height: 30px;
 }
-    
+
 div#allpage {
-	padding: 5px;
+	/*padding: 5px;
 	margin-top: 50px;
 	margin-bottom: 50px;
 	margin-right: 100px;
 	margin-left: 100px;
 	max-height: 821px;
-	max-width: 1000px;
+	max-width: 1000px;*/
 }
-    
+
 div#crossline {
 	background-color: #8dd9ca;
 	height: 5px;
-	width: 800px;
+	border-radius: 5px;
+	/*width: 805px;*/
 }
-    
+
 div#box {
 	border: solid #c0dfd9;
 	font-size: 16px;
-	width: 805px;
+	border-width: 1px;
+	/*width: 805px;*/
 }
 
-ul {  
-	margin: 0.75em 0;  
-	padding: 0 1em;  
-	list-style: none;  
-} 
-    
-li:before {   
-	content: "";  
-	border-color: transparent #4A4646;  
-	border-style: solid;  
-	border-width: 0.35em 0 0.35em 0.45em;  
-	display: block;  
-	height: 0;  
-	width: 0;  
+ul.department-ul {
+	margin: 0.75em 0;
+	padding: 0 1em;
+	list-style: none;
+}
+
+li.department-li:before {
+	content: "";
+	border-color: transparent #4A4646;
+	border-style: solid;
+	border-width: 0.35em 0 0.35em 0.45em;
+	display: block;
+	height: 0;
+	width: 0;
 <<<<<<< HEAD
-	left: 2em;  
-	top: 1em;  
-	position: relative;  
-} 
-    
+	left: 2em;
+	top: 1em;
+	position: relative;
+}
+
 span2 {
 =======
-	left: -1em;  
-	top: 0.9em;  
-	position: relative;  
-} 
-    
+	left: -1em;
+	top: 0.9em;
+	position: relative;
+}
+
 div#span1 {
 	background-color: #c0dfd9;
 	font-size: 20px;
-	text-align: center;
+	/*text-align: center;*/
 	width: 300px;
-	height: 30px;
+	height: 40px;
+	padding: 7px 0 0 20px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
-    
+
 div#span2 {
 >>>>>>> 685983407efc8303290c6ec53d65a0eac90a92a7
 	font-size: 18px;
 }
-    
+
 div.div1 {
 	border: solid;
 	border-color: #8dd9ca;
 	text-align: left;
 }
-    
+
 div.div2 {
 	height: 5px;
 	width: 800px;
 	border: solid;
 }
-    
+
 div.div3 {
 	border: solid;
+}
+
+.department-span {
+	margin-left: 20px;
+	text-decoration: none;
+	color: #3b3a36;
+}
+
+@media (max-width: 767px) {
+	div#span1{
+		width: 100%;
+	}
 }
