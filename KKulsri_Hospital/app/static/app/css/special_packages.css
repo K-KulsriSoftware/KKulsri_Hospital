@@ -7,12 +7,12 @@ div#allpage {
 	max-height: 821px;
 	max-width: 1000px;
 }
-    
+
 .jumbotron {
 	font-size: 30px;
 	text-align: center;
 }
-    
+
 <<<<<<< HEAD
 span2 {
 =======
@@ -24,7 +24,7 @@ div#p1 {
 	float: left;
 	margin: auto;
 }
-    
+
 div#p2 {
 	width: 990px;
 	height: auto;
@@ -32,18 +32,18 @@ div#p2 {
 	float: left;
 	margin: auto;
 }
-    
+
 div#span0 {
 	font-size: 20px;
 	margin: auto;
 }
-    
+
 div#span1 {
 >>>>>>> 685983407efc8303290c6ec53d65a0eac90a92a7
 	font-size: 18px;
 	margin: auto;
 }
-    
+
 <<<<<<< HEAD
 span3 {
 =======

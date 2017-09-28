@@ -100,7 +100,7 @@ div.div3 {
 
 div.img-top-slider{
   height:400px;
-  background:#fff url("https://thumbs.dreamstime.com/z/info-graphic-medical-hospital-surgery-operation-room-doctors-patients-post-ward-interior-building-health-71031691.jpg") no-repeat top center;
+  background:#fff url("https://static1.squarespace.com/static/56c1810140261d17781b7765/t/56c2223520c647590144660f/1455563325057/hospital.jpg?format=1500w") no-repeat center center;
   width:100%;
 	text-align: center;
 	padding-top: 200px;
@@ -114,6 +114,8 @@ div.img-top-slider{
 	height: 30px;
 	padding-top: 2px;
 	border-radius: 5px;
+	color: #3b3a36;
+	/*background-color: rgba(255, 255, 255, 0.8);*/
 }
 
 .div-button-middle:hover{
