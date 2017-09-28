@@ -358,7 +358,7 @@ div.col-md-2.colinlastname{
   }
 }
 
-div{
+.container div{
   float:left;
   display:inline-block;
   height:40px;
