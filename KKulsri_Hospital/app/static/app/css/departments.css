@@ -10,28 +10,21 @@ span#head {
 	height: 30px;
 }
 
-div#allpage {
-	/*padding: 5px;
-	margin-top: 50px;
-	margin-bottom: 50px;
-	margin-right: 100px;
-	margin-left: 100px;
-	max-height: 821px;
-	max-width: 1000px;*/
-}
-
 div#crossline {
 	background-color: #8dd9ca;
 	height: 5px;
 	border-radius: 5px;
-	/*width: 805px;*/
+}
+div#allpage{
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 div#box {
 	border: solid #c0dfd9;
 	font-size: 16px;
 	border-width: 1px;
-	/*width: 805px;*/
+	padding-bottom: 15px;
 }
 
 ul.department-ul {
@@ -103,4 +96,27 @@ div.div3 {
 	div#span1{
 		width: 100%;
 	}
+}
+
+div.img-top-slider{
+  height:400px;
+  background:#fff url("https://thumbs.dreamstime.com/z/info-graphic-medical-hospital-surgery-operation-room-doctors-patients-post-ward-interior-building-health-71031691.jpg") no-repeat top center;
+  width:100%;
+	text-align: center;
+	padding-top: 200px;
+}
+
+.div-button-middle{
+	margin: auto;
+	border: #3b3a36 1px solid;
+	width: 150px;
+	font-size: 16px;
+	height: 30px;
+	padding-top: 2px;
+	border-radius: 5px;
+}
+
+.div-button-middle:hover{
+	background-color: #fff;
+	cursor: pointer;
 }
