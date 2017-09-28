@@ -56,17 +56,18 @@ span.row-data-name-span{
   font-size:16px;
 }
 
-img.plam{
-}
-
-body.bg-body{
-}
-
 div.table-data-row{
   background-color:#fff;
 }
 
-@media (max-width:360px) {
-  button.btn.btn-default{
+@media (max-width:700px){
+  .choosebtn{
+    display:none;
+  }
+}
+
+@media (min-width:700px){
+  .icon-choobtn {
+    display:none;
   }
 }
