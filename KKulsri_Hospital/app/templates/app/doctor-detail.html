@@ -7,26 +7,54 @@
         <div class="row doctor">
             <div class="col-sm-4"><img class="doctor-image"></div>
             <div class="col-sm-8 doctor-content">
-                <h3>นายแพทย์กนกพล กุลศรี</h3>
+                <h3>{{ doctor.doctor_name_title }}{{ doctor.doctor_name }} {{ doctor.doctor_surname }}</h3>
                 <div class="doctor-content-detail">
                     <div class="row">
                         <div class="col-xs-4"><span>ชำนาญพิเศษ </span></div>
-                        <div class="col-xs-8"><span>เวชศาสตร์ครอบครัว, อายุรศาสตร์</span></div>
+                        <div class="col-xs-8">
+                            <span>
+                            {% if doctor.expertise and doctor.expertise|length > 0 %}
+                                {{ doctor.expertise|join:"<br>" }}
+                            {% else %}
+                                -
+                            {% endif %}
+                            </span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4"><span>เฉพาะทาง </span></div>
-                        <div class="col-xs-8"><span>- </span></div>
+                        <div class="col-xs-8">
+                            <span>
+                            {% if doctor.position %}
+                                {{ doctor.position }}
+                            {% else %}
+                                -
+                            {% endif %}
+                            </span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4"><span>ภาษา </span></div>
-                        <div class="col-xs-8"><span>ไทย, อังกฤษ, เกาหลี</span></div>
+                        <div class="col-xs-8">
+                            <span>
+                            {% if doctor.language and doctor.language|length %}
+                                {{ doctor.language|join:", " }}
+                            {% else %}
+                                -
+                            {% endif %}
+                            </span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4"><span>การศึกษา </span></div>
                         <div class="col-xs-8">
-                            <span>2545 เวชศาสตร์ครอบครัว (Thai Medial Council)<br>
-    2529 อายุรศาสตร์ (Thai Medical Council Khon Khan)<br>
-    2523 แพทย์ศาสตร์บัณฑิต (มหาวิทยาลัยขอนแก่น) </span>
+                            <span>
+                            {% if doctor.educations and doctor.educations|length %}
+                                {{ doctor.educations|join:"<br>" }}
+                            {% else %}
+                                -
+                            {% endif %}
+                            </span>
                         </div>
                     </div>
                 </div>

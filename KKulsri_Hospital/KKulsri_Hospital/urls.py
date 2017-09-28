@@ -1,6 +1,7 @@
 """
 Definition of urls for KKulsri_Hospital.
 """
+# -*- coding: utf-8 -*-
 
 from datetime import datetime
 from django.conf.urls import url
@@ -19,14 +20,14 @@ urlpatterns = [
     url(r'^$', app.views.home, name='home'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),
-    url(r'^doctor-detail', app.views.doctor_detail, name='doctor_detail '),
+    url(r'^doctor-detail/(?P<doctor_name>\w{0,50})-(?P<doctor_surname>\w{0,50})/$', app.views.doctor_detail, name='doctor_detail '),
     url(r'^register', app.views.register, name='register '),
     url(r'^member', app.views.member, name='member '),
     url(r'^departments', app.views.departments, name='departments '),
     url(r'^regular-packages', app.views.regular_packages, name='regular_packages '),
     url(r'^special-packages', app.views.special_packages, name='special_packages '),
     url(r'^doctor-search', app.views.search_for_doctor, name='search_for_doctor '),
-    url(r'^doctor', app.views.doctor, name='doctor '),
+    url(r'^doctor$', app.views.doctor, name='doctor '),
     url(r'^confirm', app.views.confirm, name='confirm '),
     url(r'^payment', app.views.payment, name='payment '),
     url(r'^login/$',

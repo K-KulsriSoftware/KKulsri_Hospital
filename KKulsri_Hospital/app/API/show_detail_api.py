@@ -18,10 +18,12 @@ class show_detail_api :
     		{
         		'$project':
         		{
+					'doctor_name_title' : '$doctor_name_title',
             		'doctor_name' : '$doctor_name',
             		'doctor_surname' : '$doctor_surname',
             		'doctor_img' : '$doctor_img',
 					'doctor_img' : '$doctor_img',
+					'position' : '$position',
 					'expertises' : '$expertises',
 					'educations' : '$educations',
 					'language' : '$language',

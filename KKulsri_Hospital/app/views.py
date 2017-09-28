@@ -1,12 +1,17 @@
 """
 Definition of views.
 """
-
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
 from .API.API import API
+from pymongo import MongoClient
+import base64
+
+
+api = API()
 
 def home(request):
     """Renders the home page."""
@@ -47,17 +52,18 @@ def about(request):
     )
 
 
-def doctor_detail(request):
+def doctor_detail(request, doctor_name, doctor_surname):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    doctor_name = base64.b64decode(doctor_name.encode('utf8')).decode('utf8')
+    doctor_surname = base64.b64decode(doctor_surname.encode('utf8')).decode('utf8')
+    status, result = api.show_detail(doctor_name, doctor_surname)
     return render(
         request,
         'app/doctor-detail.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'doctor': result
+        }
     )
 
 
