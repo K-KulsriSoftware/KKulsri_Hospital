@@ -39,7 +39,7 @@ class show_profile_api :
 					'mother_name' : '$mother_name',
 					'emergency_name' : '$emergency_name',
 					'emergency_phone' : '$emergency_phone',
-					'emergency_addr' : '$emergency_addr',
+					'emergency_address' : '$emergency_addr',
 					'email' : '$email',
 					'congenital disease' : '$congenital disease'
         		}
