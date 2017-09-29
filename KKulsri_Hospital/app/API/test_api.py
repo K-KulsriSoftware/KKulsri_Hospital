@@ -28,15 +28,105 @@ api = API()
 #status, result = api.get_doctor_detail('d007')
 
 #test  update_doctor_profile
-status, result = api.update_doctor_profile(doctor_id='d001', doctor_name_title='นายแพทย์', doctor_name='กนกพล', 
-							  doctor_surname='กุลศรี', gender='True', birthday=datetime(1997,2,8,0,0), office_phone_number='0856789012', 
+status, result = api.update_doctor_profile(doctor_id='d001', doctor_name_title='นายแพทย์', doctor_name='กนกพล',
+							  doctor_surname='กุลศรี', gender='True', birthday=datetime(1997,2,8,0,0), office_phone_number='0856789012',
 							  email='palmpalm@gmail.com', department_id=1, doctor_img='https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
-							  position='แพทย์เชี่ยวชาญทางด้านดวงตาง', expertises=['aaa', 'bbb'], educations=['กขค'], language=['ไทย', 'เกาหลี'], 
-							  working_time={"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]}, 
+							  position='แพทย์เชี่ยวชาญทางด้านดวงตาง', expertises=['aaa', 'bbb'], educations=['กขค'], language=['ไทย', 'เกาหลี'],
+							  working_time={"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]},
 							  order_ids=[])
 
 #test delete_doctor
 #status, result = delete_doctor('d003')
+
+#######Jakapong Mo START
+#status, result = api.get_all_patients()
+
+#test get_patients_detail
+#status, result = api.get_patients_detail('admao')
+#status, result = api.get_patients_detail('ukukukkkk')
+
+#test get_all_patients_name
+#status, result = api.get_all_patients_name()
+
+#test  update_patients_profile
+
+'''
+status, result = api.update_patient_profile("watermelon", "นาง", "สมหญิง", "ชำนาญคอม", "img.html", "1309905889674", True, [], 1996,
+							  1, 1, 1, 2, "ไทย", "ไทย", "พุทธ", 1, "37/16 สุขุมวิทย์ กทม", "โปรแกรมเมอร์", "0818453265",
+							  "วิศรุต ชำนาญคอม", "วริศรา หล่อเภรี", "มหาอินทร์ การช่างเยี่ยม", "0845263254", "98/14 ทองหล่อ กทม",
+							  "st@gmail.com", [])
+'''
+#test delete_patient
+#status, result = api.delete_patient(username='eiei')
+
+#test insert_patient
+'''
+status, result = api.insert_patient("watermelon22", "นางสาว", "สมหญิง", "ชำนาญคอม", "img.html", "1309905889674", True, [], 1996,
+							  1, 1, 1, 2, "ไทย", "ไทย", "พุทธ", 1, "37/16 สุขุมวิทย์ กทม", "โปรแกรมเมอร์", "0818453265",
+							  "วิศรุต ชำนาญคอม", "วริศรา หล่อเภรี", "มหาอินทร์ การช่างเยี่ยม", "0845263254", "98/14 ทองหล่อ กทม",
+							  "st@gmail.com", [])
+'''
+
+#####
+
+#status, result = api.get_all_packages()
+
+#test get_package_detail
+#status, result = api.get_package_detail('p00001')
+
+#test get_all_packages_name
+#status, result = api.get_all_packages_name()
+
+#test  update_package
+
+#status, result = api.update_package("p000099", "eiei", 1.1, 9, "-", [],"s", 1)
+#status, result = api.update_package(package_id= "p000099", package_name = "eiei",  package_cost = 1.1, department_id = 99, description = "-", conditions = [], package_notice = "s", building_id= 1)
+#status, result = api.update_package()
+#test delete_package
+#status, result = api.delete_package(package_id = "p000099")
+
+#test insert_package
+'''
+status, result = api.insert_package(package_id= "p000099", package_name = "eiei", package_cost = 1.1,
+									department_id = 99, description = "-", conditions = [], package_notice = "s", building_id= 1)
+'''
+
+#####
+
+#status, result = api.get_all_orders()
+
+#test get_order_detail
+#status, result = api.get_order_detail('o000001')
+
+#test get_all_orders_with_package_and_user
+#status, result = api.get_all_orders_with_package_and_user()
+
+#test  update_order
+'''
+status, result = api.update_order(order_id = "o0000099", package_id = "p0000999", doctor_id = "d0099", username = "99", notice = "9", cost = 9.9,
+								time = {
+				    	    		"year" : 2018,
+									"date" : 13,
+									"month" : 11,
+									"start_hr" : 9,
+									"finish_hr" : 10,
+				    			} )
+'''
+#test delete_order
+#status, result = api.delete_order(order_id = "o0000099")
+
+#test insert_order
+'''
+status, result = api.create_order(order_id = "o0000099", package_id = "p0000999", doctor_id = "d0099", username = "99", notice = "9", cost = 9.9,
+								time = {
+				    	    		"year" : 2018,
+									"date" : 13,
+									"month" : 11,
+									"start_hr" : 9,
+									"finish_hr" : 10,
+				    			} )
+'''
+#######Jakapong Mo END
 
 #######Watcharachat Tay START
 #test get_all_departments
@@ -113,9 +203,9 @@ status, result = api.update_doctor_profile(doctor_id='d001', doctor_name_title='
 
 #test register
 '''
-status, result = api.register("watermelon", "นางสาว", "สมหญิง", "ชำนาญคอม", "img.html", "1309905889674", True, [], 1996, 
-							  1, 1, 1, 2, "ไทย", "ไทย", "พุทธ", 1, "37/16 สุขุมวิทย์ กทม", "โปรแกรมเมอร์", "0818453265", 
-							  "วิศรุต ชำนาญคอม", "วริศรา หล่อเภรี", "มหาอินทร์ การช่างเยี่ยม", "0845263254", "98/14 ทองหล่อ กทม", 
+status, result = api.register("watermelon", "นางสาว", "สมหญิง", "ชำนาญคอม", "img.html", "1309905889674", True, [], 1996,
+							  1, 1, 1, 2, "ไทย", "ไทย", "พุทธ", 1, "37/16 สุขุมวิทย์ กทม", "โปรแกรมเมอร์", "0818453265",
+							  "วิศรุต ชำนาญคอม", "วริศรา หล่อเภรี", "มหาอินทร์ การช่างเยี่ยม", "0845263254", "98/14 ทองหล่อ กทม",
 							  "st@gmail.com", [], True)
 '''
 
