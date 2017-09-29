@@ -360,7 +360,7 @@ div.col-md-2.colinlastname{
 
 .container div{
   display:inline-block;
-  height:40px;
+  /*height:40px;*/
 }
 
 div.teub div, div.marr div {

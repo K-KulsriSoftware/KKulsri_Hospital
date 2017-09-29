@@ -354,11 +354,11 @@ div.col-md-2.colinlastname{
 
 .container div{
   display:inline-block;
-  height:40px;
+  /*height:40px;*/
 }
 
 div.marr div {
-  float:left;  
+  float:left;
 }
 
 @media (min-width:768px) {
