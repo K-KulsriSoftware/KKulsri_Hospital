@@ -97,17 +97,42 @@ class doctor_query_api :
 		)
 		return True, 'Successfully Removed'
 
+	def get_new_doctor_id(self) :
+		cursor = self.db.doctors.aggregate([
+			{
+				'$match' : {}
+			},
+			{
+				'$sort' : 
+				{
+					'username' : -1
+				}
+			},
+			{
+				'$limit' : 1
+			}
+		])
+		for i in cursor :
+			i = int(i['username'][1:])
+			if i < 10 :
+				return 'd00' + str(i)
+			elif i < 100 :
+				return 'd0' + str(i)
+			elif i < 1000 :
+				return 'd' + str(i)
+		return ''
+
 	def insert_doctor(self, doctor_name_title, doctor_name, doctor_surname, gender, birthday, 
 					  office_phone_number, email, department_id, doctor_img, position, expertises, 
 		              educations, language, working_time) :
-		if doctor_name_title == None or doctor_name == None or doctor_surname == None or gender == None or
+		if (doctor_name_title == None or doctor_name == None or doctor_surname == None or gender == None or
 		   birthday == None or office_phone_number == None or email == None or department_id == None or
 		   doctor_img == None or position == None or expertises == None or educations == None or
-		   language == None or working_time == None :
+		   language == None or working_time == None) :
 		   return False, 'Incomplete input'
 		self.db.doctors.insert(
 			{
-				'username' : ,
+				'username' : self.get_new_doctor_id(),
 				'doctor_name_title' : doctor_name_title, 
 				'doctor_name' : doctor_name,
 				'doctor_surname' : doctor_surname,
@@ -116,7 +141,7 @@ class doctor_query_api :
 				'office_phone_number' : office_phone_number, 
 				'email' : email, 
 				'department_id' : department_id, 
-				'doctor_img' : department_img, 
+				'doctor_img' : doctor_img, 
 				'position' : position, 
 				'expertises' : expertises, 
 		        'educations' : educations, 

@@ -133,7 +133,7 @@ class API :
 	#input: doctor_name_title(str), doctor_name(str), doctor_surname(str), gender(bool),
 	#       birthday(date), office_phone_number(str), email(str), department_id(number), doctor_img(str_url),
 	#       position(str), expertises(list_str), educations(list_str), language(list_str), working_time(dict)
-	def insert_doctor(doctor_name_title=None, doctor_name=None, doctor_surname=None, gender=None,
+	def insert_doctor(self, doctor_name_title=None, doctor_name=None, doctor_surname=None, gender=None,
 		   birthday=None, office_phone_number=None, email=None, department_id=None, doctor_img=None,
 		   position=None, expertises=None, educations=None, language=None, working_time=None) :
 		return self.doctor_query_api.insert_doctor(doctor_name_title, doctor_name, doctor_surname, gender,
@@ -199,6 +199,11 @@ class API :
 	#input: building_id(str)
 	def delete_building(self, building_id=None) :
 		return self.building_query_api.delete_building(building_id)
+
+	#input: building_name(str)
+	def insert_building(self, building_name=None) :
+		return self.building_query_api.insert_building(building_name)
+
 ###Watcharachat Tay END
 
 ###Jakapong Mo Start

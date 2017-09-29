@@ -41,12 +41,17 @@ status, result = api.update_doctor_profile('d001', 'นายแพทย์', '
 #status, result = api.delete_doctor('d003')
 
 #test insert_doctor
-'''
-status, result = api.insert_doctor('นายแพทย์', 'กนกพล', 'กุลศรี', 'True', datetime(1997,2,8,0,0), '0856789012',
-							       'palmpalm@gmail.com', 1, 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
-							  	   'แพทย์เชี่ยวชาญทางด้านดวงตาง', ['aaa', 'bbb'], ['กขค'], ['ไทย', 'เกาหลี'],
-							  	   {"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]})
-'''
+working_time = {
+					"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], 
+					"tue" : [{"start" : 9, "finish" : 10}]
+				}
+birthday = datetime(1997,2,8,0,0)
+language = ['ไทย', 'เกาหลี']
+status, result = api.insert_doctor('นายแพทย์', 'นิติ', 'นานา', True, birthday, '0856789012', 'palmpalm@gmail.com', 
+								   2, 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
+							  	   'แพทย์เชี่ยวชาญทางด้านจิตวิทยา', ['om', 'บลาบลา'], ['กขค'], language,
+							  	   working_time)
+
 
 #######Jakapong Mo START
 #status, result = api.get_all_patients()
@@ -190,10 +195,11 @@ status, result = api.create_order(order_id = "o0000099", package_id = "p0000999"
 #status, result = api.update_building_profile(building_id=None, building_name=None)
 #status, result = api.update_building_profile(9.9, 'loltest')
 
-
 #test delete_building
 #status, result = api.delete_building(9.9)
 
+#test insert_building
+#status, result = api.insert_building('อาคารออโทปิทิส')
 #######Watcharachat Tay END
 
 #test show_profile

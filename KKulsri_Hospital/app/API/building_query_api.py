@@ -57,7 +57,37 @@ class building_query_api :
 			return False, 'Incomplete input: building_id'
 		self.db.buildings.delete_one(
 			{
-				"building_id": building_id
+				'building_id': building_id
 			}
 		)
 		return True, 'Successfully Removed'
+
+	def get_new_building_id(self) :
+		cursor = self.db.buildings.aggregate([
+			{
+				'$match' : {}
+			},
+			{
+				'$sort' :
+				{
+					'building_id' : -1
+				}
+			},
+			{
+				'$limit' : 1
+			}
+		])
+		for i in cursor :
+			i = i[building_id]
+			return i+1
+
+	def insert_building(self, building_name) :
+		if building_name == None :
+			return False, 'Incomplete input: building_name'
+		self.db.buildings.insert(
+			{
+				'building_id' : self.get_new_building_id(),
+				'building_name' : building_name
+			}
+		)
+		return True, 'Successfully Inserted'
