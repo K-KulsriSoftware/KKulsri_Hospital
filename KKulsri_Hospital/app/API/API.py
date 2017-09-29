@@ -100,6 +100,10 @@ class API :
 		return self.create_order_api.create_order(package_id, doctor_id, username, notice, time)
 
 	#input: -
+	def show_doctor_in_department(self) :
+		return self.show_doctor_in_department_api.show_doctor_in_department()
+		
+	#input: -
 	def get_all_doctors(self) :
 		return self.doctor_query_api.get_all_doctors()
 
@@ -113,7 +117,7 @@ class API :
 
 	#input: doctor_id(str), doctor_name_title(str), doctor_name(str), doctor_surname(str), gender(bool),
 	#       birthday(date), office_phone_number(str), email(str), department_id(number), doctor_img(str_url),
-	#       position(str), expertises(list_str), educations(list_str), language(list_str), working_time(dict)
+	#       position(str), expertises(list_str), educations(list_str), language(list_str), working_time(dict), order_ids(list)
 	def update_doctor_profile(self, doctor_id=None, doctor_name_title=None, doctor_name=None,
 							  doctor_surname=None, gender=None, birthday=None, office_phone_number=None,
 							  email=None, department_id=None, doctor_img=None, position=None,
@@ -126,6 +130,15 @@ class API :
 	def delete_doctor(self, doctor_id=None) :
 		return self.delete_doctor(self, doctor_id)
 
+	#input: doctor_name_title(str), doctor_name(str), doctor_surname(str), gender(bool),
+	#       birthday(date), office_phone_number(str), email(str), department_id(number), doctor_img(str_url),
+	#       position(str), expertises(list_str), educations(list_str), language(list_str), working_time(dict)
+	def insert_doctor(doctor_name_title=None, doctor_name=None, doctor_surname=None, gender=None,
+		   birthday=None, office_phone_number=None, email=None, department_id=None, doctor_img=None,
+		   position=None, expertises=None, educations=None, language=None, working_time=None) :
+		return self.doctor_query_api.insert_doctor(doctor_name_title, doctor_name, doctor_surname, gender,
+		   birthday, office_phone_number, email, department_id, doctor_img,
+		   position, expertises, educations, language, working_time)
 
 
 ###Watcharachat Tay Start
@@ -192,10 +205,6 @@ class API :
 		return self.building_query_api.delete_building(building_id)
 ###Watcharachat Tay END
 
-	#input: -
-	def show_doctor_in_department(self) :
-		return self.show_doctor_in_department_api.show_doctor_in_department()
-
 ###Jakapong Mo Start
 	#input: -
 	def get_all_patients(self) :
@@ -213,9 +222,9 @@ class API :
 	# birthday_year(int), birthday_month(int), birthday_day(int), blood_group_abo(int), blood_group_rh(int), race(str), nationallity(str), Religion(str), Status(int), pateint_address(str), occupy(str),
 	# telphone_number(str), father_name(str), mother_name(str), emergency_name(str), emergency_phone(str), mergency_addr(str), email(str), congenital_disease(list)
 	def update_patient_profile(self, username = None , patient_name_title = None , patient_name = None, patient_surname = None, patient_img = None, id_card_number = None, gender = None,
-                 		order_ids = None, birthday_year = None, birthday_month = None, birthday_day = None, blood_group_abo = None, blood_group_rh = None, race = None, nationallity = None,
-				 		Religion = None, Status = None, pateint_address = None, occupy = None, telphone_number = None, father_name = None, mother_name = None, emergency_name = None,
-				 		emergency_phone = None, emergency_addr = None, email = None, congenital_disease = None) :
+                 		       order_ids = None, birthday_year = None, birthday_month = None, birthday_day = None, blood_group_abo = None, blood_group_rh = None, race = None, nationallity = None,
+				 		       Religion = None, Status = None, pateint_address = None, occupy = None, telphone_number = None, father_name = None, mother_name = None, emergency_name = None,
+				 		       emergency_phone = None, emergency_addr = None, email = None, congenital_disease = None) :
 		return self.patients_query_api.update_patient_profile(username, patient_name_title, patient_name, patient_surname, patient_img,
 			   id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo,
 			   blood_group_rh, race, nationallity, Religion, Status, pateint_address, occupy, telphone_number,
@@ -230,9 +239,9 @@ class API :
 	# birthday_year(int), birthday_month(int), birthday_day(int), blood_group_abo(int), blood_group_rh(int), race(str), nationallity(str), Religion(str), Status(int), pateint_address(str), occupy(str),
 	# telphone_number(str), father_name(str), mother_name(str), emergency_name(str), emergency_phone(str), mergency_addr(str), email(str), congenital_disease(list)
 	def insert_patient(self, username = None , patient_name_title = None , patient_name = None, patient_surname = None, patient_img = None, id_card_number = None, gender = None,
-                 		order_ids = None, birthday_year = None, birthday_month = None, birthday_day = None, blood_group_abo = None, blood_group_rh = None, race = None, nationallity = None,
-				 		Religion = None, Status = None, pateint_address = None, occupy = None, telphone_number = None, father_name = None, mother_name = None, emergency_name = None,
-				 		emergency_phone = None, emergency_addr = None, email = None, congenital_disease = None) :
+                 	   order_ids = None, birthday_year = None, birthday_month = None, birthday_day = None, blood_group_abo = None, blood_group_rh = None, race = None, nationallity = None,
+				 	   Religion = None, Status = None, pateint_address = None, occupy = None, telphone_number = None, father_name = None, mother_name = None, emergency_name = None,
+				 	   emergency_phone = None, emergency_addr = None, email = None, congenital_disease = None) :
 		return self.patients_query_api.insert_patient(username, patient_name_title, patient_name, patient_surname, patient_img,
 			   id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo,
 			   blood_group_rh, race, nationallity, Religion, Status, pateint_address, occupy, telphone_number,

@@ -40,7 +40,7 @@ class doctor_query_api :
         	{
         		'$project' : {
         			'doctor_id' : '$username',
-        			'doctor_name_title' : '$doctor_name_tile',
+        			'doctor_name_title' : '$doctor_name_title',
         			'doctor_first_name' : '$doctor_name',
         			'doctor_surname' : '$doctor_surname'
         		}
@@ -52,9 +52,9 @@ class doctor_query_api :
 			doctors.append(doctor)
 		return True, doctors
 
-	def update_doctor_profile(self, doctor_id, doctor_name_title, doctor_name, doctor_surname, gender, birthday, 
-		                      office_phone_number, email, department_id, doctor_img, position, expertises, 
-		                      educations, language, working_time, order_ids) :
+	def update_doctor(self, doctor_id, doctor_name_title, doctor_name, doctor_surname, gender, birthday, 
+		              office_phone_number, email, department_id, doctor_img, position, expertises, 
+		              educations, language, working_time, order_ids) :
 		if (doctor_id == None or doctor_name_title == None or doctor_name == None or doctor_surname == None or
 		   gender == None or birthday == None or office_phone_number == None or email == None or 
 		   department_id == None or doctor_img == None or position == None or expertises == None or
@@ -90,10 +90,39 @@ class doctor_query_api :
 	def delete_doctor(self, doctor_id) :
 		if doctor_id == None :
 			return False, 'Incomplete input: doctor_id'
-		self.db.doctor.delete_one(
+		self.db.doctors.delete_one(
 			{
 				"username": doctor_id
 			}
 		)
 		return True, 'Successfully Removed'
 
+	def insert_doctor(self, doctor_name_title, doctor_name, doctor_surname, gender, birthday, 
+					  office_phone_number, email, department_id, doctor_img, position, expertises, 
+		              educations, language, working_time) :
+		if doctor_name_title == None or doctor_name == None or doctor_surname == None or gender == None or
+		   birthday == None or office_phone_number == None or email == None or department_id == None or
+		   doctor_img == None or position == None or expertises == None or educations == None or
+		   language == None or working_time == None :
+		   return False, 'Incomplete input'
+		self.db.doctors.insert(
+			{
+				'username' : ,
+				'doctor_name_title' : doctor_name_title, 
+				'doctor_name' : doctor_name,
+				'doctor_surname' : doctor_surname,
+				'gender' : gender, 
+				'birthday' : birthday, 
+				'office_phone_number' : office_phone_number, 
+				'email' : email, 
+				'department_id' : department_id, 
+				'doctor_img' : department_img, 
+				'position' : position, 
+				'expertises' : expertises, 
+		        'educations' : educations, 
+		        'language' : language, 
+		        'working_time' : working_time,
+		        'order_ids' : []
+			}
+		)
+		return True, 'Successfully Inserted'
