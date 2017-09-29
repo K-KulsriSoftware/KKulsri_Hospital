@@ -92,7 +92,7 @@ def departments(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/departments.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
@@ -120,7 +120,7 @@ def special_packages(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'app/special_packages.html',
         # {
         #     'title': 'About',
         #     'message': 'Your application description page.',
