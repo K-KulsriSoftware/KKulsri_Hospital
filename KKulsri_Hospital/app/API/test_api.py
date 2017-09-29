@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from API import API
 from pprint import pprint
+from datetime import datetime
 
 api = API()
 
@@ -27,12 +28,12 @@ api = API()
 #status, result = api.get_doctor_detail('d007')
 
 #test  update_doctor_profile
-'''
-status, result = api.update_doctor_profile(doctor_id=None, doctor_name_title=None, doctor_name=None, 
-							  doctor_surname=None, gender=None, birthday=None, office_phone_number=None, 
-							  email=None, department_id=None, doctor_img=None, position=None, 
-		                      expertises=None, educations=None, language=None, working_time=None)
-'''
+status, result = api.update_doctor_profile(doctor_id='d001', doctor_name_title='นายแพทย์', doctor_name='กนกพล', 
+							  doctor_surname='กุลศรี', gender='True', birthday=datetime(1997,2,8,0,0), office_phone_number='0856789012', 
+							  email='palmpalm@gmail.com', department_id=1, doctor_img='https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
+							  position='แพทย์เชี่ยวชาญทางด้านดวงตาง', expertises=['aaa', 'bbb'], educations=['กขค'], language=['ไทย', 'เกาหลี'], 
+							  working_time={"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]}, 
+							  order_ids=[])
 
 #test delete_doctor
 #status, result = delete_doctor('d003')

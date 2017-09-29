@@ -15,6 +15,7 @@ from doctor_query_api import doctor_query_api
 from department_query_api import department_query_api###Watcharachat Tay
 from user_query_api import user_query_api###Watcharachat Tay
 from building_query_api import building_query_api###Watcharachat Tay
+from show_doctor_in_department_api import show_doctor_in_department_api
 
 class API :
 
@@ -35,6 +36,7 @@ class API :
 		self.department_query_api = department_query_api(self.db)##Watcharachat Tay
 		self.user_query_api = user_query_api(self.db)##Watcharachat Tay
 		self.building_query_api = building_query_api(self.db)##Watcharachat Tay
+		self.show_doctor_in_department_api = show_doctor_in_department_api(self.db)
 
 	# input : package_id(str), day(list of str), time('ช่วงเช้า'  or 'ช่วงบ่าย'), doctor_firstname(str), doctor_lastname(str), gender('ชาย' or 'หญิง')
 	def find_doctors(self, package_id=None, days=None, time=None, doctor_firstname=None, doctor_lastname=None, gender=None) :
@@ -108,10 +110,10 @@ class API :
 	def update_doctor_profile(self, doctor_id=None, doctor_name_title=None, doctor_name=None, 
 							  doctor_surname=None, gender=None, birthday=None, office_phone_number=None, 
 							  email=None, department_id=None, doctor_img=None, position=None, 
-		                      expertises=None, educations=None, language=None, working_time=None) :
+		                      expertises=None, educations=None, language=None, working_time=None, order_ids=None) :
 		return self.doctor_query_api.update_doctor_profile(doctor_id, doctor_name_title, doctor_name, 
 							  doctor_surname, gender, birthday, office_phone_number, email, department_id,
-							  doctor_img, position, expertises, educations, language, working_time)
+							  doctor_img, position, expertises, educations, language, working_time, order_ids)
 
 	#input: doctor_id(str)
 	def delete_doctor(self, doctor_id=None) :
@@ -182,3 +184,7 @@ class API :
 	def delete_building(self, building_id=None) :
 		return self.building_query_api.delete_building(building_id)
 ###Watcharachat Tay END
+	
+	#input: -
+	def show_doctor_in_department(self) :
+		return self.show_doctor_in_department_api.show_doctor_in_department()

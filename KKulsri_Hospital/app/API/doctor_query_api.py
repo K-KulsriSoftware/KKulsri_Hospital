@@ -54,11 +54,11 @@ class doctor_query_api :
 
 	def update_doctor_profile(self, doctor_id, doctor_name_title, doctor_name, doctor_surname, gender, birthday, 
 		                      office_phone_number, email, department_id, doctor_img, position, expertises, 
-		                      educations, language, working_time) :
+		                      educations, language, working_time, order_ids) :
 		if (doctor_id == None or doctor_name_title == None or doctor_name == None or doctor_surname == None or
 		   gender == None or birthday == None or office_phone_number == None or email == None or 
 		   department_id == None or doctor_img == None or position == None or expertises == None or
-		   educations == None or language == None or working_time == None) :
+		   educations == None or language == None or working_time == None or order_ids == None) :
 			return False, 'Incomplete input'
 		self.db.doctors.update_one(
 			{
@@ -80,7 +80,8 @@ class doctor_query_api :
 	               	'expertises' : expertises,
 	               	'educations' : educations,
 	               	'language' : language,
-	               	'working_time' : working_time
+	               	'working_time' : working_time,
+	               	'order_ids' : order_ids
         		}
     		}
 		)
@@ -95,3 +96,4 @@ class doctor_query_api :
 			}
 		)
 		return True, 'Successfully Removed'
+
