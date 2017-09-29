@@ -185,10 +185,6 @@ status, result = api.create_order(order_id = "o0000099", package_id = "p0000999"
 #test get_all_buildings_name
 #status, result = api.get_all_buildings_name()
 
-#test get_building_detail
-#status, result = api.get_building_detail(1.0)
-#status, result = api.get_building_detail(2.0)
-
 #test  update_building_profile
 
 #status, result = api.update_building_profile(building_id=None, building_name=None)

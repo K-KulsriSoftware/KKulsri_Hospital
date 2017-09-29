@@ -18,20 +18,6 @@ class building_query_api :
 			buildings.append(building)
 		return True, buildings
 
-	def get_building_detail(self,building_id) :##
-		cursor = self.db.buildings.aggregate([
-			{
-            	'$match' : 
-            		{
-            			'building_id' : building_id
-            		}
-        	}
-		])
-		for building in cursor :
-			building.pop('_id', None)
-			return True, building
-		return False, "No match profile"
-
 	def get_all_buildings_name(self) :
 		cursor = self.db.buildings.aggregate([
 			{

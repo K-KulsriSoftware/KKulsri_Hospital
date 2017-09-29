@@ -188,10 +188,6 @@ class API :
 	def get_all_buildings(self) :
 		return self.building_query_api.get_all_buildings()
 
-	#input: building_id(str)
-	def get_building_detail(self,building_id=None) :
-		return self.building_query_api.get_building_detail(building_id)
-
 	#input: -
 	def get_all_buildings_name(self) :
 		return self.building_query_api.get_all_buildings()
