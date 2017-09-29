@@ -26,6 +26,17 @@ api = API()
 #status, result = api.get_doctor_detail('d001')
 #status, result = api.get_doctor_detail('d007')
 
+#test  update_doctor_profile
+'''
+status, result = api.update_doctor_profile(doctor_id=None, doctor_name_title=None, doctor_name=None, 
+							  doctor_surname=None, gender=None, birthday=None, office_phone_number=None, 
+							  email=None, department_id=None, doctor_img=None, position=None, 
+		                      expertises=None, educations=None, language=None, working_time=None)
+'''
+
+#test delete_doctor
+#status, result = delete_doctor('d003')
+
 #test show_profile
 #status, result = api.show_profile(username='ekekjubjub')
 

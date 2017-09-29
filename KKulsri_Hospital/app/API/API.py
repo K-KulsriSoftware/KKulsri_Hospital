@@ -89,9 +89,24 @@ class API :
 		return self.doctor_query_api.get_all_doctors()
 
 	#input: doctor_id(str)
-	def get_doctor_detail(self,doctor_id) :
+	def get_doctor_detail(self,doctor_id=None) :
 		return self.doctor_query_api.get_doctor_detail(doctor_id)
 
 	#input: -
 	def get_all_doctors_name(self) :
 		return self.doctor_query_api.get_all_doctors_name()
+
+	#input: doctor_id(str), doctor_name_title(str), doctor_name(str), doctor_surname(str), gender(bool), 
+	#       birthday(date), office_phone_number(str), email(str), department_id(number), doctor_img(str_url), 
+	#       position(str), expertises(list_str), educations(list_str), language(list_str), working_time(dict)
+	def update_doctor_profile(self, doctor_id=None, doctor_name_title=None, doctor_name=None, 
+							  doctor_surname=None, gender=None, birthday=None, office_phone_number=None, 
+							  email=None, department_id=None, doctor_img=None, position=None, 
+		                      expertises=None, educations=None, language=None, working_time=None) :
+		return self.doctor_query_api.update_doctor_profile(doctor_id, doctor_name_title, doctor_name, 
+							  doctor_surname, gender, birthday, office_phone_number, email, department_id,
+							  doctor_img, position, expertises, educations, language, working_time)
+
+	#input: doctor_id(str)
+	def delete_doctor(self, doctor_id=None) :
+		return self.delete_doctor(self, doctor_id)
