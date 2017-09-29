@@ -60,7 +60,7 @@ class department_query_api :
     		{
         		'$set': 
         		{
-        			'department_name' : department_name_title,
+        			'department_name' : department_name,
         		}
     		}
 		)
