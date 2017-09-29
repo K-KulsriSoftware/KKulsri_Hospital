@@ -264,7 +264,7 @@ a{
 .hide {
   display: none;
 }
-
+/*plam*/
 @media (max-width:991px){
   .head-1{
     display:inline-block;
@@ -365,8 +365,5 @@ a{
     display:inline-block;
     float:left;
     margin-top: 10px;
-  }
-  .div-data-wrapper-below{
-      margin-top:-50px;
   }
 }
