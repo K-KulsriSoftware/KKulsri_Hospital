@@ -69,7 +69,7 @@ class user_query_api :
 	def delete_user(self, username) :
 		if username == None :
 			return False, 'Incomplete input: username'
-		self.db.user.delete_one(
+		self.db.users.delete_one(
 			{
 				"username": username
 			}

@@ -12,6 +12,9 @@ from show_special_package_info_api import show_special_package_info_api
 from create_order_api import create_order_api
 from show_confirmation_info_api import show_confirmation_info_api
 from doctor_query_api import doctor_query_api
+from department_query_api import department_query_api###Watcharachat Tay
+from user_query_api import user_query_api###Watcharachat Tay
+from building_query_api import building_query_api###Watcharachat Tay
 
 class API :
 
@@ -29,6 +32,9 @@ class API :
 		self.create_order_api = create_order_api(self.db)
 		self.show_confirmation_info_api = show_confirmation_info_api(self.db)
 		self.doctor_query_api = doctor_query_api(self.db)
+		self.department_query_api = department_query_api(self.db)##Watcharachat Tay
+		self.user_query_api = user_query_api(self.db)##Watcharachat Tay
+		self.building_query_api = building_query_api(self.db)##Watcharachat Tay
 
 	# input : package_id(str), day(list of str), time('ช่วงเช้า'  or 'ช่วงบ่าย'), doctor_firstname(str), doctor_lastname(str), gender('ชาย' or 'หญิง')
 	def find_doctors(self, package_id=None, days=None, time=None, doctor_firstname=None, doctor_lastname=None, gender=None) :
@@ -110,3 +116,69 @@ class API :
 	#input: doctor_id(str)
 	def delete_doctor(self, doctor_id=None) :
 		return self.delete_doctor(self, doctor_id)
+
+
+
+###Watcharachat Tay Start
+	#input: -
+	def get_all_departments(self) :
+		return self.department_query_api.get_all_departments()
+
+	#input: department_id(str)
+	def get_department_detail(self,department_id=None) :
+		return self.department_query_api.get_department_detail(department_id)
+
+	#input: -
+	def get_all_departments_name(self) :
+		return self.department_query_api.get_all_departments()
+
+	#input: department_id(str), department_name(str)
+	def update_department_profile(self, department_id=None, department_name=None) :
+		return self.department_query_api.update_department_profile(department_id, department_name)
+
+	#input: department_id(str)
+	def delete_department(self, department_id=None) :
+		return self.department_query_api.delete_department(department_id)
+###############
+
+	#input: -
+	def get_all_users(self) :
+		return self.user_query_api.get_all_users()
+
+	#input: user_id(str)
+	def get_user_detail(self,user_id=None) :
+		return self.user_query_api.get_user_detail(user_id)
+
+	#input: -
+	def get_all_users_name(self) :
+		return self.user_query_api.get_all_users()
+
+	#input: user_id(str), user_name(str)
+	def update_user_profile(self, username=None, password=None) :
+		return self.user_query_api.update_user_profile(username, password)
+
+	#input: user_id(str)
+	def delete_user(self, username=None) :
+		return self.user_query_api.delete_user(username)
+#############
+
+	#input: -
+	def get_all_buildings(self) :
+		return self.building_query_api.get_all_buildings()
+
+	#input: building_id(str)
+	def get_building_detail(self,building_id=None) :
+		return self.building_query_api.get_building_detail(building_id)
+
+	#input: -
+	def get_all_buildings_name(self) :
+		return self.building_query_api.get_all_buildings()
+
+	#input: building_id(str), building_name(str)
+	def update_building_profile(self, building_id=None, building_name=None) :
+		return self.building_query_api.update_building_profile(building_id, building_name)
+
+	#input: building_id(str)
+	def delete_building(self, building_id=None) :
+		return self.building_query_api.delete_building(building_id)
+###Watcharachat Tay END

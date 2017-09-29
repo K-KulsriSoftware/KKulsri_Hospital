@@ -37,6 +37,48 @@ status, result = api.update_doctor_profile(doctor_id=None, doctor_name_title=Non
 #test delete_doctor
 #status, result = delete_doctor('d003')
 
+#######Watcharachat Tay START
+#test get_all_departments
+#status, result = api.get_all_departments()
+
+#test get_all_departments_name
+#status, result = api.get_all_departments_name()
+
+#test get_department_detail
+#status, result = api.get_department_detail(1.0)
+#status, result = api.get_department_detail(2.0)
+
+#test  update_department_profile
+
+#status, result = api.update_department_profile(department_id=None, department_name=None)
+#status, result = api.update_department_profile(6.6, 'loltest')
+
+
+#test delete_department
+#status, result = api.delete_department(6.6)
+
+#####
+
+#test get_all_users
+#status, result = api.get_all_users()
+
+#test get_all_users_name
+#status, result = api.get_all_users_name()
+
+#test get_user_detail
+#status, result = api.get_user_detail('ekekjubjub')
+#status, result = api.get_user_detail('d001')
+
+#test  update_user_profile
+#status, result = api.update_user_profile(username=None, password=None)
+#status, result = api.update_user_profile('testuser', 'loltest')
+
+
+#test delete_user
+status, result = api.delete_user('testuser')
+
+#######Watcharachat Tay END
+
 #test show_profile
 #status, result = api.show_profile(username='ekekjubjub')
 

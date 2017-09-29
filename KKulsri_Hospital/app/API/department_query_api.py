@@ -69,9 +69,9 @@ class department_query_api :
 	def delete_department(self, department_id) :
 		if department_id == None :
 			return False, 'Incomplete input: department_id'
-		self.db.department.delete_one(
+		self.db.departments.delete_one(
 			{
-				"department_id": department_id
+				'department_id' : department_id
 			}
 		)
 		return True, 'Successfully Removed'
