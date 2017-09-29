@@ -1,16 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-from .find_doctors_api import find_doctors_api
-from .show_profile_api import show_profile_api
-from .show_detail_api import show_detail_api
-from .edit_profile_api import edit_profile_api
-from .register_api import register_api
-from .show_general_list_api import show_general_list_api
-from .show_departments_api import show_departments_api
-from .show_special_package_info_api import show_special_package_info_api
-from .create_order_api import create_order_api
-from .show_confirmation_info_api import show_confirmation_info_api
+from find_doctors_api import find_doctors_api
+from show_profile_api import show_profile_api
+from show_detail_api import show_detail_api
+from edit_profile_api import edit_profile_api
+from register_api import register_api
+from show_general_list_api import show_general_list_api
+from show_departments_api import show_departments_api
+from show_special_package_info_api import show_special_package_info_api
+from create_order_api import create_order_api
+from show_confirmation_info_api import show_confirmation_info_api
+from doctor_query_api import doctor_query_api
 
 class API :
 
@@ -27,6 +28,7 @@ class API :
 		self.show_special_package_info_api = show_special_package_info_api(self.db)
 		self.create_order_api = create_order_api(self.db)
 		self.show_confirmation_info_api = show_confirmation_info_api(self.db)
+		self.doctor_query_api = doctor_query_api(self.db)
 
 	# input : package_id(str), day(list of str), time('ช่วงเช้า'  or 'ช่วงบ่าย'), doctor_firstname(str), doctor_lastname(str), gender('ชาย' or 'หญิง')
 	def find_doctors(self, package_id=None, days=None, time=None, doctor_firstname=None, doctor_lastname=None, gender=None) :
@@ -81,3 +83,15 @@ class API :
 	#input: package_id,doctor_id,patient_id,time,notice
 	def create_order(self,package_id=None, doctor_id=None, username=None, notice='', time=None) :
 		return self.create_order_api.create_order(package_id, doctor_id, username, notice, time)
+
+	#input: -
+	def get_all_doctors(self) :
+		return self.doctor_query_api.get_all_doctors()
+
+	#input: doctor_id(str)
+	def get_doctor_detail(self,doctor_id) :
+		return self.doctor_query_api.get_doctor_detail(doctor_id)
+
+	#input: -
+	def get_all_doctors_name(self) :
+		return self.doctor_query_api.get_all_doctors_name()

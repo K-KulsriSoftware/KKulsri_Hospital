@@ -6,7 +6,7 @@ from pprint import pprint
 api = API()
 
 #test find_doctors
-status, result = api.find_doctors(package_id='p00001')
+#status, result = api.find_doctors(package_id='p00001')
 #status, result = api.find_doctors(package_id='p00001',days=['mon'])
 #status, result = api.find_doctors(package_id='p00001',days=['mon','tue'],time='ช่วงเช้า')
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
@@ -15,6 +15,16 @@ status, result = api.find_doctors(package_id='p00001')
 
 #test auto_find_doctors
 #status, result = api.auto_find_doctors(package_id='p00001')
+
+#test get_all_doctors
+#status, result = api.get_all_doctors()
+
+#test get_all_doctors_name
+#status, result = api.get_all_doctors_name()
+
+#test get_doctor_detail
+#status, result = api.get_doctor_detail('d001')
+#status, result = api.get_doctor_detail('d007')
 
 #test show_profile
 #status, result = api.show_profile(username='ekekjubjub')
