@@ -69,7 +69,7 @@ class building_query_api :
 	def delete_building(self, building_id) :
 		if building_id == None :
 			return False, 'Incomplete input: building_id'
-		self.db.building.delete_one(
+		self.db.buildings.delete_one(
 			{
 				"building_id": building_id
 			}
