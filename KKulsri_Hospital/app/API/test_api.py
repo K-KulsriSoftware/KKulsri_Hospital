@@ -28,15 +28,25 @@ api = API()
 #status, result = api.get_doctor_detail('d007')
 
 #test  update_doctor_profile
-status, result = api.update_doctor_profile(doctor_id='d001', doctor_name_title='นายแพทย์', doctor_name='กนกพล',
-							  doctor_surname='กุลศรี', gender='True', birthday=datetime(1997,2,8,0,0), office_phone_number='0856789012',
-							  email='palmpalm@gmail.com', department_id=1, doctor_img='https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
-							  position='แพทย์เชี่ยวชาญทางด้านดวงตาง', expertises=['aaa', 'bbb'], educations=['กขค'], language=['ไทย', 'เกาหลี'],
-							  working_time={"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]},
-							  order_ids=[])
+'''
+status, result = api.update_doctor_profile('d001', 'นายแพทย์', 'กนกพล', 'กุลศรี', 'True', datetime(1997,2,8,0,0), 
+										   '0856789012', 'palmpalm@gmail.com', 1, 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
+							 			   'แพทย์เชี่ยวชาญทางด้านดวงตาง', ['aaa', 'bbb'], ['กขค'], ['ไทย', 'เกาหลี'],
+							  			   {"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]},
+							               [])
+
+'''
 
 #test delete_doctor
-#status, result = delete_doctor('d003')
+#status, result = api.delete_doctor('d003')
+
+#test insert_doctor
+'''
+status, result = api.insert_doctor('นายแพทย์', 'กนกพล', 'กุลศรี', 'True', datetime(1997,2,8,0,0), '0856789012',
+							       'palmpalm@gmail.com', 1, 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
+							  	   'แพทย์เชี่ยวชาญทางด้านดวงตาง', ['aaa', 'bbb'], ['กขค'], ['ไทย', 'เกาหลี'],
+							  	   {"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]})
+'''
 
 #######Jakapong Mo START
 #status, result = api.get_all_patients()
@@ -140,7 +150,6 @@ status, result = api.create_order(order_id = "o0000099", package_id = "p0000999"
 #status, result = api.get_department_detail(2.0)
 
 #test  update_department_profile
-
 #status, result = api.update_department_profile(department_id=None, department_name=None)
 #status, result = api.update_department_profile(6.6, 'loltest')
 
@@ -199,7 +208,7 @@ status, result = api.create_order(order_id = "o0000099", package_id = "p0000999"
 #status, result = api.show_detail(doctor_name="Jackapong", doctor_surname='K.')
 
 #test edit_profile
-#status, result = api.edit_profile(email="eiei@gmail.com", telphone_number="0923485995", emergency_phone="0653251554", submit=True)
+#status, result = api.edit_profile(username='admao',email="eiei@gmail.com", telphone_number="0923485995", emergency_phone="0653251554", submit=True)
 
 #test register
 '''

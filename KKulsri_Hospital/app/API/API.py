@@ -63,8 +63,8 @@ class API :
 		return self.show_detail_api.show_detail(doctor_name,doctor_surname)
 
 	# input : email(str), telphone_number(str), emergency_phone(str), sumit(bool)
-	def edit_profile(self, email=None, telphone_number=None, emergency_phone=None, submit=False) :
-		return self.edit_profile_api.edit_profile(email,telphone_number,emergency_phone,submit)
+	def edit_profile(self, username=None, email=None, telphone_number=None, emergency_phone=None, submit=False) :
+		return self.edit_profile_api.edit_profile(username,email,telphone_number,emergency_phone,submit)
 
 	# input : username(str), patient_name_title(str), patient_name(str), patient_surname(str), patient_img(str), id_card_number(str), gender(bool), order_ids(list),
 	# birthday_year(int), birthday_month(int), birthday_day(int), blood_group_abo(int), blood_group_rh(int), race(str), nationallity(str), Religion(str), Status(int), pateint_address(str), occupy(str),
@@ -102,7 +102,7 @@ class API :
 	#input: -
 	def show_doctor_in_department(self) :
 		return self.show_doctor_in_department_api.show_doctor_in_department()
-		
+
 	#input: -
 	def get_all_doctors(self) :
 		return self.doctor_query_api.get_all_doctors()
