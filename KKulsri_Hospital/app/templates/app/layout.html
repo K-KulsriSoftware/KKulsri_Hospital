@@ -19,7 +19,7 @@
     <nav class="navbar navbar-default custom-header">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="/" class="navbar-brand navbar-link"><img id="site-logo" src="{% static 'app/images/KKULSRI_Logo.png' %}"><span class="logo-description">{{ header_title|default:"KULSRI" }}</span></a>
+                <a href="{{ logo_link|default:'/' }}" class="navbar-brand navbar-link"><img id="site-logo" src="{% static 'app/images/KKULSRI_Logo.png' %}"><span class="logo-description">{{ header_title|default:"KULSRI" }}</span></a>
                 <button data-toggle="collapse" data-target="#navbar-collapse" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">

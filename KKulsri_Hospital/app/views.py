@@ -246,7 +246,8 @@ def admin_mongo(request):
         {
             'header_title': 'mongoDB Admin',
             'collections': result,
-            'DATABASE': True
+            'DATABASE': True,
+            'logo_link': '/admin-mongo'
         }
     )
 
@@ -269,6 +270,7 @@ def admin_mongo_collection(request, collection_name):
             'collection_name': collection_name,
             'data': result,
             'COLLECTION': True,
-            'toolbar': True
+            'toolbar': True,
+            'logo_link': '/admin-mongo'
         }
     )
