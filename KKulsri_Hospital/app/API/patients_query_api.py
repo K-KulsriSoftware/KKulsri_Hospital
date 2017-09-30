@@ -58,20 +58,20 @@ class patients_query_api :
 
 	def update_patient_profile(self, username, patient_name_title, patient_name, patient_surname, patient_img, id_card_number, gender,
 				                order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
-				                Religion, Status, pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
-				                emergency_phone, emergency_addr, email, congenital_disease) :
+				                Religion, Status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+				                emergency_phone, emergency_address, email, congenital_disease) :
 		if username == None or patient_name_title == None or patient_name == None or patient_surname == None :
 			return False, 'Incommplete Input: username, patient_name_title, patient_name, patient_surname'
 		if patient_img == None or id_card_number == None or gender == None or order_ids == None or birthday_year == None :
 			return False, 'Incommplete Input: patient_img, id_card_number, gender, order_ids, birthday_year'
 		if birthday_month == None or birthday_day == None or blood_group_abo == None or blood_group_rh == None or race == None :
 			return False, 'Incommplete Input: birthday_month, birthday_day, blood_group_abo, blood_group_rh, race'
-		if nationallity == None or Religion == None or Status == None or pateint_address == None or occupy == None :
+		if nationallity == None or Religion == None or Status == None or patient_address == None or occupy == None :
 			return False, 'Incommplete Input: nationallity, Religion, Status, pateint_address, occupy'
 		if telphone_number == None or father_name == None or mother_name == None or emergency_name == None :
 			return False, 'Incommplete Input: telphone_number, father_name, mother_name, emergency_name'
-		if emergency_phone == None or emergency_addr == None or email == None or congenital_disease == None :
-			return False, 'Incommplete Input: emergency_phone, emergency_addr, email, congenital_disease'
+		if emergency_phone == None or emergency_address == None or email == None or congenital_disease == None :
+			return False, 'Incommplete Input: emergency_phone, emergency_address, email, congenital_disease'
 
 		self.db.patients.update_one(
     		{
@@ -94,14 +94,14 @@ class patients_query_api :
     				'nationallity' : nationallity,
     				'Religion' : Religion,
     				'Status' : Status,
-    				'pateint_address' : pateint_address,
+    				'patient_address' : patient_address,
     				'occupy' : occupy,
     				'telphone_number' : telphone_number,
     				'father_name' : father_name,
     				'mother_name' : mother_name,
     				'emergency_name' : emergency_name,
     				'emergency_phone' : emergency_phone,
-    				'emergency_addr' : emergency_addr,
+    				'emergency_address' : emergency_address,
     				'email' : email,
     				'congenital_disease' : congenital_disease
         		}
@@ -121,8 +121,8 @@ class patients_query_api :
 
 	def insert_patient(self, username, patient_name_title, patient_name, patient_surname, patient_img, id_card_number, gender,
                  order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
-				 Religion, Status, pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
-				 emergency_phone, emergency_addr, email, congenital_disease) :
+				 Religion, Status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+				 emergency_phone, emergency_address, email, congenital_disease) :
 
 		if username == None or patient_name_title == None or patient_name == None or patient_surname == None :
 			return False, 'Incommplete Input: username, patient_name_title, patient_name, patient_surname'
@@ -130,12 +130,12 @@ class patients_query_api :
 			return False, 'Incommplete Input: patient_img, id_card_number, gender, order_ids, birthday_year'
 		if birthday_month == None or birthday_day == None or blood_group_abo == None or blood_group_rh == None or race == None :
 			return False, 'Incommplete Input: birthday_month, birthday_day, blood_group_abo, blood_group_rh, race'
-		if nationallity == None or Religion == None or Status == None or pateint_address == None or occupy == None :
-			return False, 'Incommplete Input: nationallity, Religion, Status, pateint_address, occupy'
+		if nationallity == None or Religion == None or Status == None or patient_address == None or occupy == None :
+			return False, 'Incommplete Input: nationallity, Religion, Status, patidnt_address, occupy'
 		if telphone_number == None or father_name == None or mother_name == None or emergency_name == None :
 			return False, 'Incommplete Input: telphone_number, father_name, mother_name, emergency_name'
-		if emergency_phone == None or emergency_addr == None or email == None or congenital_disease == None :
-			return False, 'Incommplete Input: emergency_phone, emergency_addr, email, congenital_disease'
+		if emergency_phone == None or emergency_address == None or email == None or congenital_disease == None :
+			return False, 'Incommplete Input: emergency_phone, emergency_address, email, congenital_disease'
 
 		self.db.patients.insert(
 			{
@@ -154,16 +154,16 @@ class patients_query_api :
 				'nationallity' : nationallity,
 				'Religion' : Religion,
 				'Status' : Status,
-				'pateint_address' : pateint_address,
+				'patient_address' : patient_address,
 				'occupy' : occupy,
 				'telphone_number' : telphone_number,
 				'father_name' : father_name,
 				'mother_name' : mother_name,
 				'emergency_name' : emergency_name,
 				'emergency_phone' : emergency_phone,
-				'emergency_addr' : emergency_addr,
+				'emergency_address' : emergency_address,
 				'email' : email,
-				'congenital disease' : congenital_disease
+				'congenital_disease' : congenital_disease
 			}
 	    )
 		return True,'Successfully Added'
