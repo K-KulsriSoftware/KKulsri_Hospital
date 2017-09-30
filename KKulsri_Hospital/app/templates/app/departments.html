@@ -21,31 +21,12 @@
 
 		<div id="allpage">
 
-					<div id="span1"> {{ department.department_id }}</div>
-					<div id="crossline"></div>
-					<div id="box">
-						
-						<ul class="department-ul">
-								<li class="department-li"><a href="#"><span class="department-span"> {{ package.package_name }} </span></a></li>
-						</ul>
-					</div>
-
-		</div>
-	</div>
-	{% endfor %}
-
-	{% for department in departments %}
-
-	<div>
-
-		<div id="allpage">
-
 					<div id="span1"> {{ department.department_name }} </div>
 					<div id="crossline"></div>
 					<div id="box">
-						{% for department in departments %}
+						{% for package in departments %}
 						<ul class="department-ul">
-								<li class="department-li"><a href="#"> {{ department.department_name }} <span class="department-span"> </span></a></li>
+								<li class="department-li"><a href="/special-packages/?ppackage_id={{ package.package_id }} }}"> {{ package.package_name }} <span class="department-span"> </span></a></li>
 						</ul>
 						{% endfor %}
 					</div>
@@ -54,21 +35,6 @@
 	</div>
 	{% endfor %}
 	<!-- เพิ่มแผนกแบบนี้ -->
-
-
-	<div>
-		<div id="allpage">
-				<div id="span1">ear</div>
-				<div id="crossline"></div>
-				<div id="box">
-				<ul class="department-ul">
-					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในหู</span></a></li>
-					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในคอ </a></li>
-					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในจมูก</span></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
 
 {% endblock %}
 
