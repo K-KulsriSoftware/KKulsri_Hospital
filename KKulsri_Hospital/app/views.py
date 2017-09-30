@@ -194,6 +194,9 @@ def search_for_doctor(request):
         # }
     )
 
+def doctor_search_api(request):
+    pass
+
 def doctor(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)

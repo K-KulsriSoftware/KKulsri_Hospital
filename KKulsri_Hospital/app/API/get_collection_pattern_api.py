@@ -161,9 +161,8 @@ class get_collection_pattern_api :
 					{
 						'field_name' : 'mon',
 						'field_type' : 'list',
-						'value' : 'dict'
-						'dict' :
-						[
+						'value' : 'dict',
+						'dict' : [
 							{
 								'field_name' : 'start',
 								'field_type' : 'string'
@@ -177,9 +176,8 @@ class get_collection_pattern_api :
 					{
 						'field_name' : 'tue',
 						'field_type' : 'list',
-						'value' : 'dict'
-						'dict' :
-						[
+						'value' : 'dict',
+						'dict' : [
 							{
 								'field_name' : 'start',
 								'field_type' : 'string'
@@ -193,9 +191,8 @@ class get_collection_pattern_api :
 					{
 						'field_name' : 'wed',
 						'field_type' : 'list',
-						'value' : 'dict'
-						'dict' :
-						[
+						'value' : 'dict',
+						'dict' : [
 							{
 								'field_name' : 'start',
 								'field_type' : 'string'
@@ -209,9 +206,8 @@ class get_collection_pattern_api :
 					{
 						'field_name' : 'thu',
 						'field_type' : 'list',
-						'value' : 'dict'
-						'dict' :
-						[
+						'value' : 'dict',
+						'dict' : [
 							{
 								'field_name' : 'start',
 								'field_type' : 'string'
@@ -225,9 +221,8 @@ class get_collection_pattern_api :
 					{
 						'field_name' : 'fri',
 						'field_type' : 'list',
-						'value' : 'dict'
-						'dict' :
-						[
+						'value' : 'dict',
+						'dict' : [
 							{
 								'field_name' : 'start',
 								'field_type' : 'string'
@@ -241,9 +236,8 @@ class get_collection_pattern_api :
 					{
 						'field_name' : 'sat',
 						'field_type' : 'list',
-						'value' : 'dict'
-						'dict' :
-						[
+						'value' : 'dict',
+						'dict' : [
 							{
 								'field_name' : 'start',
 								'field_type' : 'string'
@@ -257,9 +251,8 @@ class get_collection_pattern_api :
 					{
 						'field_name' : 'sun',
 						'field_type' : 'list',
-						'value' : 'dict'
-						'dict' :
-						[
+						'value' : 'dict',
+						'dict' : [
 							{
 								'field_name' : 'start',
 								'field_type' : 'string'
