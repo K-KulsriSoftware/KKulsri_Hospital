@@ -195,7 +195,13 @@ def search_for_doctor(request):
     )
 
 def doctor_search_api(request):
-    status, result = api.find_doctors(request.GET.get('package_id'), request.GET.get('days').split(','), request.GET.get('time'), request.GET.get('doctor_firstname'), request.GET.get('doctor_lastname'), request.GET.get('gender'))
+    package_id = request.GET.get('package_id')
+    days = request.GET.get('days').split(',')
+    time = request.GET.get('time')
+    doctor_firstname = request.GET.get('doctor_firstname')
+    doctor_lastname = request.GET.get('doctor_lastname')
+    gender = request.GET.get('gender')
+    api.find_doctors(package_id, days, time, doctor_firstname, doctor_lastname, gender)
     return JsonResponse(result)
 
 def doctor(request):

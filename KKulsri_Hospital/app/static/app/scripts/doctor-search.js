@@ -13,5 +13,7 @@ $('li#manual').click(function(){
 })
 
 $('.btn-summit').click(function() {
-  alert('hello')
+  $.get('/doctor_search_api', {}, function(data) {
+    console.log(data)
+  })
 })
