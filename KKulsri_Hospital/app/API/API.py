@@ -71,16 +71,15 @@ class API :
 	# input : username(str), patient_name_title(str), patient_name(str), patient_surname(str), patient_img(str), id_card_number(str), gender(bool), order_ids(list),
 	# birthday_year(int), birthday_month(int), birthday_day(int), blood_group_abo(int), blood_group_rh(int), race(str), nationallity(str), Religion(str), Status(int), pateint_address(str), occupy(str),
 	# telphone_number(str), father_name(str), mother_name(str), emergency_name(str), emergency_phone(str), mergency_addr(str), email(str), congenital_disease(list)
-	def register(self, username=None, patient_name_title=None, patient_name=None, patient_surname=None, patient_img=None,
+def register(self, username=None, patient_name_title=None, patient_name=None, patient_surname=None, patient_img=None,
 				 id_card_number=None, gender=None, order_ids=None, birthday_year=None, birthday_month=None, birthday_day=None,
 				 blood_group_abo=None, blood_group_rh=None, race=None, nationallity=None, Religion=None, Status=None,
-				 pateint_address=None, occupy=None, telphone_number=None, father_name=None, mother_name=None, emergency_name=None,
-				 emergency_phone=None, emergency_addr=None, email=None, congenital_disease=None, submit=False) :
-		return self.register_api.register(username, patient_name_title, patient_name, patient_surname, patient_img,
-			   id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo,
-			   blood_group_rh, race, nationallity, Religion, Status, pateint_address, occupy, telphone_number,
-			   father_name, mother_name, emergency_name, emergency_phone, emergency_addr, email, congenital_disease,submit)
-
+				 patient_address=None, occupy=None, telphone_number=None, father_name=None, mother_name=None, emergency_name=None,
+				 emergency_phone=None, emergency_address=None, email=None, congenital_disease=None, submit=False) :
+		return self.register_api.register(username, patient_name_title, patient_name, patient_surname, patient_img, id_card_number, gender,
+					 order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
+					 Religion, Status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+					 emergency_phone, emergency_address, email, congenital_disease, submit)
 	#input : -
 	def show_general_list(self) :
 		return self.show_general_list_api.show_general_list()
@@ -163,10 +162,10 @@ class API :
 	#input: department_id(str)
 	def delete_department(self, department_id=None) :
 		return self.department_query_api.delete_department(department_id)
-	
+
 	#input: department_name(str)
 	def insert_department(self, department_name=None) :
-		return self.department_query_api.insert_department(department_name)		
+		return self.department_query_api.insert_department(department_name)
 ###############
 
 	#input: -
@@ -197,7 +196,7 @@ class API :
 	#input: building_id
 	def get_building_detail() :
 		return self.building_query_api.get_building_detail()
-	
+
 	#input: -
 	def get_all_buildings_name(self) :
 		return self.building_query_api.get_all_buildings()
@@ -310,7 +309,7 @@ class API :
 		return self.orders_query_api.create_order(order_id, package_id, doctor_id, username, notice, cost, time)
 
 ###Jakapong Mo END
-	
+
 	#input: -
 	def get_all_collections_name(self) :
 		return True, self.db.collection_names()
