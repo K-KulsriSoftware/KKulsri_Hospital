@@ -4,7 +4,7 @@ Definition of views.
 # -*- coding: utf-8 -*-
 from django.http import Http404
 from django.shortcuts import redirect, render
-from django.http import HttpRequest
+from django.http import HttpRequest, JsonResponse
 from django.template import RequestContext
 from datetime import datetime
 from .API.API import API
@@ -151,6 +151,8 @@ def departments(request):
 
 def regular_packages(request):
     """Renders the about page."""
+    if request.method == 'POST':
+        return JsonResponse({'ok':True})
     assert isinstance(request, HttpRequest)
     status, result = api.show_general_list()
     return render(
