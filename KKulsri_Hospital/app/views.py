@@ -2,7 +2,7 @@
 Definition of views.
 """
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
@@ -70,15 +70,28 @@ def doctor_detail(request, doctor_name, doctor_surname):
 def register(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/register.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
-    )
+    if request.method == 'POST':
+
+        username = request.POST['username']
+        # เติมให้ครบ
+
+        status, result = api.register(username, patient_name_title, patient_name, patient_surname, patient_img,
+            id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day,
+            blood_group_abo, blood_group_rh, race, nationallity, Religion, Status, 
+            pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+            emergency_phone, emergency_addr, email, congenital_disease, submit)
+        if status:
+            return redirect('/')
+        else:
+            return render(
+                request,
+                'app/register.html',
+            )
+    else:
+        return render(
+            request,
+            'app/register.html',
+        )
 
 def member(request):
     """Renders the about page."""
