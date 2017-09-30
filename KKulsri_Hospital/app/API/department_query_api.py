@@ -75,3 +75,34 @@ class department_query_api :
 			}
 		)
 		return True, 'Successfully Removed'
+
+	def get_new_department_id(self) :
+		cursor = self.db.departments.aggregate([
+			{
+				'$match' : {}
+			},
+			{
+				'$sort' :
+				{
+					'department_id' : -1
+				}
+			},
+			{
+				'$limit' : 1
+			}
+		])
+		for i in cursor :
+			i = i[department_id]
+			return i+1
+		return 0
+
+	def insert_department(self, department_name) :
+		if department_name == None :
+			return False, 'Incomplete input'
+		self.db.departments.insert(
+			{
+				'department_id' : get_new_department_id(),
+				'department_name' : department_name
+			}
+		)
+		return True, 'Successfully Inserted'

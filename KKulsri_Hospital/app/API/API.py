@@ -161,6 +161,10 @@ class API :
 	#input: department_id(str)
 	def delete_department(self, department_id=None) :
 		return self.department_query_api.delete_department(department_id)
+	
+	#input: department_name(str)
+	def insert_department(self, department_name=None) :
+		return self.department_query_api.insert_department(department_name)		
 ###############
 
 	#input: -
@@ -188,6 +192,10 @@ class API :
 	def get_all_buildings(self) :
 		return self.building_query_api.get_all_buildings()
 
+	#input: building_id
+	def get_building_detail() :
+		return self.building_query_api.get_building_detail()
+	
 	#input: -
 	def get_all_buildings_name(self) :
 		return self.building_query_api.get_all_buildings()
@@ -303,4 +311,4 @@ class API :
 	
 	#input: -
 	def get_all_collections_name(self) :
-		return self.db.collection_names()
+		return True, self.db.collection_names()
