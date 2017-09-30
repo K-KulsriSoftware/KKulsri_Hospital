@@ -1,11 +1,22 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from . import common_function
 
 class find_doctors_api :
 
 	def __init__(self, db) :
 		self.db = db
+
+	def translate_gender(self, gender) :
+		if type(gender) == type(True) :
+			if gender :
+				return 'ชาย'
+			else :
+				return 'หญิง'
+		else :
+			if gender == 'ชาย' :
+				return True
+			else :
+				return False
 
 	def get_doctors_query(self, package_id) :
 		return self.db.packages.aggregate([
