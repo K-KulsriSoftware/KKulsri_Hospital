@@ -64,7 +64,7 @@
             <div class="col-md-12">
                 <nav>
                     <ul class="pager">
-                        <li class="previous"><a href="#">สัปดาห์ก่อน</a></li>
+                        <li class="previous disabled"><a href="#">สัปดาห์ก่อน</a></li>
                         <li class="next"><a href="#">สัปดาห์ถัดไป</a></li>
                     </ul>
                 </nav>
@@ -96,7 +96,7 @@
                                     <div class="panel-body">
                                         <ul class="time">
                                             {% for time in doctor.working_time|get_item:day %}
-                                                <li>{{time.start}}:00 - {{time.end}}:00</li>
+                                                <li>{{ time.start }}:00 - {{ time.finish }}:00</li>
                                             {% endfor %}
                                         </ul>
                                     </div>
@@ -108,14 +108,18 @@
                 </div>
             </div>
         </div>
-        <div class="row appointment-detail round-border row-top-margin padding-row">
+        <div class="row appointment-detail round-border row-top-margin padding-row hide">
             <div class="col-md-8">
-                <p>นัดหมายกับ </p>
-                <p>พฤหัสบดี, 07 .........................</p>
+                <p>นัดหมายกับ {{ doctor.doctor_name_title }}{{ doctor.doctor_name }} {{ doctor.doctor_surname }}</p>
+                <p class="appointment-time"></p>
             </div>
             <div class="col-md-4 confirm-appointment-container">
                 <button class="btn" type="button" id="confirm-appointment">ยืนยันการนัดหมายแพทย์ </button>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'app/scripts/doctor-detail.js' %}"></script>
 {% endblock %}

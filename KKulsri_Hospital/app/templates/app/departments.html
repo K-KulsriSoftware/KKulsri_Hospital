@@ -1,41 +1,69 @@
 <!DOCTYPE html>
 
+<!--unfinished-->
+
 {% extends "app/layout.html" %}
 
 {% block content %}
 
 	{% load staticfiles %}
-
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/departments.css' %}" />
+
+	<!--find package tab-->
+	<a href="regular_packages.html">
 	<div class="img-top-slider">
 		<div class="div-button-middle">ค้นหาแพคเกจ</div>
 	</div>
+	</a>
+	<!--end find package tab-->
+
 	<div>
 		<div id="allpage">
-				<div id="span1">หู คอ จมูก</div>
+
+			{% for department in departments%}
+				<div id="span1">{{ department.department_name}}</div>
+				<div id="crossline"></div>
+				<div id="box">
+				{% for package in packages%}
+					<ul class="department-ul">
+						{% if package.department_id == department.department_id %}
+						<li class="department-li"><a href="#"><span class="department-span">{{ package.package_name }}</span></a></li>
+						{% endif %}
+					</ul>
+				{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+	<!-- เพิ่มแผนกแบบนี้ -->
+
+
+	<div>
+		<div id="allpage">
+				<div id="span1">ear</div>
 				<div id="crossline"></div>
 				<div id="box">
 				<ul class="department-ul">
 					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในหู</span></a></li>
 					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในคอ </a></li>
-					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในจมูก</a></li>
+					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในจมูก</span></a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	<!-- เพิ่มแผนกแบบนี้ -->
+
 	<div>
-		<div id="allpage">
-				<div id="span1">หู คอ จมูก</div>
-				<div id="crossline"></div>
-				<div id="box">
-				<ul class="department-ul">
-					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในหู</span></a></li>
-					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในคอ </a></li>
-					<li class="department-li"><a href="#"><span class="department-span">แพ็กเกจตรวจโรคในจมูก</a></li>
-				</ul>
+			<div id="allpage">
+					<div id="span1">Dept. Name</div>
+					<div id="crossline"></div>
+
+					<div id="box">
+					<ul class="department-ul">
+						<li class="department-li"><a href="#"><span class="department-span">Package Name</span></a></li>
+					</ul>
+					</div>
 			</div>
-		</div>
 	</div>
 
 {% endblock %}
