@@ -16,14 +16,15 @@ api = API()
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/index.html',
-        {
-            'title':'Home Page',
-            'year':datetime.now().year,
-        }
-    )
+    # return render(
+    #     request,
+    #     'app/index.html',
+    #     {
+    #         'title':'Home Page',
+    #         'year':datetime.now().year,
+    #     }
+    # )
+    return redirect('/departments')
 
 def contact(request):
     """Renders the contact page."""

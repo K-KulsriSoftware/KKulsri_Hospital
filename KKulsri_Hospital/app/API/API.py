@@ -1,24 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-from find_doctors_api import find_doctors_api
-from show_profile_api import show_profile_api
-from show_detail_api import show_detail_api
-from edit_profile_api import edit_profile_api
-from register_api import register_api
-from show_general_list_api import show_general_list_api
-from show_departments_api import show_departments_api
-from show_special_package_info_api import show_special_package_info_api
-from create_order_api import create_order_api
-from show_confirmation_info_api import show_confirmation_info_api
-from doctor_query_api import doctor_query_api
-from department_query_api import department_query_api###Watcharachat Tay
-from user_query_api import user_query_api###Watcharachat Tay
-from building_query_api import building_query_api###Watcharachat Tay
-from show_doctor_in_department_api import show_doctor_in_department_api
-from patients_query_api import patients_query_api###Jakapong Mo
-from packages_query_api import packages_query_api###Jakapong Mo
-from orders_query_api import orders_query_api###Jakapong Mo
+from .find_doctors_api import find_doctors_api
+from .show_profile_api import show_profile_api
+from .show_detail_api import show_detail_api
+from .edit_profile_api import edit_profile_api
+from .register_api import register_api
+from .show_general_list_api import show_general_list_api
+from .show_departments_api import show_departments_api
+from .show_special_package_info_api import show_special_package_info_api
+from .create_order_api import create_order_api
+from .show_confirmation_info_api import show_confirmation_info_api
+from .doctor_query_api import doctor_query_api
+from .department_query_api import department_query_api###Watcharachat Tay
+from .user_query_api import user_query_api###Watcharachat Tay
+from .building_query_api import building_query_api###Watcharachat Tay
+from .show_doctor_in_department_api import show_doctor_in_department_api
+from .patients_query_api import patients_query_api###Jakapong Mo
+from .packages_query_api import packages_query_api###Jakapong Mo
+from .orders_query_api import orders_query_api###Jakapong Mo
 
 class API :
 

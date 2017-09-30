@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import common_function
+from . import common_function
 
 class find_doctors_api :
 
