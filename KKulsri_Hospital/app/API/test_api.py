@@ -254,6 +254,9 @@ status,result = api.show_confirmation_info('p00003','d002', 'admao',
     			})
 '''
 
+#test get_collection_pattern
+status, result = api.get_collection_pattern('patients')
+
 if status :
 	pprint(result)
 else :

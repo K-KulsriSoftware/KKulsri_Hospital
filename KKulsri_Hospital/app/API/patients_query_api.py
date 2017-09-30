@@ -103,7 +103,7 @@ class patients_query_api :
     				'emergency_phone' : emergency_phone,
     				'emergency_addr' : emergency_addr,
     				'email' : email,
-    				'congenital disease' : congenital_disease
+    				'congenital_disease' : congenital_disease
         		}
     		}
 		)
