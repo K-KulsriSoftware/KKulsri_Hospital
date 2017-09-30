@@ -1,0 +1,16 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/admin-mongo.css' %}" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="collection-header-wrapper"><span class="collection-header">Collections </span></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="collection"><a href="#">Link<span>Text</span></a></div>
+        </div>
+    </div>
+{% endblock %}

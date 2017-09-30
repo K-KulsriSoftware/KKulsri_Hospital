@@ -229,3 +229,15 @@ def payment(request):
         #     'year': datetime.now().year,
         # }
     )
+
+def admin_mongo(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/admin-mongo.html',
+        # {
+        #     'title': 'About',
+        #     'message': 'Your application description page.',
+        #     'year': datetime.now().year,
+        # }
+    )

@@ -1,0 +1,13 @@
+span.collection-header{
+  font-weight:bold;
+}
+
+div.collection-header-wrapper{
+  background-color:#8dd9ca;
+  padding:10px;
+}
+
+div.collection{
+  padding:10px;
+}
+

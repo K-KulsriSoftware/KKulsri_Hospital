@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^doctor$', app.views.doctor, name='doctor '),
     url(r'^confirm', app.views.confirm, name='confirm '),
     url(r'^payment', app.views.payment, name='payment '),
+    url(r'^admin-mongo', app.views.admin_mongo, name='admin-mongo '),
     url(r'^login/$',
         django.contrib.auth.views.login,
         {
