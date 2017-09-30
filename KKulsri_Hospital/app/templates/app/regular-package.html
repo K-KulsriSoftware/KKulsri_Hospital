@@ -11,8 +11,8 @@
         <div class="tab-title-addons">
             <div style="padding-top: 5px"><span style="font-size: 20px;"><b>รายการตรวจสุขภาพทั่วไป</b></span></div>
         </div>
-        {% csrf_token %}
-        <div class="table-data-row">
+
+        <!-- <div class="table-data-row">
             <div class="row-data">
                 <div class="row-data-name">
                     <span class="row-data-name-span">1. การตรวจวัดอุณหภูมิในร่างกาย</span>
@@ -21,47 +21,19 @@
                     <button class="btn btn-default plam" type="button" id="p00006"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
                 </div>
             </div>
-        </div>
-        <div class="table-data-row">
-            <div class="row-data">
-                <div class="row-data-name">
-                    <span class="row-data-name-span">2. การตรวจหมู่เลือด</span>
-                </div>
-                <div class="row-data-button">
-                    <button class="btn btn-default" type="button" id="p00007"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
-                </div>
+        </div> -->
+
+        {% for package in packages%}
+        <div class="row-data">
+            <div class="row-data-name">
+                <span class="row-data-name-span">{{package.package_name}}</span>
+            </div>
+            <div class="row-data-button">
+                <button class="btn btn-default plam" type="button" id={{package_package_id}}><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
             </div>
         </div>
-        <div class="table-data-row">
-            <div class="row-data">
-                <div class="row-data-name">
-                    <span class="row-data-name-span">3. การตรวจคัดกรองเบาหวาน</span>
-                </div>
-                <div class="row-data-button">
-                    <button class="btn btn-default" type="button" id="p00008"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
-                </div>
-            </div>
-        </div>
-        <div class="table-data-row">
-            <div class="row-data">
-                <div class="row-data-name">
-                    <span class="row-data-name-span">4. การตรวจคัดกรองภาวะความดันโลหิตสูง</span>
-                </div>
-                <div class="row-data-button">
-                    <button class="btn btn-default" type="button" id="p00009"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
-                </div>
-            </div>
-        </div>
-        <div class="table-data-row">
-            <div class="row-data">
-                <div class="row-data-name">
-                    <span class="row-data-name-span">5. การตรวจวัดระดับวิตามิน A ในร่างกาย</span>
-                </div>
-                <div class="row-data-button">
-                    <button class="btn btn-default" type="button" id="p00010"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
+
         <div class="detail-conditions">
             <span style="font-size: 18px"><b>รายละเอียดการตรวจ</b></span><br>
 <div style="margin-left: 50px">

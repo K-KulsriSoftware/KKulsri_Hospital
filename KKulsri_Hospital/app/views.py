@@ -112,7 +112,7 @@ def register(request):
 
         status, result = api.register(username, patient_name_title, patient_name, patient_surname, patient_img,
             id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day,
-            blood_group_abo, blood_group_rh, race, nationallity, Religion, Status, 
+            blood_group_abo, blood_group_rh, race, nationallity, Religion, Status,
             pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
             emergency_phone, emergency_addr, email, congenital_disease, submit)
         if status:
@@ -157,8 +157,6 @@ def departments(request):
 
 def regular_packages(request):
     """Renders the about page."""
-    if request.method == 'POST':
-        return JsonResponse({'ok':True})
     assert isinstance(request, HttpRequest)
     status, result = api.show_general_list()
     return render(
