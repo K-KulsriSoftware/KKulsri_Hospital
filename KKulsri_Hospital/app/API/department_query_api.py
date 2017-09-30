@@ -50,8 +50,8 @@ class department_query_api :
 			departments.append(department)
 		return True, departments
 
-	def update_department_profile(self, department_id, department_name) :
-		if department_id == None or department_name == None :
+	def update_department_profile(self, department_id, department_name, department_description) :
+		if department_id == None or department_name == None or department_description == None:
 			return False, 'Incomplete input'
 		self.db.departments.update_one(
 			{
@@ -61,6 +61,7 @@ class department_query_api :
         		'$set': 
         		{
         			'department_name' : department_name,
+        			'department_description' : department_description,
         		}
     		}
 		)
@@ -96,13 +97,14 @@ class department_query_api :
 			return i+1
 		return 0
 
-	def insert_department(self, department_name) :
-		if department_name == None :
+	def insert_department(self, department_name, department_description) :
+		if department_name == None or department_description == None:
 			return False, 'Incomplete input'
 		self.db.departments.insert(
 			{
 				'department_id' : get_new_department_id(),
 				'department_name' : department_name
+				'department_description' : department_description,
 			}
 		)
 		return True, 'Successfully Inserted'
