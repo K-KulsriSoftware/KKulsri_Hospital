@@ -100,7 +100,7 @@ div.div3 {
 
 div.img-top-slider{
   height:400px;
-  background:#fff url("https://static1.squarespace.com/static/56c1810140261d17781b7765/t/56c2223520c647590144660f/1455563325057/hospital.jpg?format=1500w") no-repeat center center;
+  background:#fff url("http://i0.wp.com/static.turbosquid.com/Preview/2015/07/30__09_09_33/01.jpg3e3244be-caa3-4644-aa4c-790cf7d365ccOriginal.jpg?quality=80&strip=all") no-repeat center center;
   width:100%;
 	text-align: center;
 	padding-top: 200px;
@@ -115,7 +115,7 @@ div.img-top-slider{
 	padding-top: 2px;
 	border-radius: 5px;
 	color: #3b3a36;
-	/*background-color: rgba(255, 255, 255, 0.8);*/
+	background-color: rgba(255, 255, 255, 0.7);
 }
 
 .div-button-middle:hover{

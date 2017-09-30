@@ -9,25 +9,25 @@
     <div class="body-big">
         <div class="img-top-slider"></div>
         <div class="tab-title-addons">
-            <div style="padding-top: 5px"><span style="font-size: 20px;"><b>รายการตรวจสุขภาพเพิ่มเติม (Add-ons)</b></span></div>
+            <div style="padding-top: 5px"><span style="font-size: 20px;"><b>รายการตรวจสุขภาพทั่วไป</b></span></div>
         </div>
         <div class="table-data-row">
             <div class="row-data">
                 <div class="row-data-name">
-                    <span class="row-data-name-span">1. การตรวจความหนาแน่นของกระดูก (กระดูกสันหลังส่วนเอว)</span>
+                    <span class="row-data-name-span">1. การตรวจวัดอุณหภูมิในร่างกาย</span>
                 </div>
                 <div class="row-data-button">
-                    <button class="btn btn-default" type="button"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
+                    <button class="btn btn-default plam" type="button" id="p00006"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
                 </div>
             </div>
         </div>
         <div class="table-data-row">
             <div class="row-data">
                 <div class="row-data-name">
-                    <span class="row-data-name-span">2. การตรวจวัดระดับวิตามินดี</span>
+                    <span class="row-data-name-span">2. การตรวจหมู่เลือด</span>
                 </div>
                 <div class="row-data-button">
-                    <button class="btn btn-default" type="button"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
+                    <button class="btn btn-default" type="button" id="p00007"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
                     <span class="row-data-name-span">3. การตรวจคัดกรองเบาหวาน</span>
                 </div>
                 <div class="row-data-button">
-                    <button class="btn btn-default" type="button"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
+                    <button class="btn btn-default" type="button" id="p00008"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
                 </div>
             </div>
         </div>
@@ -47,7 +47,17 @@
                     <span class="row-data-name-span">4. การตรวจคัดกรองภาวะความดันโลหิตสูง</span>
                 </div>
                 <div class="row-data-button">
-                    <button class="btn btn-default" type="button"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
+                    <button class="btn btn-default" type="button" id="p00009"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
+                </div>
+            </div>
+        </div>
+        <div class="table-data-row">
+            <div class="row-data">
+                <div class="row-data-name">
+                    <span class="row-data-name-span">5. การตรวจวัดระดับวิตามิน A ในร่างกาย</span>
+                </div>
+                <div class="row-data-button">
+                    <button class="btn btn-default" type="button" id="p00010"><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
                 </div>
             </div>
         </div>
@@ -79,6 +89,7 @@
 
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-{% endblock %}
+    {% endblock %}
+    {% block scripts %}
+    <script src="{% static 'app/scripts/regular-packages.js' %}"></script>
+    {% endblock %}
