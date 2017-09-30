@@ -97,42 +97,39 @@ def member(request):
 def departments(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    status, result = api.show_departments()
     return render(
         request,
         'app/departments.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'departments': result
+        }
     )
 
 
 def regular_packages(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    status, result = api.show_general_list()
     return render(
         request,
         'app/regular-package.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'packages': result
+        }
     )
 
 
-def special_packages(request):
+def special_packages(request, package_id):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    status, result = api.show_special_package_info(package_id)
     return render(
         request,
         'app/special_packages.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'package': result
+        }
     )
 
 
