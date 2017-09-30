@@ -74,8 +74,34 @@ def register(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
-
         username = request.POST['username']
+        patient_name_title = request.POST['patient_name_title']
+        patient_name = request.POST['patient_name']
+        patient_surname = request.POST['patient_surname']
+        patient_img = request.POST['patient_img']
+        id_card_number = request.POST['id_card_number']
+        gender = request.POST['gender']
+        order_ids = request.POST['order_ids']
+        birthday_year = request.POST['birthday_year']
+        birthday_month = request.POST['birthday_month']
+        birthday_day = request.POST['birthday_day']
+        blood_group_abo = request.POST['blood_group_abo']
+        blood_group_rh = request.POST['blood_group_rh']
+        race = request.POST['race']
+        nationallity = request.POST['nationallity']
+        Religion = request.POST['Religion']
+        Status = request.POST['Status']
+        pateint_address = request.POST['pateint_address']
+        occupy = request.POST['occupy']
+        telphone_number = request.POST['telphone_number']
+        father_name = request.POST['father_name']
+        mother_name = request.POST['mother_name']
+        emergency_name = request.POST['emergency_name']
+        emergency_phone = request.POST['emergency_phone']
+        emergency_addr = request.POST['emergency_addr']
+        email = request.POST['email']
+        congenital_disease = request.POST['congenital_disease']
+        submit = request.POST['submit']
         # เติมให้ครบ
 
         status, result = api.register(username, patient_name_title, patient_name, patient_surname, patient_img,
