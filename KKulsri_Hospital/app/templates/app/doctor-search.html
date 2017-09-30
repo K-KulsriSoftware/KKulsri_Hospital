@@ -37,6 +37,14 @@
                             <label>
                                 <input type="checkbox" id="friday">วันศุกร์</label>
                         </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="friday">วันเสาร์</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="friday">วันอาทิตย์</label>
+                        </div>
                     </div>
                   </div>
                   <div class="div-data-wrapper-top">
@@ -86,6 +94,7 @@
                   <br>
                   <div class="div-data-wrapper-below-buttonseach">
                     <form id="confirm" class="form-inline">
+                        {% csrf_token %}
                         <button class="btn btn-default btn-summit" type="button" id="summit">ค้นหาแพทย์ </button>
                     </form>
                   </div>

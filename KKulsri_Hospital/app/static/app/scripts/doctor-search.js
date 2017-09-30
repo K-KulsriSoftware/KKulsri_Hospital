@@ -11,3 +11,7 @@ $('li#manual').click(function(){
   $('div#auto-page').addClass('hide')
   $('div#manual-page').removeClass('hide')
 })
+
+$('.btn-summit').click(function() {
+  alert('hello')
+})

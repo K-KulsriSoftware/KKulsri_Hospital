@@ -195,7 +195,8 @@ def search_for_doctor(request):
     )
 
 def doctor_search_api(request):
-    pass
+    status, result = api.find_doctors(request.GET.get('package_id'), request.GET.get('days').split(','), request.GET.get('time'), request.GET.get('doctor_firstname'), request.GET.get('doctor_lastname'), request.GET.get('gender'))
+    return JsonResponse(result)
 
 def doctor(request):
     """Renders the about page."""
