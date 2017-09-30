@@ -18,21 +18,23 @@
 	{% for department in departments %}
 
 	<div>
-
 		<div id="allpage">
 
 					<div id="span1"> {{ department.department_name }} </div>
 					<div id="crossline"></div>
 					<div id="box">
-						{% for package in departments %}
-						<ul class="department-ul">
-								<li class="department-li"><a href="/special-packages/?ppackage_id={{ package.package_id }} }}"> {{ package.package_name }} <span class="department-span"> </span></a></li>
-						</ul>
+						{% for package in depart.packages %}
+							{% if package.department_id == department.department_id %}
+							<ul class="department-ul">
+								<li class="department-li"><a href="/special-packages/?ppackage_id={{ package.package_id }} }}"> {{  package.package_name }} <span class="department-span"> </span></a></li>
+							</ul>
+							{% endif %}
 						{% endfor %}
 					</div>
 
 		</div>
 	</div>
+	
 	{% endfor %}
 	<!-- เพิ่มแผนกแบบนี้ -->
 
