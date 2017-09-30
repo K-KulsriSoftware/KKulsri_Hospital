@@ -260,7 +260,7 @@ status,result = api.show_confirmation_info('p00003','d002', 'admao',
 #status, result = api.get_collection_pattern('doctors')
 
 #test show_doctor_in_department()
-status, result = api.show_doctor_in_department()
+#status, result = api.show_doctor_in_department()
 
 if status :
 	pprint(result)
