@@ -14,6 +14,12 @@ import base64
 
 api = API()
 
+from django.template.defaulttags import register
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -232,10 +238,28 @@ def payment(request):
 
 def admin_mongo(request):
     assert isinstance(request, HttpRequest)
+    status, result = api.get_all_collections_name()
+    result.sort()
     return render(
         request,
         'app/admin-mongo.html',
         {
-            'header_title': 'mongoDB Admin'
+            'header_title': 'mongoDB Admin',
+            'collections': result
+        }
+    )
+
+def admin_mongo_collection(request, collection_name):
+    assert isinstance(request, HttpRequest)
+    status = result = ''
+    if collection_name == 'packages':
+        status, result = api.get_all_packages()
+    return render(
+        request,
+        'app/admin-mongo.html',
+        {
+            'header_title': 'mongoDB Admin',
+            'collection_name': collection_name,
+            'data': result
         }
     )

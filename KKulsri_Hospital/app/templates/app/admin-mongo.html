@@ -13,14 +13,51 @@
             </div>
         </div>
     {% endif %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="collection-header-wrapper"><span class="collection-header">Collections </span></div>
+    {% if collections %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="collection-header-wrapper"><span class="collection-header">Collections </span></div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="collection"><a href="#">Link<span>Text</span></a></div>
+        {% for collection in collections %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="collection"><a href="collection/{{ collection }}">{{ collection }}</a></div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if data %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="collection-header-wrapper"><span class="collection-header">{{ collection_name }}</span></div>
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-12">
+            {% if data|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                {% for field in data.0 %}
+                                    <th>{{ field }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for doc in data %}
+                                <tr>
+                                    {% for field in data.0 %}
+                                        <td>{{ doc|get_item:field }}</td>
+                                    {% endfor%}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
