@@ -103,8 +103,8 @@ class department_query_api :
 		self.db.departments.insert(
 			{
 				'department_id' : get_new_department_id(),
-				'department_name' : department_name
-				'department_description' : department_description,
+				'department_name' : department_name,
+				'department_description' : department_description
 			}
 		)
 		return True, 'Successfully Inserted'

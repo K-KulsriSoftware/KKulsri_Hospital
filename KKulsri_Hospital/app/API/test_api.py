@@ -78,12 +78,12 @@ status, result = api.update_patient_profile("watermelon", "นาง", "สม�
 #status, result = api.delete_patient(username='eiei')
 
 #test insert_patient
-
+'''
 status, result = api.insert_patient("watermelon22", "นางสาว", "สมหญิง", "ชำนาญคอม", "img.html", "1309905889674", True, [], 1996,
 							  1, 1, 1, 2, "ไทย", "ไทย", "พุทธ", 1, "37/16 สุขุมวิทย์ กทม", "โปรแกรมเมอร์", "0818453265",
 							  "วิศรุต ชำนาญคอม", "วริศรา หล่อเภรี", "มหาอินทร์ การช่างเยี่ยม", "0845263254", "98/14 ทองหล่อ กทม",
 							  "st@gmail.com", [])
-
+'''
 
 #####
 
@@ -258,6 +258,9 @@ status,result = api.show_confirmation_info('p00003','d002', 'admao',
 
 #test get_collection_pattern
 #status, result = api.get_collection_pattern('doctors')
+
+#test show_doctor_in_department()
+status, result = api.show_doctor_in_department()
 
 if status :
 	pprint(result)
