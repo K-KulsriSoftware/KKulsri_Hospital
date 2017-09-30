@@ -7,28 +7,35 @@ class create_order_api :
 	def __init__(self, db) :
 		self.db = db
 
-	def generate_orderid(self):
+	def get_new_order_id(self):
 		cursor = self.db.orders.aggregate([
 			{
-            	'$count' : 'counting'
-        	}
+				'$match' : {}
+			},
+			{
+				'$sort' : 
+				{
+					'order_id' : -1
+				}
+			},
+			{
+				'$limit' : 1
+			}
 		])
-		total_order = 0
 		for temp in cursor:
-			total_order = temp['counting']
-		orderamount = total_order + 1
-		if orderamount < 10 :
-			return 'o0000' + str(orderamount)
-		elif orderamount < 100 :
-			return 'o000' + str(orderamount)
-		elif orderamount < 1000 :
-			return 'o00' + str(orderamount)
-		elif orderamount < 10000 :
-			return 'o0' + str(orderamount)
-		elif orderamount < 100000 :
-			return 'o' + str(orderamount)
-		else :
-			return 'o000000'
+			temp = int(temp['order_id'][1:]) + 1
+			if temp < 10 :
+				return 'o0000' + str(temp)
+			elif temp < 100 :
+				return 'o000' + str(temp)
+			elif temp < 1000 :
+				return 'o00' + str(temp)
+			elif temp < 10000 :
+				return 'o0' + str(temp)
+			elif temp < 100000 :
+				return 'o' + str(temp)
+			else :
+				return 'o000000'
 
 	def get_package_cost(self,package_id) :
 		if package_id == None :
@@ -53,7 +60,7 @@ class create_order_api :
 	def insert_query(self, package_id, doctor_id, username, notice, time) :
 		self.db.orders.insert(
 			{
-    			"order_id" : self.generate_orderid(),
+    			"order_id" : self.generate_new_order_id(),
     			"package_id" : package_id,
     			"doctor_id" : doctor_id,
     			"user_id" : username,

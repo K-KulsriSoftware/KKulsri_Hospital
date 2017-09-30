@@ -80,6 +80,7 @@ class building_query_api :
 		for i in cursor :
 			i = i[building_id]
 			return i+1
+		return 0
 
 	def insert_building(self, building_name) :
 		if building_name == None :
