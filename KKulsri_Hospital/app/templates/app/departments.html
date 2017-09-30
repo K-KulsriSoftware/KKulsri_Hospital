@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 
-<!--unfinished-->
-
 {% extends "app/layout.html" %}
 
 {% block content %}
@@ -17,25 +15,44 @@
 	</a>
 	<!--end find package tab-->
 
+	{% for department in departments %}
+
 	<div>
+
 		<div id="allpage">
 
-			{% for department in departments%}
-				<div id="span1">{{ department.department_name}}</div>
-				<div id="crossline"></div>
-				<div id="box">
-				{% for package in packages%}
-					<ul class="department-ul">
-						{% if package.department_id == department.department_id %}
-						<li class="department-li"><a href="#"><span class="department-span">{{ package.package_name }}</span></a></li>
-						{% endif %}
-					</ul>
-				{% endfor %}
-				</div>
-			{% endfor %}
+					<div id="span1"> {{ department.department_id }}</div>
+					<div id="crossline"></div>
+					<div id="box">
+						
+						<ul class="department-ul">
+								<li class="department-li"><a href="#"><span class="department-span"> {{ package.package_name }} </span></a></li>
+						</ul>
+					</div>
+
 		</div>
 	</div>
-	{% endif %}
+	{% endfor %}
+
+	{% for department in departments %}
+
+	<div>
+
+		<div id="allpage">
+
+					<div id="span1"> {{ department.department_name }} </div>
+					<div id="crossline"></div>
+					<div id="box">
+						{% for department in departments %}
+						<ul class="department-ul">
+								<li class="department-li"><a href="#"> {{ department.department_name }} <span class="department-span"> </span></a></li>
+						</ul>
+						{% endfor %}
+					</div>
+
+		</div>
+	</div>
+	{% endfor %}
 	<!-- เพิ่มแผนกแบบนี้ -->
 
 
@@ -53,17 +70,9 @@
 		</div>
 	</div>
 
-	<div>
-			<div id="allpage">
-					<div id="span1">Dept. Name</div>
-					<div id="crossline"></div>
-
-					<div id="box">
-					<ul class="department-ul">
-						<li class="department-li"><a href="#"><span class="department-span">Package Name</span></a></li>
-					</ul>
-					</div>
-			</div>
-	</div>
-
 {% endblock %}
+
+<!--{% block scripts %}
+<script src="{% static 'app/scripts/departments.js' %}"></script>
+{% endblock %}-->
+
