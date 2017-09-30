@@ -163,14 +163,13 @@ def search_for_doctor(request):
 def doctor(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    status, result = api.show_doctor_in_department()
     return render(
         request,
         'app/doctor.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'departments': result
+        }
     )
 
 
