@@ -78,17 +78,16 @@ class find_doctors_api :
 		if days != None and time != None :
 			check = True
 			for day in days :
-				if day in doctor['working_time'] :
-					for working_time in doctor['working_time'][day] :
-						for now_check_time in range(working_time['start'], working_time['stop']) :
-							if (time == 'ช่วงเช้า' and 9 <= now_check_time <= 12) or (time == 'ช่วงบ่าย' and 13 <= now_check_time <= 17) :
-								check = False
+				for working_time in doctor['working_time'][day] :
+					for now_check_time in range(working_time['start'], working_time['stop']) :
+						if (time == 'ช่วงเช้า' and 9 <= now_check_time <= 12) or (time == 'ช่วงบ่าย' and 13 <= now_check_time <= 17) :
+							check = False
 			if check :
 				return False
 		elif days != None :
 			check = True
 			for day in days :
-				if day in doctor['working_time'] :
+				if len(doctor['working_time'][day]) > 0 :
 					check = False
 			if check :
 				return False
@@ -109,8 +108,7 @@ class find_doctors_api :
 		doctors = self.get_doctors_query(package_id)
 		result_doctors = []
 		for doctor in doctors :
-			check = self.check_correct_conditions(doctor, days, time, doctor_firstname, doctor_lastname, gender) 
-			if check :
+			if self.check_correct_conditions(doctor, days, time, doctor_firstname, doctor_lastname, gender) :
 				doctor.pop('_id', None)
 				doctor.pop('working_time', None)
 				doctor.pop('gender', None)
