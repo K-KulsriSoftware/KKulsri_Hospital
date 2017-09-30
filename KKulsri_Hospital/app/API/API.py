@@ -233,12 +233,12 @@ def register(self, username=None, patient_name_title=None, patient_name=None, pa
 	# telphone_number(str), father_name(str), mother_name(str), emergency_name(str), emergency_phone(str), mergency_addr(str), email(str), congenital_disease(list)
 	def update_patient_profile(self, username = None , patient_name_title = None , patient_name = None, patient_surname = None, patient_img = None, id_card_number = None, gender = None,
                  		       order_ids = None, birthday_year = None, birthday_month = None, birthday_day = None, blood_group_abo = None, blood_group_rh = None, race = None, nationallity = None,
-				 		       Religion = None, Status = None, pateint_address = None, occupy = None, telphone_number = None, father_name = None, mother_name = None, emergency_name = None,
-				 		       emergency_phone = None, emergency_addr = None, email = None, congenital_disease = None) :
+				 		       Religion = None, Status = None, patient_address = None, occupy = None, telphone_number = None, father_name = None, mother_name = None, emergency_name = None,
+				 		       emergency_phone = None, emergency_address = None, email = None, congenital_disease = None) :
 		return self.patients_query_api.update_patient_profile(username, patient_name_title, patient_name, patient_surname, patient_img,
 			   id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo,
-			   blood_group_rh, race, nationallity, Religion, Status, pateint_address, occupy, telphone_number,
-			   father_name, mother_name, emergency_name, emergency_phone, emergency_addr, email, congenital_disease)
+			   blood_group_rh, race, nationallity, Religion, Status, patient_address, occupy, telphone_number,
+			   father_name, mother_name, emergency_name, emergency_phone, emergency_address, email, congenital_disease)
 
 
 	# input : username(str)
@@ -250,12 +250,12 @@ def register(self, username=None, patient_name_title=None, patient_name=None, pa
 	# telphone_number(str), father_name(str), mother_name(str), emergency_name(str), emergency_phone(str), mergency_addr(str), email(str), congenital_disease(list)
 	def insert_patient(self, username = None , patient_name_title = None , patient_name = None, patient_surname = None, patient_img = None, id_card_number = None, gender = None,
                  	   order_ids = None, birthday_year = None, birthday_month = None, birthday_day = None, blood_group_abo = None, blood_group_rh = None, race = None, nationallity = None,
-				 	   Religion = None, Status = None, pateint_address = None, occupy = None, telphone_number = None, father_name = None, mother_name = None, emergency_name = None,
-				 	   emergency_phone = None, emergency_addr = None, email = None, congenital_disease = None) :
+				 	   Religion = None, Status = None, patient_address = None, occupy = None, telphone_number = None, father_name = None, mother_name = None, emergency_name = None,
+				 	   emergency_phone = None, emergency_address = None, email = None, congenital_disease = None) :
 		return self.patients_query_api.insert_patient(username, patient_name_title, patient_name, patient_surname, patient_img,
 			   id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo,
-			   blood_group_rh, race, nationallity, Religion, Status, pateint_address, occupy, telphone_number,
-			   father_name, mother_name, emergency_name, emergency_phone, emergency_addr, email, congenital_disease)
+			   blood_group_rh, race, nationallity, Religion, Status, patient_address, occupy, telphone_number,
+			   father_name, mother_name, emergency_name, emergency_phone, emergency_address, email, congenital_disease)
 
 #############
 	# input : -
