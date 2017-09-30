@@ -245,21 +245,30 @@ def admin_mongo(request):
         'app/admin-mongo.html',
         {
             'header_title': 'mongoDB Admin',
-            'collections': result
+            'collections': result,
+            'DATABASE': True
         }
     )
 
 def admin_mongo_collection(request, collection_name):
     assert isinstance(request, HttpRequest)
-    status = result = ''
-    if collection_name == 'packages':
-        status, result = api.get_all_packages()
+    status, result = {
+        'buildings': api.get_all_buildings_name(),
+        'departments': api.get_all_departments_name(),
+        'doctors': api.get_all_doctors_name(),
+        'orders': api.get_all_orders(),
+        'patients': api.get_all_patients_name(),
+        'users': api.get_all_users_name(),
+        'packages': api.get_all_packages_name()
+    }.get(collection_name)
     return render(
         request,
         'app/admin-mongo.html',
         {
             'header_title': 'mongoDB Admin',
             'collection_name': collection_name,
-            'data': result
+            'data': result,
+            'COLLECTION': True,
+            'toolbar': True
         }
     )
