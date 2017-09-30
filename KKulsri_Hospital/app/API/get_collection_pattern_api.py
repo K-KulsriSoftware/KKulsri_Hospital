@@ -6,9 +6,9 @@ class get_collection_pattern_api :
 
 	def __init__(self, db) :
 		self.db = db
-
+	'''
 	def str_type_name(self, field_type) :
-		print(field_type)
+		#print(field_type)
 		if field_type == type(0) :
 			return 'int'
 		if field_type == type(0.2) :
@@ -29,10 +29,13 @@ class get_collection_pattern_api :
 		for field in record_dict :
 			field_type = self.str_type_name(type(record_dict[field]))
 			if field_type == 'dict' :
-				result.append({'field_name' : field, 'field_type' : 'dict', 'dict' : self.read_dict(record_dict[field])})
+				print(field)
+				result.append({'field_name' : field, 'field_type' : 'dict', 'dict' : self.read_dict(collection_name, record_dict[field])})
 			elif field_type == 'list' :
 				if collection_name == 'patients' and field == 'congenital_disease':
 					result.append({'field_name' : field, 'field_type' : 'string'})
+				elif collection_name == 'doctors' and field in ['mon','tue','wed','thu','fri','sat','sun'] :
+					result.append('field_name' : field, 'field_type' : 'list', 'value' : dict)
 				else :
 					result.append({'field_name' : field, 'field_type' : 'list', 'value' : self.str_type_name(type(record_dict[field][0]))})
 			else :
@@ -59,3 +62,24 @@ class get_collection_pattern_api :
 			record.pop('_id', None)
 			result = self.read_dict(collection_name, record)
 		return True, result
+	'''
+
+	def get_buildings_pattern(self) :
+		return [
+			{
+				'field_name' : 'building_id',
+				'field_type' : 'integer'
+			},
+			{
+				'field_name' : 'building_name',
+				'field_type' : 'integer'
+			}
+		]
+	
+	def get_collection_pattern(self, collection_name) :
+		if collection_name == None :
+			return False, 'Incomplete input: collection_name'
+		elif collection_name == 'building' :
+			return True, self.get_buildings_pattern()
+		else :
+			return False, 'No collection name : ' + collection_name
