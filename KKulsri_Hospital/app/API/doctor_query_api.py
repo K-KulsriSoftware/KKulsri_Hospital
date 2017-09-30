@@ -120,7 +120,7 @@ class doctor_query_api :
 				return 'd0' + str(i)
 			elif i < 1000 :
 				return 'd' + str(i)
-		return ''
+		return 'd000'
 
 	def insert_doctor(self, doctor_name_title, doctor_name, doctor_surname, gender, birthday, 
 					  office_phone_number, email, department_id, doctor_img, position, expertises, 
