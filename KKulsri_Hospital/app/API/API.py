@@ -300,3 +300,7 @@ class API :
 		return self.orders_query_api.create_order(order_id, package_id, doctor_id, username, notice, cost, time)
 
 ###Jakapong Mo END
+	
+	#input: -
+	def get_all_collections_name(self) :
+		return self.db.collection_names()
