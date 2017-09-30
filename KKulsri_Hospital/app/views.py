@@ -2,6 +2,7 @@
 Definition of views.
 """
 # -*- coding: utf-8 -*-
+from django.http import Http404
 from django.shortcuts import redirect, render
 from django.http import HttpRequest
 from django.template import RequestContext
@@ -53,19 +54,20 @@ def about(request):
     )
 
 
-def doctor_detail(request, doctor_name, doctor_surname):
+def doctor_detail(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
-    doctor_name = base64.b64decode(doctor_name.encode('utf8')).decode('utf8')
-    doctor_surname = base64.b64decode(doctor_surname.encode('utf8')).decode('utf8')
-    status, result = api.show_detail(doctor_name, doctor_surname)
-    return render(
-        request,
-        'app/doctor-detail.html',
-        {
-            'doctor': result
-        }
-    )
+    status, result = api.show_detail(request.GET.get('doctor_name'), request.GET.get('doctor_surname'))
+    if status:
+        return render(
+            request,
+            'app/doctor-detail.html',
+            {
+                'doctor': result
+            }
+        )
+    else:
+        raise Http404("No doctor found")
 
 
 def register(request):
