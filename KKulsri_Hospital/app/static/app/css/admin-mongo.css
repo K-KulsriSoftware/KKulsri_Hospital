@@ -11,3 +11,12 @@ div.collection{
   padding:10px;
 }
 
+div.toolbar{
+  text-align:right;
+  padding-bottom:5px;
+}
+
+div.toolbar button{
+  margin-left:5px;
+}
+

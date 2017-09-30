@@ -3,6 +3,16 @@
 {% block content %}
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/admin-mongo.css' %}" />
+    {% if toolbar %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="toolbar">
+                    <button class="btn btn-default btn-danger" type="button">Delete</button>
+                    <button class="btn btn-default" type="button">Add</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="row">
         <div class="col-md-12">
             <div class="collection-header-wrapper"><span class="collection-header">Collections </span></div>

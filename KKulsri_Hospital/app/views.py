@@ -235,9 +235,7 @@ def admin_mongo(request):
     return render(
         request,
         'app/admin-mongo.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'header_title': 'mongoDB Admin'
+        }
     )
