@@ -44,20 +44,26 @@ function getDateForDay() {
 getDateForDay();
 
 $('ul.time li').click(function() {
-    $('ul.time li').removeClass('selected')
+    $('ul.time li').removeClass('selected');
     $(this).addClass('selected');
+    $('p.appointment-time').text($(this).closest('.panel').find('.panel-title').text() + ', เวลา ' + $(this).text());
     $('div.appointment-detail').removeClass('hide');
 });
 
 $('.schedule-container .pager li').click(function() {
+    $(this).addClass('disabled');
     if($(this).hasClass('previous')) {
         if(!isThisWeek) {
+            $('ul.time li').removeClass('selected')
+            $('div.appointment-detail').addClass('hide');
             $('.schedule-container .pager li.next').removeClass('disabled');
             isThisWeek = true;
             getDateForDay();
         }
     } else if($(this).hasClass('next')) {
         if(isThisWeek) {
+            $('ul.time li').removeClass('selected')
+            $('div.appointment-detail').addClass('hide');
             $('.schedule-container .pager li.previous').removeClass('disabled');
             isThisWeek = false;
             getDateForDay();
