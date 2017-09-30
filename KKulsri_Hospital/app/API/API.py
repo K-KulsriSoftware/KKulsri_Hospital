@@ -71,7 +71,7 @@ class API :
 	# input : username(str), patient_name_title(str), patient_name(str), patient_surname(str), patient_img(str), id_card_number(str), gender(bool), order_ids(list),
 	# birthday_year(int), birthday_month(int), birthday_day(int), blood_group_abo(int), blood_group_rh(int), race(str), nationallity(str), Religion(str), Status(int), pateint_address(str), occupy(str),
 	# telphone_number(str), father_name(str), mother_name(str), emergency_name(str), emergency_phone(str), mergency_addr(str), email(str), congenital_disease(list)
-def register(self, username=None, patient_name_title=None, patient_name=None, patient_surname=None, patient_img=None,
+	def register(self, username=None, patient_name_title=None, patient_name=None, patient_surname=None, patient_img=None,
 				 id_card_number=None, gender=None, order_ids=None, birthday_year=None, birthday_month=None, birthday_day=None,
 				 blood_group_abo=None, blood_group_rh=None, race=None, nationallity=None, Religion=None, Status=None,
 				 patient_address=None, occupy=None, telphone_number=None, father_name=None, mother_name=None, emergency_name=None,
