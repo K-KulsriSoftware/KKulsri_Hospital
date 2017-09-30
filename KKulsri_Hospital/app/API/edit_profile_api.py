@@ -6,10 +6,10 @@ class edit_profile_api :
 	def __init__(self, db) :
 		self.db = db
 
-	def update_query(self, email, telphone_number, emergency_phone) :
+	def update_query(self, username, email, telphone_number, emergency_phone) :
 		self.db.patients.update_one(
     		{
-        		'username': 'admao'
+        		'username': username
     		},
     		{
         		'$set': 
@@ -20,11 +20,12 @@ class edit_profile_api :
         		}
     		}
 		)
-	def edit_profile(self, email, telphone_number, emergency_phone, submit) :
-		if email == None or telphone_number == None or emergency_phone == None :
+		
+	def edit_profile(self, username, email, telphone_number, emergency_phone, submit) :
+		if username == None or email == None or telphone_number == None or emergency_phone == None :
 			return False, 'Incomplete input: email, telphone_number, emergency_phone'
 		if submit :
-			self.update_query(email, telphone_number, emergency_phone)
+			self.update_query(username, email, telphone_number, emergency_phone)
 			return True,'Successfully Updated'
 		else :
 			return False, 'Fail Updated'
