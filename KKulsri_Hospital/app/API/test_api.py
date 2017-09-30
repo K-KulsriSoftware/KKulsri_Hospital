@@ -52,7 +52,8 @@ status, result = api.insert_doctor('นายแพทย์', 'นิติ', '
 							  	   'แพทย์เชี่ยวชาญทางด้านจิตวิทยา', ['om', 'บลาบลา'], ['กขค'], language,
 							  	   working_time)
 
-
+#test get_all_collections_name
+status, result = api.get_all_collections_name()
 #######Jakapong Mo START
 #status, result = api.get_all_patients()
 
