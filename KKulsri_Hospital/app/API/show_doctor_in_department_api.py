@@ -36,12 +36,16 @@ class show_doctor_in_department_api :
 				'$project' :
 				{
 					'department_name' : '$department.department_name',
+					'department_description' : '$department.department_description',
 					'doctors' : '$doctors'
 				}
 			},
-                        {
-                                '$unwind' : '$department_name'
-                        }
+            {
+                '$unwind' : '$department_name'
+            },
+            {
+                '$unwind' : '$department_description'
+            }
 		])
 
 	def show_doctor_in_department(self) :

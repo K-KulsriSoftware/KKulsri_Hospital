@@ -29,7 +29,7 @@ api = API()
 
 #test  update_doctor_profile
 '''
-status, result = api.update_doctor_profile('d001', 'นายแพทย์', 'กนกพล', 'กุลศรี', 'True', datetime(1997,2,8,0,0), 
+status, result = api.update_doctor_profile('d001', 'นายแพทย์', 'กนกพล', 'กุลศรี', 'True', datetime(1997,2,8,0,0),
 										   '0856789012', 'palmpalm@gmail.com', 1, 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
 							 			   'แพทย์เชี่ยวชาญทางด้านดวงตาง', ['aaa', 'bbb'], ['กขค'], ['ไทย', 'เกาหลี'],
 							  			   {"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]},
@@ -41,19 +41,21 @@ status, result = api.update_doctor_profile('d001', 'นายแพทย์', '
 #status, result = api.delete_doctor('d003')
 
 #test insert_doctor
+'''
 working_time = {
-					"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], 
+					"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}],
 					"tue" : [{"start" : 9, "finish" : 10}]
 				}
 birthday = datetime(1997,2,8,0,0)
 language = ['ไทย', 'เกาหลี']
-status, result = api.insert_doctor('นายแพทย์', 'นิติ', 'นานา', True, birthday, '0856789012', 'palmpalm@gmail.com', 
+status, result = api.insert_doctor('นายแพทย์', 'นิติ', 'นานา', True, birthday, '0856789012', 'palmpalm@gmail.com',
 								   2, 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/13907130_10205456063434894_2847443788461698332_n.jpg?oh=913be734de97d590b0db87f3ca219342&oe=5A83D820',
 							  	   'แพทย์เชี่ยวชาญทางด้านจิตวิทยา', ['om', 'บลาบลา'], ['กขค'], language,
 							  	   working_time)
+'''
 
 #test get_all_collections_name
-status, result = api.get_all_collections_name()
+#status, result = api.get_all_collections_name()
 #######Jakapong Mo START
 #status, result = api.get_all_patients()
 
@@ -76,12 +78,12 @@ status, result = api.update_patient_profile("watermelon", "นาง", "สม�
 #status, result = api.delete_patient(username='eiei')
 
 #test insert_patient
-'''
+
 status, result = api.insert_patient("watermelon22", "นางสาว", "สมหญิง", "ชำนาญคอม", "img.html", "1309905889674", True, [], 1996,
 							  1, 1, 1, 2, "ไทย", "ไทย", "พุทธ", 1, "37/16 สุขุมวิทย์ กทม", "โปรแกรมเมอร์", "0818453265",
 							  "วิศรุต ชำนาญคอม", "วริศรา หล่อเภรี", "มหาอินทร์ การช่างเยี่ยม", "0845263254", "98/14 ทองหล่อ กทม",
 							  "st@gmail.com", [])
-'''
+
 
 #####
 
@@ -253,6 +255,9 @@ status,result = api.show_confirmation_info('p00003','d002', 'admao',
 					"finish_hr" : 10,
     			})
 '''
+
+#test get_collection_pattern
+#status, result = api.get_collection_pattern('doctors')
 
 if status :
 	pprint(result)

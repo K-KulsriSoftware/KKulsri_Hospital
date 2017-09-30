@@ -32,16 +32,16 @@ class show_profile_api :
 					'nationallity' : '$nationallity',
 					'Religion' : '$Religion',
 					'Status' : '$Status',
-					'pateint_address' : '$pateint_address',
+					'patient_address' : '$patient_address',
 					'occupy' : '$occupy',
 					'telphone_number' : '$telphone_number',
 					'father_name' : '$father_name',
 					'mother_name' : '$mother_name',
 					'emergency_name' : '$emergency_name',
 					'emergency_phone' : '$emergency_phone',
-					'emergency_address' : '$emergency_addr',
+					'emergency_address' : '$emergency_address',
 					'email' : '$email',
-					'congenital disease' : '$congenital disease'
+					'congenital_disease' : '$congenital_disease'
         		}
      		}
 		])
