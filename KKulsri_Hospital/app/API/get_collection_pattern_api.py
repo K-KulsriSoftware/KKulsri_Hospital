@@ -388,30 +388,77 @@ class get_collection_pattern_api :
 				'field_type' : 'string'
 			},
 			{
+				'field_name' : 'package_id',
+				'field_type' : 'string'
+			},
+			{
 				'field_name' : 'doctor_id',
 				'field_type' : 'string'
 			},
 			{
-				'field_name' : 'patient_id',
+				'field_name' : 'user_id',
 				'field_type' : 'string'
-			},
-			{
-				'field_name' : 'building_id',
-				'field_type' : 'int'
 			},
 			{
 				'field_name' : 'cost',
 				'field_type' : 'double'
 			},
-			###############################
 			{
-				'field_name' : 'building_id',
-				'field_type' : 'int'
+				'field_name' : 'notice',
+				'field_type' : 'string'
 			},
+			{
+				'field_name' : 'time',
+				'field_type' : 'dict',
+				'dict' : 
+				[
+					{
+						'field_name' : 'start',
+						'field_type' : 'date'
+					},
+					{
+						'field_name' : 'finish',
+						'field_type' : 'date'
+					}
+				]
+			}
 		]
 
 	def get_packages_pattern(self) :
 		return [
+			{
+				'field_name' : 'package_id',
+				'field_type' : 'string'
+			},
+			{
+				'field_name' : 'package_name',
+				'field_type' : 'string'
+			},
+			{
+				'field_name' : 'package_cost',
+				'field_type' : 'double'
+			},
+			{
+				'field_name' : 'department_id',
+				'field_type' : 'int'
+			},
+			{
+				'field_name' : 'description',
+				'field_type' : 'string'
+			},
+			{
+				'field_name' : 'conditions',
+				'field_type' : 'list',
+				'value' : 'string'
+			},
+			{
+				'field_name' : 'package_notice',
+				'field_type' : 'string'
+			},
+			{
+				'field_name' : 'building_id',
+				'field_type' : 'int'
+			}
 		]
 
 	def get_collection_pattern(self, collection_name) :
