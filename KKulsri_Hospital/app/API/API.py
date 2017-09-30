@@ -156,16 +156,16 @@ class API :
 		return self.department_query_api.get_all_departments()
 
 	#input: department_id(str), department_name(str)
-	def update_department_profile(self, department_id=None, department_name=None) :
-		return self.department_query_api.update_department_profile(department_id, department_name)
+	def update_department_profile(self, department_id=None, department_name=None, department_description=None) :
+		return self.department_query_api.update_department_profile(department_id, department_name, department_description)
 
 	#input: department_id(str)
 	def delete_department(self, department_id=None) :
 		return self.department_query_api.delete_department(department_id)
 
 	#input: department_name(str)
-	def insert_department(self, department_name=None) :
-		return self.department_query_api.insert_department(department_name)
+	def insert_department(self, department_name=None, department_description=None) :
+		return self.department_query_api.insert_department(department_name,department_description)
 ###############
 
 	#input: -
