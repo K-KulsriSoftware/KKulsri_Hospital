@@ -87,7 +87,7 @@ div.padding-row{
 
 @media (min-width:1024px) {
   div.row.appointment-detail{
-    height:82px;
+    height:104px;
   }
 }
 
@@ -99,7 +99,7 @@ div.padding-row{
 
 @media (min-width:1024px) {
   div.confirm-appointment-container{
-    line-height:60px;
+    line-height:78px;
   }
 }
 

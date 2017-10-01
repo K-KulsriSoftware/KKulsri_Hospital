@@ -69,9 +69,9 @@
                     </ul>
                 </nav>
                 <div class="schedule">
-                    {% if doctor.working_time %}
-                        {% for day in doctor.working_time  %}
-                            {% if doctor.working_time|get_item:day|length > 0 %}
+                    {% if working_time %}
+                        {% for day in working_time  %}
+                            {% if working_time|get_item:day|length > 0 %}
                             <div class="col-md-3 col-sm-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <ul class="time">
-                                            {% for time in doctor.working_time|get_item:day %}
+                                            {% for time in working_time|get_item:day %}
                                                 <li>{{ time.start }}:00 - {{ time.finish }}:00</li>
                                             {% endfor %}
                                         </ul>
@@ -112,9 +112,14 @@
             <div class="col-md-8">
                 <p>นัดหมายกับ {{ doctor.doctor_name_title }}{{ doctor.doctor_name }} {{ doctor.doctor_surname }}</p>
                 <p class="appointment-time"></p>
+                <p class="appointment-package">{{ selected_package.package_name }}</p>
             </div>
             <div class="col-md-4 confirm-appointment-container">
-                <button class="btn" type="button" id="confirm-appointment">ยืนยันการนัดหมายแพทย์ </button>
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="date">
+                    <button class="btn" type="submit" id="confirm-appointment">ยืนยันการนัดหมายแพทย์ </button>
+                </form>
             </div>
         </div>
     </div>

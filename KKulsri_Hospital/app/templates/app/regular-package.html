@@ -29,7 +29,11 @@
                 <span class="row-data-name-span">{{package.package_name}}</span>
             </div>
             <div class="row-data-button">
-                <button class="btn btn-default plam" type="button" id={{package_package_id}}><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="package" value="{{ package.package_id }}">
+                    <button class="btn btn-default plam" type="submit" id={{package_package_id}}><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
+                </form>
             </div>
         </div>
         {% endfor %}

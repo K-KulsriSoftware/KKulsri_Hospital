@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^admin-mongo/$', app.views.admin_mongo, name='admin-mongo '),
     url(r'^admin-mongo/collection/(?P<collection_name>\w{0,50})/$', app.views.admin_mongo_collection, name='admin-mongo-collection'),
     url(r'^doctor_search_api/', app.views.doctor_search_api, name='doctor_search_api'),
+    url(r'^doctor_auto_search_api/', app.views.doctor_auto_search_api, name='doctor_auto_search_api'),
     url(r'^login/$',
         django.contrib.auth.views.login,
         {

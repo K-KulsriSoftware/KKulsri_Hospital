@@ -33,9 +33,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 doc_info" id="button">
-                            <a href="/doctor-detail/?doctor_name={{ doctor.doctor_name }}&doctor_surname={{ doctor.doctor_name_surname }}">
-                                <button class="btn btn-default my-btn" type="button" id="de_doc">ดูรายละเอียดเพิ่มเติม</button>
-                            </a>
+                            <form action="." method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="doctor_name" value="{{ doctor.doctor_name }}">
+                                <input type="hidden" name="doctor_surname" value="{{ doctor.doctor_name_surname }}">
+                                <button class="btn btn-default my-btn" type="submit" id="de_doc">ดูรายละเอียดเพิ่มเติม</button>
+                            </form>
                         </div>
                     </div>
                 </div>

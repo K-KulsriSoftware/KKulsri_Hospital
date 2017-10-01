@@ -94,7 +94,6 @@ div.col-md-3{
 @media (min-width:768px) {
   div.us{
     width:65%;
-    height:40px;
   }
 }
 
@@ -217,9 +216,9 @@ span.birthday{
 }
 
 input.inbirthday{
-  height:30px;
+  /*height:30px;*/
   width:130px;
-  margin-top:5px;
+  /*margin-top:5px;*/
   font-size:16px;
   color:#3b3a36;
   border-radius:5px;
@@ -252,7 +251,7 @@ input{
 
 @media (min-width:768px) {
   input.inold{
-    width:55%;
+    width:45%;
     margin-left:10px;
   }
 }
@@ -342,13 +341,19 @@ div.col-md-2.colinlastname{
 
 @media (min-width:768px) {
   input.inbirth{
-    width:91%;
+    width:24%;
+  }
+}
+
+@media (min-width:768px) {
+  input.inyear{
+    width:36%;
   }
 }
 
 @media (min-width:768px) {
   div.dbir{
-    width:28%;
+    width:25%;
   }
 }
 
@@ -363,6 +368,12 @@ div.marr div {
 
 @media (min-width:768px) {
   div.dold{
+    width:17%;
+  }
+}
+
+@media (min-width:768px) {
+  div.blood{
     width:17%;
   }
 }
@@ -417,7 +428,7 @@ div.dtel{
 
 @media (min-width:768px) {
   input.insurname{
-    width:65%;
+    width:55%;
     margin:10px;
   }
 }
@@ -718,7 +729,6 @@ div.ddidcard{
 @media (min-width:1024px) {
   div.us{
     width:77%;
-    height:40px;
   }
 }
 
@@ -832,13 +842,19 @@ div.ddidcard{
 
 @media (min-width:1024px) {
   input.inbirth{
-    width:77%;
+    width:20%;
+  }
+}
+
+@media (min-width:1024px) {
+  input.inyear{
+    width:32%;
   }
 }
 
 @media (min-width:1024px) {
   div.dbir{
-    width:25%;
+    width:20%;
   }
 }
 
@@ -862,6 +878,12 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
+  div.dblood{
+    width:23%;
+  }
+}
+
+@media (min-width:1024px) {
   input.insex{
     width:49%;
     margin-left:10px;
@@ -870,7 +892,7 @@ div.ddidcard{
 
 @media (min-width:1024px) {
   input.inblood{
-    width:63%;
+    width:43%;
     margin-left:10px;
   }
 }

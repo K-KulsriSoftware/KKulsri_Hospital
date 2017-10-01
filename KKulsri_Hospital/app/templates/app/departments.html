@@ -8,39 +8,42 @@
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/departments.css' %}" />
 
 	<!--find package tab-->
-	<a href="regular_packages.html">
 	<div class="img-top-slider">
-		<div class="div-button-middle">ค้นหาแพคเกจ</div>
+		<!-- <div class="div-button-middle">ค้นหาแพคเกจ</div> -->
 	</div>
-	</a>
 	<!--end find package tab-->
-
-	{% for department in departments %}
 
 	<div>
 		<div id="allpage">
-
-					<div id="span1"> {{ department.department_name }} </div>
-					<div id="crossline"></div>
-					<div id="box">
-						{% for package in depart.packages %}
-							{% if package.department_id == department.department_id %}
-							<ul class="department-ul">
-								<li class="department-li"><a href="/special-packages/?package_id={{ package.package_id }}"> {{  package.package_name }} <span class="department-span"> </span></a></li>
-							</ul>
-							{% endif %}
-						{% endfor %}
-					</div>
-
+			<div id="span1"> อายุรกรรม </div>
+			<div id="crossline"></div>
+			<div id="box">
+				<ul class="department-ul">
+					<li class="department-li"><a href="/regular-packages/"><span class="department-span"> แพ็กเกจตรวจสุขภาพต่าง ๆ </span></a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-	
+
+	{% for department in departments %}
+		{% if department.department_name.0 != 'อายุรกรรม' %}
+		<div>
+			<div id="allpage">
+				<div id="span1"> {{ department.department_name.0 }} </div>
+				<div id="crossline"></div>
+				<div id="box">
+
+					<ul class="department-ul">
+						{% for package_list in department.package_list %}
+						<li class="department-li"><a href="/special-packages/{{ package_list.package_id }}/"><span class="department-span"> {{ package_list.package_name }}</span></a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
 	{% endfor %}
 	<!-- เพิ่มแผนกแบบนี้ -->
 
 {% endblock %}
-
-<!--{% block scripts %}
-<script src="{% static 'app/scripts/departments.js' %}"></script>
-{% endblock %}-->
-
