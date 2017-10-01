@@ -72,12 +72,14 @@ def doctor_detail(request):
     assert isinstance(request, HttpRequest)
     status, result = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     if status:
+        status, package = api.show_special_package_info(request.session['selected_package'])
         return render(
             request,
             'app/doctor-detail.html',
             {
                 'title': 'ข้อมูลแพทย์',
-                'doctor': result
+                'doctor': result,
+                'selected_package': package
             }
         )
     else:
