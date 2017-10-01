@@ -37,7 +37,7 @@
 
 					<ul class="department-ul">
 						{% for package_list in department.package_list %}
-						<li class="department-li"><a href="/special-packages/?package_id={{ package.package_id }}"><span class="department-span"> {{ package_list.package_name }}</span></a></li>
+						<li class="department-li"><a href="/special-packages/?package_id={{ package_list.package_id }}"><span class="department-span"> {{ package_list.package_name }}</span></a></li>
 						{% endfor %}
 					</ul>
 				</div>
