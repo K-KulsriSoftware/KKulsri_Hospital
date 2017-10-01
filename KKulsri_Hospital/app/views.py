@@ -219,6 +219,9 @@ def regular_packages(request):
 def special_packages(request, package_id):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        request.session['selected_package'] = request.POST['package']
+        return redirect('/doctor-search/')
     status, result = api.show_special_package_info(package_id)
     print(result)
     return render(
@@ -226,7 +229,8 @@ def special_packages(request, package_id):
         'app/special_packages.html',
         {
             'title': 'รายละเอียดแพ็คเกจ',
-            'package': result
+            'package': result,
+            'package_id': package_id
         }
     )
 

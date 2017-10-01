@@ -15,8 +15,11 @@
             <p></p>
         </div>
 
-
-        <p> &nbsp <button class="selectButton1" type="button"><a href="/payment/">เลือกแพ็คเกจนี้</a></button></p>
+        <form action="." method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="package" value="{{package_id}}">
+            <p> &nbsp <button class="selectButton1" type="submit">เลือกแพ็คเกจนี้</button></p>
+        </form>
 
         <p><br></br>
         </p>
@@ -57,7 +60,11 @@
             </div>
         </p>
 
-        <p> &nbsp &nbsp &nbsp &nbsp &nbsp<button class="selectButton2" type="button"><a href="/payment/">เลือกแพ็คเกจนี้</a></button></p>
+        <form action="." method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="package" value="{{package_id}}">
+            <p> &nbsp &nbsp &nbsp &nbsp &nbsp<button class="selectButton2" type="submit"><a href="/payment/">เลือกแพ็คเกจนี้</a></button></p>
+        </form>
     </div>
 </div>
 {% endblock %}
