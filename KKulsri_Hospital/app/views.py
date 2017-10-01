@@ -3,6 +3,9 @@ Definition of views.
 """
 # -*- coding: utf-8 -*-
 from django.http import Http404
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, JsonResponse
 from django.template import RequestContext
@@ -10,7 +13,7 @@ from datetime import datetime
 from .API.API import API
 from pymongo import MongoClient
 import base64
-
+# import app.forms
 
 api = API()
 
@@ -33,6 +36,8 @@ def home(request):
     # )
     return redirect('/departments')
 
+
+@login_required
 def contact(request):
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
@@ -111,10 +116,10 @@ def register(request):
         # เติมให้ครบ
 
         status, result = api.register(username, patient_name_title, patient_name, patient_surname, patient_img,
-            id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day,
-            blood_group_abo, blood_group_rh, race, nationallity, Religion, Status,
-            pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
-            emergency_phone, emergency_addr, email, congenital_disease, submit)
+                                      id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day,
+                                      blood_group_abo, blood_group_rh, race, nationallity, Religion, Status,
+                                      pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+                                      emergency_phone, emergency_addr, email, congenital_disease, submit)
         if status:
             return redirect('/')
         else:
@@ -128,6 +133,21 @@ def register(request):
             'app/register.html',
         )
 
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('register')
+    else:
+        form = UserCreationForm()
+    return render(request, 'app/signup.html', {'form': form})
+
+@login_required
 def member(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
@@ -283,3 +303,5 @@ def admin_mongo_collection(request, collection_name):
             'logo_link': '/admin-mongo'
         }
     )
+
+
