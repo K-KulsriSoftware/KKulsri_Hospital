@@ -13,55 +13,72 @@
             <div class="col1">
                 <div class="ddus"><span>username</span></div>
                 <div class="us">
-                    <input type="text" id="iUsername" class="inuser">
+                    <input type="text" id="iUsername" class="inuser" name="username">
                 </div>
             </div>
             <div class="col1">
+                    <div class="ddpass"><span>password </span></div>
+                    <div class="us">
+                        <input type="password" id="iPassword" class="inuser">
+                    </div>
+            </div>
+            <div class="col1">
+                    <div class="ddcon"><span>confirm password </span></div>
+                    <div class="us">
+                        <input type="password" id="iConfirmPassword" class="inuser">
+                    </div>
+                </div>
+            <div class="col1">
                 <div class="ddidcard"><span>เลขบัตรประชาชน </span></div>
                 <div class="id">
-                    <input type="text" id="iIDCard" class="inid">
+                    <input type="text" id="iIDCard" class="inid" name="id_card_number">
                 </div>
             </div>
             <div class="col1">
                 <div class="ddmr"><span>คำนำหน้า </span></div>
                 <div class="mr">
-                    <input type="text" id="iMr" class="inmr">
+                    <input type="text" id="iMr" class="inmr" name="patient_name_title">
                 </div>
                 <div class="name"><span>ชื่อ </span>
-                    <input type="text" id="iName" class="inname">
+                    <input type="text" id="iName" class="inname" name="patient_name">
                 </div>
                 <div class="surname"><span>นามสกุล </span>
-                    <input type="text" id="iSurname" class="insurname">
+                    <input type="text" id="iSurname" class="insurname" name="patient_surname">
                 </div>
             </div>
             <div class="col1">
                 <div class="ddmr"><span>วันเกิด </span></div>
+                <!--div class="dbir">
+                    <input type="date" id="iBirthday" class="inbirth" name="">
+                </div-->
                 <div class="dbir">
-                    <input type="date" id="iBirthday" class="inbirth">
+                    <input type="text" id="iMonth" class="inbirth" name="birthday_month" placeholder="02">
+                    <input type="text" id="iDay" class="inbirth" name="birthday_day" placeholder="23">
+                    <input type="text" id="iYear" class="inyear" name="birthday_year" placeholder="2560">
                 </div>
                 <div class="dold"><span>อายุ</span>
-                    <input type="number" id="iAge" class="inold">
+                    <input type="number" id="iAge" class="inold" name="">
                 </div>
                 <div class="dsex"><span>เพศ</span>
-                    <input type="text" id="iSex" class="insex">
+                    <input type="text" id="iSex" class="insex" name="gender">
                 </div>
                 <div class="dblood"><span>หมู่เลือด </span>
-                    <input type="text" id="iBlood" class="inblood">
+                    <input type="text" id="iBlood" class="inblood" name="blood_group_abo" placeholder="O/A/B/AB">
                 </div>
             </div>
             <div class="col1">
                 <div class="ddmr"><span>เชื้อชาติ </span></div>
                 <div class="dnational">
-                    <input type="text" id="iRace" class="innational">
+                    <input type="text" id="iRace" class="innational" name="race">
                 </div>
                 <div class="dnationn"><span>สัญชาติ </span>
-                    <input type="text" id="iNationality" class="innationn">
+                    <input type="text" id="iNationality" class="innationn" name="nationallity">
                 </div>
                 <div class="dregion"><span>ศาสนา </span>
-                    <input type="text" id="iReligious" class="inregion">
+                    <input type="text" id="iReligious" class="inregion" name="">
                 </div>
                 <div class="dnow"><span>สถานภาพ</span>
-                    <select id="iNow" class="innow">
+                    <select id="iNow" class="innow" name="Status">
                         <optgroup label="สถานภาพปัจจุบัน">
                             <option value="12" selected="">โสด</option>
                             <option value="13">สมรส</option>
@@ -78,48 +95,48 @@
                     <input type="text" id="iCareer" class="incareer">
                 </div>
                 <div class="dlive"><span>ที่อยู่ </span>
-                    <input type="text" id="iLive" class="inlive">
+                    <input type="text" id="iLive" class="inlive" name="pateint_address">
                 </div>
             </div>
             <div class="col1">
                 <div class="dlive2">
-                    <input type="text" id="iLive2" class="inlive2">
+                    <input type="text" id="iLive2" class="inlive2" name="pateint_address">
                 </div>
             </div>
             <div class="col1">
                 <div class="dlok"><span>โรคประจำตัว </span>
-                    <input type="text" id="iLok" class="inlok">
+                    <input type="text" id="iLok" class="inlok" name="congenital_disease">
                 </div>
                 <div class="demail"><span>E-mail </span>
-                    <input type="email" id="iEmail" class="inemail">
+                    <input type="email" id="iEmail" class="inemail" name="email">
                 </div>
             </div>
             <div class="col1">
                 <div class="dtel"><span>เบอร์โทร </span>
-                    <input type="tel" id="iTel" class="intel">
+                    <input type="tel" id="iTel" class="intel" name="telphone_number">
                 </div>
             </div>
             <div class="col1">
                 <div class="dfather"><span>ชื่อ-นามสกุลของบิดา </span>
-                    <input type="text" id="iFather" class="infather">
+                    <input type="text" id="iFather" class="infather" name="father_name">
                 </div>
             </div>
             <div class="col1">
                 <div class="dmother"><span>ชื่อ-นามสกุลของมารดา </span>
-                    <input type="text" id="iMother" class="inmother">
+                    <input type="text" id="iMother" class="inmother" name="mother_name">
                 </div>
             </div>
             <div class="col1">
                 <div class="demername"><span>ชื่อผู้ที่ติดต่อได้ฉุกเฉิน </span>
-                    <input type="text" id="iEmerName" class="inemername">
+                    <input type="text" id="iEmerName" class="inemername" name="emergency_name">
                 </div>
                 <div class="dtelmer"><span>เบอร์โทรศัพท์ </span>
-                    <input type="tel" id="iEmerTel" class="intelmer">
+                    <input type="tel" id="iEmerTel" class="intelmer" name="emergency_phone">
                 </div>
             </div>
             <div class="col1">
                 <div class="demerlive"><span>ที่อยู่ของผู้ที่สามารถติดต่อได้ฉุกเฉิน </span>
-                    <input type="text" id="iEmerLive" class="inemerlive">
+                    <input type="text" id="iEmerLive" class="inemerlive" name="emergency_addr">
                     <div class="col1"></div>
                 </div>
             </div>
@@ -136,7 +153,7 @@
                 <div class="daccept"><span class="plamplamplam">เจ้าหน้าที่และบุคลากรของโรงพยาบาลที่เกี่ยวข้อง ซึ่งมีความจำเป็นในการเข้าถึงข้อมูลของข้าพเจ้า </span></div>
             </div>
             <div class="col1">
-                <button class="btn btn-default button" type="button">ลงทะเบียน </button>
+                <button class="btn btn-default button" type="button" name="submit">ลงทะเบียน </button>
             </div>
             <div class="col1"></div>
             <div class="col1"></div>
