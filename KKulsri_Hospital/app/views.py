@@ -261,6 +261,10 @@ def doctor_search_api(request):
 def doctor(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        request.session['selected_package'] = 'p00006'
+        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
+        return redirect('/doctor-detail/')
     status, result = api.show_doctor_in_department()
     return render(
         request,
