@@ -13,6 +13,7 @@ $('li#manual').click(function(){
 })
 
 $('.btn-summit').click(function() {
+  $('#result').empty();
   $.get('/doctor_search_api', {}, function(data) {
     if(data && data.status && data.result.length > 0) {
       $(data.result).each(function() {
