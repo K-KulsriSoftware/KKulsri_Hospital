@@ -169,6 +169,8 @@ def member(request):
 
 def departments(request):
     """Renders the about page."""
+    if 'selected_package' in request.session:
+        del request.session['selected_package']
     assert isinstance(request, HttpRequest)
     status, result = api.show_departments()
     return render(
@@ -183,6 +185,9 @@ def departments(request):
 
 def regular_packages(request):
     """Renders the about page."""
+    if request.method == 'POST':
+        request.session['selected_package'] = request.POST['package']
+        return redirect('/doctor-search/')
     assert isinstance(request, HttpRequest)
     status, result = api.show_general_list()
     return render(
@@ -212,6 +217,9 @@ def special_packages(request, package_id):
 
 def search_for_doctor(request):
     """Renders the about page."""
+    if 'selected_package' not in request.session:
+        return redirect('/departments/')
+    print(request.session['selected_package'])
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -222,8 +230,7 @@ def search_for_doctor(request):
     )
 
 def doctor_search_api(request):
-    package_id = request.GET.get('package_id')
-    package_id = 'p00001'
+    package_id = request.session['selected_package']
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
     time = request.GET.get('time')
     doctor_firstname = request.GET.get('doctor_firstname')
