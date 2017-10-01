@@ -11,14 +11,14 @@
             <div class="p2" style="width:auto;margin-left: 10px;height: auto;display: inline-block;float: left;"></div>
             <div style="width:100%;height:63px"></div>
         </div>
-        <div id="span2"> &nbsp ราคาแพ็คเกจ : {{ package.package_cost }}
+        <div id="span2"> &nbsp ราคาแพ็กเกจ : {{ package.package_cost|floatformat:2 }} บาท
             <p></p>
         </div>
 
         <form action="." method="POST">
             {% csrf_token %}
             <input type="hidden" name="package" value="{{package_id}}">
-            <p> &nbsp <button class="selectButton1" type="submit">เลือกแพ็คเกจนี้</button></p>
+            <p> &nbsp <button class="selectButton1" type="submit">เลือกแพ็กเกจนี้</button></p>
         </form>
 
         <p><br></br>
@@ -65,7 +65,7 @@
           <form action="." method="POST">
               {% csrf_token %}
               <input type="hidden" name="package" value="{{package_id}}">
-              <p> &nbsp &nbsp &nbsp &nbsp &nbsp<button class="selectButton2" type="submit">เลือกแพ็คเกจนี้</button></p>
+              <p> &nbsp &nbsp &nbsp &nbsp &nbsp<button class="selectButton2" type="submit">เลือกแพ็กเกจนี้</button></p>
           </form>
         </div>
     </div>
