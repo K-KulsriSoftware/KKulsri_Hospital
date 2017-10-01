@@ -258,6 +258,11 @@ def doctor_search_api(request):
     status, result = api.find_doctors(package_id, days, time, doctor_firstname, doctor_lastname, gender)
     return JsonResponse({'status': status, 'result': result})
 
+def doctor_auto_search_api(request):
+    package_id = request.session['selected_package']
+    status, result = api.auto_find_doctors(package_id)
+    return JsonResponse({'status': status, 'result': result})
+
 def doctor(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
