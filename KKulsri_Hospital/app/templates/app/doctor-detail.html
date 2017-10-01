@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/doctor-detail.css' %}" />
     <div class="container">
         <div class="row doctor">
-            <div class="col-sm-4"><img class="doctor-image" src="{{ doctor.doctor_img }}"></div>
+            <div class="col-sm-4"><div class="doctor-image-wrapper"><img class="doctor-image" src="{{ doctor.doctor_img }}"></div></div>
             <div class="col-sm-8 doctor-content">
                 <h3>{{ doctor.doctor_name_title }}{{ doctor.doctor_name }} {{ doctor.doctor_surname }}</h3>
                 <div class="doctor-content-detail">
