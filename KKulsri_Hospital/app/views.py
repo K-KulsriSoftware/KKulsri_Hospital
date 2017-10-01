@@ -13,7 +13,7 @@ from datetime import datetime
 from .API.API import API
 from pymongo import MongoClient
 import base64
-# import app.forms
+import app.forms
 
 api = API()
 
@@ -135,16 +135,26 @@ def register(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = app.forms.RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('register')
+            # state 1
+            # user = form.save()
+            # user.refresh_from_db()  # load the profile instance created by the signal
+            # user.profile.birth_date = form.cleaned_data.get('birth_date')
+            # user.save()
+            # raw_password = form.cleaned_data.get('password1')
+            # user = authenticate(username=user.username, password=raw_password)
+            # login(request, user)
+            # return redirect('home')
+            # state 2
+            # form.save()
+            # username = form.cleaned_data.get('username')
+            # raw_password = form.cleaned_data.get('password1')
+            # user = authenticate(username=username, password=raw_password)
+            # login(request, user)
+            # return redirect('home')
     else:
-        form = UserCreationForm()
+        form = app.forms.RegistrationForm()
     return render(request, 'app/signup.html', {'form': form})
 
 @login_required

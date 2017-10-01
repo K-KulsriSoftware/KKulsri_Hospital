@@ -6,13 +6,14 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
+from app.models import Profile
 
 class BootstrapAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
     username = forms.CharField(max_length=254,
                                widget=forms.TextInput({
                                    'class': 'form-control',
-                                   'placeholder': 'User name'}))
+                                   'placeholder': 'Username'}))
     password = forms.CharField(label=_("Password"),
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
@@ -20,32 +21,35 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 
 
 # class RegistrationForm(UserCreationForm):
-#     # email = forms.EmailField(required=True)
-#     # first_name = forms.TextInput()
-#     # last_name = forms.TextInput()
+#     patient_name_title = forms.CharField()
+#     patient_name = forms.CharField()
+#     patient_surname = forms.CharField()
+#     birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
+#     patient_img = forms.ImageField()
+#     id_card_number = forms.CharField()
+#     gender = forms.CharField()
+#     blood_group_abo = forms.CharField()
+#     blood_group_rh = forms.CharField()
+#     race = forms.CharField()
+#     nationallity = forms.CharField()
+#     Religion = forms.CharField()
+#     Status = forms.CharField()
+#     pateint_address = forms.CharField()
+#     occupy = forms.CharField()
+#     telphone_number = forms.CharField()
+#     father_name = forms.CharField()
+#     mother_name = forms.CharField()
+#     emergency_name = forms.CharField()
+#     emergency_phone = forms.CharField()
+#     emergency_addr = forms.CharField()
+#     email = forms.EmailField()
+#     congenital_disease = forms.CharField()
 
 #     class Meta:
 #         model = User
-#         fields = (
-#             "username", 
-#             "first_name", 
-#             "last_name",
-#             "email",
-#             "password1", 
-#             "password2"
-#         )
-
-#     def save(self, commit=True):
-#         # Call save of the super of your own class,
-#         # which is UserCreationForm.save() which calls user.set_password()
-#         user = super(RegistrationForm, self).save(commit=False)
-
-#         # Add the things your super doesn't do for you
-#         user.email = self.cleaned_data['email']
-#         user.first_name = self.cleaned_data['first_name']
-#         user.last_name = self.cleaned_data['last_name']
-
-#         if commit:
-#             user.save()
-
-#         return user
+        
+#         fields = ('username', 'password1', 'password2', "patient_name_title", "patient_name", "patient_surname", "birth_date", "patient_img",
+#                   "id_card_number", "gender", "blood_group_abo", "blood_group_rh",
+#                   "race", "nationallity", "Religion", "Status", "pateint_address",
+#                   "occupy", "telphone_number", "father_name", "mother_name",
+#                   "emergency_name", "emergency_phone", "emergency_addr", "email", "congenital_disease")
