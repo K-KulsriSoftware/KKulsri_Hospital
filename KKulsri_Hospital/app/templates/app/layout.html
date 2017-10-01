@@ -27,7 +27,13 @@
                 <ul class="nav navbar-nav links">
                     <li role="presentation"><a href="/departments">แพ็คเกจ</a></li>
                     <li role="presentation"><a href="/doctor">แพทย์</a></li>
-                    <li role="presentation"><a href="/login">เข้าสู่ระบบ</a></li>
+                    {% if not user.is_authenticated %}
+                        <li role="presentation"><a href="/signup">สมัครสมาชิก</a></li>
+                        <li role="presentation"><a href="/login">เข้าสู่ระบบ</a></li>
+                    {% else %}
+                        <li role="presentation"><a href="/member">แก้ไขข้อมูลสมาชิก</a></li>
+                        <li role="presentation"><a href="/logout">ออกจากระบบ</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
