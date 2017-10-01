@@ -24,10 +24,12 @@
         <p><br></br>
         </p>
 
+        {% if package.description %}
         <div id="span1">&nbsp รายละเอียดการตรวจ</div>
-        <ol>
+        <ul>
             <li> {{ package.description }}</li>
-        </ol>
+        </ul>
+        {% endif %}
 
         <p> <br></br>
         </p>
