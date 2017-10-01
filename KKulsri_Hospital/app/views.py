@@ -12,7 +12,7 @@ from django.template import RequestContext
 from datetime import datetime
 from .API.API import API
 from pymongo import MongoClient
-import base64
+import json
 # import app.forms
 
 api = API()
@@ -67,15 +67,31 @@ def about(request):
 
 def doctor_detail(request):
     """Renders the about page."""
+    if 'selected_package' not in request.session or 'selected_doctor' not in request.session:
+        return redirect('/doctor-search')
+    if request.method == 'POST':
+        request.session['selected_date'] = json.loads(request.POST['date'])
+        return redirect('/confirm/')
     assert isinstance(request, HttpRequest)
-    status, result = api.show_detail(request.GET.get('doctor_name'), request.GET.get('doctor_surname'))
+    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     if status:
+        status, package = api.show_special_package_info(request.session['selected_package'])
+        working_times = {}
+        for day in doctor['working_time']:
+            if doctor['working_time'][day] != []:
+                working_times[day] = []
+                for time in doctor['working_time'][day]:
+                    for i in range(time['start'], time['finish']):
+                        working_times[day].append({'start': i, 'finish': i+1})
+        print(working_times)
         return render(
             request,
             'app/doctor-detail.html',
             {
                 'title': 'ข้อมูลแพทย์',
-                'doctor': result
+                'doctor': doctor,
+                'selected_package': package,
+                'working_time': working_times
             }
         )
     else:
@@ -169,6 +185,8 @@ def member(request):
 
 def departments(request):
     """Renders the about page."""
+    if 'selected_package' in request.session:
+        del request.session['selected_package']
     assert isinstance(request, HttpRequest)
     status, result = api.show_departments()
     return render(
@@ -183,6 +201,9 @@ def departments(request):
 
 def regular_packages(request):
     """Renders the about page."""
+    if request.method == 'POST':
+        request.session['selected_package'] = request.POST['package']
+        return redirect('/doctor-search/')
     assert isinstance(request, HttpRequest)
     status, result = api.show_general_list()
     return render(
@@ -198,6 +219,9 @@ def regular_packages(request):
 def special_packages(request, package_id):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        request.session['selected_package'] = request.POST['package']
+        return redirect('/doctor-search/')
     status, result = api.show_special_package_info(package_id)
     print(result)
     return render(
@@ -205,13 +229,20 @@ def special_packages(request, package_id):
         'app/special_packages.html',
         {
             'title': 'รายละเอียดแพ็คเกจ',
-            'package': result
+            'package': result,
+            'package_id': package_id
         }
     )
 
 
 def search_for_doctor(request):
     """Renders the about page."""
+    if 'selected_package' not in request.session:
+        return redirect('/departments/')
+    if request.method == 'POST':
+        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
+        return redirect('/doctor-detail/')
+    print(request.session['selected_package'])
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -222,8 +253,7 @@ def search_for_doctor(request):
     )
 
 def doctor_search_api(request):
-    package_id = request.GET.get('package_id')
-    package_id = 'p00001'
+    package_id = request.session['selected_package']
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
     time = request.GET.get('time')
     doctor_firstname = request.GET.get('doctor_firstname')
@@ -232,9 +262,18 @@ def doctor_search_api(request):
     status, result = api.find_doctors(package_id, days, time, doctor_firstname, doctor_lastname, gender)
     return JsonResponse({'status': status, 'result': result})
 
+def doctor_auto_search_api(request):
+    package_id = request.session['selected_package']
+    status, result = api.auto_find_doctors(package_id)
+    return JsonResponse({'status': status, 'result': result})
+
 def doctor(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        request.session['selected_package'] = 'p00006'
+        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
+        return redirect('/doctor-detail/')
     status, result = api.show_doctor_in_department()
     return render(
         request,
@@ -249,11 +288,38 @@ def doctor(request):
 def confirm(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
+        return redirect('/doctor-detail/')
+    if request.method == 'POST':
+        return redirect('/')
+    status, package = api.show_special_package_info(request.session['selected_package'])
+    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+    month = [
+        'มกราคม' ,
+        'กุมภาพันธ์' ,
+        'มีนาคม' ,
+        'เมษายน' ,
+        'พฤษภาคม' ,
+        'มิถุนายน' ,
+        'กรกฎาคม' ,
+        'สิงหาคม' ,
+        'กันยายน' ,
+        'ตุลาคม' ,
+        'พฤศจิกายน' ,
+        'ธันวาคม' ,
+    ]
     return render(
         request,
         'app/confirm.html',
         {
-            'title': 'ยืนยันแพ็คเกจ'
+            'title': 'ยืนยันแพ็คเกจ',
+            'selected_package': package,
+            'selected_doctor': doctor,
+            'selected_date': request.session['selected_date']['date'],
+            'selected_month': month[request.session['selected_date']['month'] - 1],
+            'selected_year': request.session['selected_date']['year'],
+            'selected_start_hr': request.session['selected_date']['start_hr'],
+            'selected_finish_hr': request.session['selected_date']['finish_hr']
         }
     )
 

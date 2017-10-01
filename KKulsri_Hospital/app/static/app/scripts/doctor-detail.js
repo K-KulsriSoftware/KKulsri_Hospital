@@ -48,6 +48,13 @@ $('ul.time li').click(function() {
     $(this).addClass('selected');
     $('p.appointment-time').text($(this).closest('.panel').find('.panel-title').text() + ', เวลา ' + $(this).text());
     $('div.appointment-detail').removeClass('hide');
+
+    var date_text = $(this).closest('.panel').find('.panel-title').text().split(' ');
+    var time_text = $(this).text().split(' - ');
+    $('input[name="date"]').val('{"year": ' + date_text[3] + ', "month": ' + (month.indexOf(date_text[2]) + 1) + ', "date": ' + date_text[1]
+        + ', "start_hr": ' + time_text[0].substring(0, time_text[0].indexOf(':')) + ', "finish_hr": ' + time_text[1].substring(0, time_text[1].indexOf(':'))
+        + '}'
+    );
 });
 
 $('.schedule-container .pager li').click(function() {
