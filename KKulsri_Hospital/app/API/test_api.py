@@ -13,6 +13,7 @@ api = API()
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
 #status, result = api.find_doctors(days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
+#status, result = api.find_doctors(package_id='p00001',days=[],time='',gender='')
 
 #test auto_find_doctors
 #status, result = api.auto_find_doctors(package_id='p00001')

@@ -66,16 +66,16 @@ class find_doctors_api :
 		])
 
 	def check_correct_conditions(self, doctor, days, time, doctor_firstname, doctor_lastname, gender) :
-		if doctor_firstname != None :
+		if doctor_firstname != None and doctor_firstname != '' :
 			if not doctor_firstname in doctor['doctor_name'] :
 				return False
-		if doctor_lastname != None :
+		if doctor_lastname != None and doctor_firstname != '' :
 			if not doctor_lastname in doctor['doctor_surname'] :
 				return False
-		if gender != None :
+		if gender != None and gender != '' :
 			if self.translate_gender(gender) != doctor['gender'] :
 				return False
-		if days != None and time != None :
+		if days != None and time != None and days != [] and time != '' :
 			check = True
 			for day in days :
 				for working_time in doctor['working_time'][day] :
@@ -84,14 +84,14 @@ class find_doctors_api :
 							check = False
 			if check :
 				return False
-		elif days != None :
+		elif days != None and days != [] :
 			check = True
 			for day in days :
 				if len(doctor['working_time'][day]) > 0 :
 					check = False
 			if check :
 				return False
-		elif time != None :
+		elif time != None and time != '' :
 			check = True
 			for day in doctor['working_time'] :
 				for working_time in doctor['working_time'][day] :
