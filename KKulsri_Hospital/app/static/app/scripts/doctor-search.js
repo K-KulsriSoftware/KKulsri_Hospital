@@ -14,6 +14,16 @@ $('li#manual').click(function(){
 
 $('.btn-summit').click(function() {
   $.get('/doctor_search_api', {}, function(data) {
-    console.log(data)
+    if(data && data.status && data.result.length > 0) {
+      $(data.result).each(function() {
+        $('#result').append(`<div class="result-block">
+          <div class="div-img-circle"><img src="` + this.doctor_img + `" class="img-cir"/></div>
+          <div class="div-name"><span class="span-detail">` + this.doctor_name_title + this.doctor_name + ' ' + this.doctor_surname + `</span></div>
+          <span class="span-detail">` + this.department_name + `</span><br>
+          <button class="btn btn-default btn-res" type="button">นัดหมายแพทย์</button>
+          </div>`
+        );
+      })
+    }
   })
 })

@@ -196,13 +196,14 @@ def search_for_doctor(request):
 
 def doctor_search_api(request):
     package_id = request.GET.get('package_id')
-    days = request.GET.get('days').split(',')
+    package_id = 'p00001'
+    days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
     time = request.GET.get('time')
     doctor_firstname = request.GET.get('doctor_firstname')
     doctor_lastname = request.GET.get('doctor_lastname')
     gender = request.GET.get('gender')
-    api.find_doctors(package_id, days, time, doctor_firstname, doctor_lastname, gender)
-    return JsonResponse(result)
+    status, result = api.find_doctors(package_id, days, time, doctor_firstname, doctor_lastname, gender)
+    return JsonResponse({'status': status, 'result': result})
 
 def doctor(request):
     """Renders the about page."""
