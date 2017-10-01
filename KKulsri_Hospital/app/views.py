@@ -265,14 +265,37 @@ def doctor(request):
 
 def confirm(request):
     """Renders the about page."""
+    assert isinstance(request, HttpRequest)
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
         return redirect('/doctor-detail/')
-    assert isinstance(request, HttpRequest)
+    status, package = api.show_special_package_info(request.session['selected_package'])
+    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+    month = [
+        'มกราคม' ,
+        'กุมภาพันธ์' ,
+        'มีนาคม' ,
+        'เมษายน' ,
+        'พฤษภาคม' ,
+        'มิถุนายน' ,
+        'กรกฎาคม' ,
+        'สิงหาคม' ,
+        'กันยายน' ,
+        'ตุลาคม' ,
+        'พฤศจิกายน' ,
+        'ธันวาคม' ,
+    ]
     return render(
         request,
         'app/confirm.html',
         {
-            'title': 'ยืนยันแพ็คเกจ'
+            'title': 'ยืนยันแพ็คเกจ',
+            'selected_package': package,
+            'selected_doctor': doctor,
+            'selected_date': request.session['selected_date']['date'],
+            'selected_month': month[request.session['selected_date']['month'] - 1],
+            'selected_year': request.session['selected_date']['year'],
+            'selected_start_hr': request.session['selected_date']['start_hr'],
+            'selected_finish_hr': request.session['selected_date']['finish_hr']
         }
     )
 
