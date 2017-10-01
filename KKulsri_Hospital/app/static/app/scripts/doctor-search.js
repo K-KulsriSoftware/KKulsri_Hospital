@@ -6,7 +6,7 @@ $('li#auto').click(function(){
 
   $.get('/doctor_auto_search_api/', function(data) {
     if(data && data.status && data.result.length > 0) {
-      console.log(data)
+      $('#auto-result').empty();
       var CSRFtoken = $('input[name=csrfmiddlewaretoken]').val();
       $(data.result).each(function() {
         $('#auto-result').append(`<div class="result-block">
