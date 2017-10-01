@@ -23,6 +23,8 @@ $('.btn-summit').click(function() {
   });
   if(data.days === '') {
     delete data.days;
+  } else {
+    data.days = data.days.substring(0, data.days.length - 1);
   }
   data.time = '';
   $('.input-time input[type="checkbox"]').each(function() {
@@ -32,6 +34,8 @@ $('.btn-summit').click(function() {
   });
   if(data.time === '') {
     delete data.time;
+  } else {
+    data.time = data.time.substring(0, data.time.length - 1);
   }
   data.doctor_firstname = $('.input-name input#in-firstname').val();
   if(data.doctor_firstname === '') {
@@ -49,6 +53,8 @@ $('.btn-summit').click(function() {
   });
   if(data.gender === '') {
     delete data.gender;
+  } else {
+    data.gender = data.gender.substring(0, data.gender.length - 1);
   }
   $.get('/doctor_search_api', {}, function(data) {
     if(data && data.status && data.result.length > 0) {
