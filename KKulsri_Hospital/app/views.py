@@ -73,16 +73,25 @@ def doctor_detail(request):
         request.session['selected_date'] = json.loads(request.POST['date'])
         return redirect('/confirm/')
     assert isinstance(request, HttpRequest)
-    status, result = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     if status:
         status, package = api.show_special_package_info(request.session['selected_package'])
+        working_times = {}
+        for day in doctor['working_time']:
+            if doctor['working_time'][day] != []:
+                working_times[day] = []
+                for time in doctor['working_time'][day]:
+                    for i in range(time['start'], time['finish']):
+                        working_times[day].append({'start': i, 'finish': i+1})
+        print(working_times)
         return render(
             request,
             'app/doctor-detail.html',
             {
                 'title': 'ข้อมูลแพทย์',
-                'doctor': result,
-                'selected_package': package
+                'doctor': doctor,
+                'selected_package': package,
+                'working_time': working_times
             }
         )
     else:
