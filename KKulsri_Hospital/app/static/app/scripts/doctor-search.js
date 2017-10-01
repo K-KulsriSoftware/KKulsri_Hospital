@@ -68,6 +68,8 @@ $('.btn-summit').click(function() {
           </div>`
         );
       });
+    } else {
+      $('#result').append('<p>ไม่พบข้อมูล</p>');
     }
   });
 })
