@@ -74,6 +74,7 @@ def doctor_detail(request):
             request,
             'app/doctor-detail.html',
             {
+                'title': 'ข้อมูลแพทย์',
                 'doctor': result
             }
         )
@@ -126,11 +127,17 @@ def register(request):
             return render(
                 request,
                 'app/register.html',
+                {
+                    'title': 'สมัครสมาชิก'
+                }
             )
     else:
         return render(
             request,
             'app/register.html',
+            {
+                'title': 'สมัครสมาชิก'
+            }
         )
 
 def signup(request):
@@ -154,11 +161,9 @@ def member(request):
     return render(
         request,
         'app/member.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'title': 'แก้ไขข้อมูลสมาชิก'
+        }
     )
 
 
@@ -170,6 +175,7 @@ def departments(request):
         request,
         'app/departments.html',
         {
+            'title': 'แผนกและแพ็คเกจ',
             'departments': result
         }
     )
@@ -183,6 +189,7 @@ def regular_packages(request):
         request,
         'app/regular-package.html',
         {
+            'title': 'ตรวจสุขภาพทั่วไป',
             'packages': result
         }
     )
@@ -192,10 +199,12 @@ def special_packages(request, package_id):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
     status, result = api.show_special_package_info(package_id)
+    print(result)
     return render(
         request,
         'app/special_packages.html',
         {
+            'title': 'รายละเอียดแพ็คเกจ',
             'package': result
         }
     )
@@ -207,11 +216,9 @@ def search_for_doctor(request):
     return render(
         request,
         'app/doctor-search.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'title': 'ค้นหาแพทย์'
+        }
     )
 
 def doctor_search_api(request):
@@ -220,7 +227,7 @@ def doctor_search_api(request):
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
     time = request.GET.get('time')
     doctor_firstname = request.GET.get('doctor_firstname')
-    doctor_lastname = request.GET.get('doctor_lastname')
+    doctor_lastname = request.GET.get('doctor_surname')
     gender = request.GET.get('gender')
     status, result = api.find_doctors(package_id, days, time, doctor_firstname, doctor_lastname, gender)
     return JsonResponse({'status': status, 'result': result})
@@ -233,6 +240,7 @@ def doctor(request):
         request,
         'app/doctor.html',
         {
+            'title': 'แผนกและแพทย์',
             'departments': result
         }
     )
@@ -244,11 +252,9 @@ def confirm(request):
     return render(
         request,
         'app/confirm.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'title': 'ยืนยันแพ็คเกจ'
+        }
     )
 
 
@@ -258,11 +264,9 @@ def payment(request):
     return render(
         request,
         'app/payment.html',
-        # {
-        #     'title': 'About',
-        #     'message': 'Your application description page.',
-        #     'year': datetime.now().year,
-        # }
+        {
+            'title': 'ชำระค่าบริการ'
+        }
     )
 
 def admin_mongo(request):
@@ -273,6 +277,7 @@ def admin_mongo(request):
         request,
         'app/admin-mongo.html',
         {
+            'title': 'mongoDB Admin',
             'header_title': 'mongoDB Admin',
             'collections': result,
             'DATABASE': True,
@@ -295,6 +300,7 @@ def admin_mongo_collection(request, collection_name):
         request,
         'app/admin-mongo.html',
         {
+            'title': 'mongoDB Admin',
             'header_title': 'mongoDB Admin',
             'collection_name': collection_name,
             'data': result,

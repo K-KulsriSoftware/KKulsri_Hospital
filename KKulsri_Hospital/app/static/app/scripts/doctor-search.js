@@ -32,10 +32,10 @@ $('.btn-summit').click(function() {
       data.time += $(this).closest('label').text().replace(/ /g, '').replace(/\n/g, '') + ',';
     }
   });
-  if(data.time === '') {
+  if(data.time !== '' && (data.time.match(/,/g) || []).length > 1) {
     delete data.time;
   } else {
-    data.time = data.time.substring(0, data.time.length - 1);
+    data.time = data.time.replace(',', '');
   }
   data.doctor_firstname = $('.input-name input#in-firstname').val();
   if(data.doctor_firstname === '') {
@@ -51,12 +51,13 @@ $('.btn-summit').click(function() {
       data.gender += $(this).closest('label').text().replace(/ /g, '').replace(/\n/g, '') + ',';
     }
   });
-  if(data.gender === '') {
+  if(data.gender !== '' && (data.gender.match(/,/g) || []).length > 1) {
     delete data.gender;
   } else {
-    data.gender = data.gender.substring(0, data.gender.length - 1);
+    data.gender = data.gender.replace(',', '');
   }
-  $.get('/doctor_search_api', {}, function(data) {
+  console.log(data)
+  $.get('/doctor_search_api', data, function(data) {
     if(data && data.status && data.result.length > 0) {
       $(data.result).each(function() {
         $('#result').append(`<div class="result-block">

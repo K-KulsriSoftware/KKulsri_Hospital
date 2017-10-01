@@ -73,13 +73,13 @@ class find_doctors_api :
 			if not doctor_lastname in doctor['doctor_surname'] :
 				return False
 		if gender != None :
-			if common_function.translate_gender(gender) != doctor['gender'] :
+			if self.translate_gender(gender) != doctor['gender'] :
 				return False
 		if days != None and time != None :
 			check = True
 			for day in days :
 				for working_time in doctor['working_time'][day] :
-					for now_check_time in range(working_time['start'], working_time['stop']) :
+					for now_check_time in range(working_time['start'], working_time['finish']) :
 						if (time == 'ช่วงเช้า' and 9 <= now_check_time <= 12) or (time == 'ช่วงบ่าย' and 13 <= now_check_time <= 17) :
 							check = False
 			if check :
