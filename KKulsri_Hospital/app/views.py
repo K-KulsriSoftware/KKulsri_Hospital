@@ -67,8 +67,10 @@ def about(request):
 
 def doctor_detail(request):
     """Renders the about page."""
+    if 'selected_package' not in request.session or 'selected_doctor' not in request.session:
+        return redirect('/doctor-search')
     assert isinstance(request, HttpRequest)
-    status, result = api.show_detail(request.GET.get('doctor_name'), request.GET.get('doctor_surname'))
+    status, result = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     if status:
         return render(
             request,
@@ -219,6 +221,9 @@ def search_for_doctor(request):
     """Renders the about page."""
     if 'selected_package' not in request.session:
         return redirect('/departments/')
+    if request.method == 'POST':
+        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
+        return redirect('/doctor-detail/')
     print(request.session['selected_package'])
     assert isinstance(request, HttpRequest)
     return render(
