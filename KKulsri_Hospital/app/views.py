@@ -220,7 +220,7 @@ def doctor_search_api(request):
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
     time = request.GET.get('time')
     doctor_firstname = request.GET.get('doctor_firstname')
-    doctor_lastname = request.GET.get('doctor_lastname')
+    doctor_lastname = request.GET.get('doctor_surname')
     gender = request.GET.get('gender')
     status, result = api.find_doctors(package_id, days, time, doctor_firstname, doctor_lastname, gender)
     return JsonResponse({'status': status, 'result': result})
