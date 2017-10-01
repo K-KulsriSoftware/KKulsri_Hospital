@@ -12,7 +12,7 @@ from django.template import RequestContext
 from datetime import datetime
 from .API.API import API
 from pymongo import MongoClient
-import base64
+import json
 # import app.forms
 
 api = API()
@@ -69,6 +69,9 @@ def doctor_detail(request):
     """Renders the about page."""
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session:
         return redirect('/doctor-search')
+    if request.method == 'POST':
+        request.session['selected_date'] = json.loads(request.POST['date'])
+        return redirect('/confirm/')
     assert isinstance(request, HttpRequest)
     status, result = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     if status:
@@ -262,6 +265,8 @@ def doctor(request):
 
 def confirm(request):
     """Renders the about page."""
+    if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
+        return redirect('/doctor-detail/')
     assert isinstance(request, HttpRequest)
     return render(
         request,
