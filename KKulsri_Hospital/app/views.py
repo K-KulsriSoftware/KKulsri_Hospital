@@ -5,6 +5,7 @@ Definition of views.
 from django.http import Http404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, JsonResponse
@@ -12,8 +13,10 @@ from django.template import RequestContext
 from datetime import datetime
 from .API.API import API
 from pymongo import MongoClient
-import json
 # import app.forms
+import json
+import base64
+import app.forms
 
 api = API()
 
@@ -37,7 +40,7 @@ def home(request):
     return redirect('/departments')
 
 
-@login_required
+@login_required(login_url='/login/')
 def contact(request):
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
@@ -158,19 +161,43 @@ def register(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = app.forms.RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('register')
+            return redirect('home')
     else:
-        form = UserCreationForm()
+        form = app.forms.RegistrationForm()
     return render(request, 'app/signup.html', {'form': form})
 
-@login_required
+    # if request.method == 'POST':
+    #     form = UserCreationForm(request.POST)
+    #     if form.is_valid():
+    #         # state 1
+    #         # user = form.save()
+    #         # user.refresh_from_db()  # load the profile instance created by the signal
+    #         # user.profile.birth_date = form.cleaned_data.get('birth_date')
+    #         # user.save()
+    #         # raw_password = form.cleaned_data.get('password1')
+    #         # user = authenticate(username=user.username, password=raw_password)
+    #         # login(request, user)
+    #         # return redirect('home')
+    #         # state 2
+    #         form.save()
+    #         username = form.cleaned_data.get('username')
+    #         raw_password = form.cleaned_data.get('password1')
+    #         user = authenticate(username=username, password=raw_password)
+    #         login(request, user)
+    #         return redirect('home')
+    # else:
+    #     form = UserCreationForm()
+    # return render(request, 'app/signup.html', {'form': form})
+
+
+@login_required(login_url='/login')
 def member(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
@@ -252,6 +279,7 @@ def search_for_doctor(request):
         }
     )
 
+@staff_member_required(login_url='/login')
 def doctor_search_api(request):
     package_id = request.session['selected_package']
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
@@ -285,6 +313,7 @@ def doctor(request):
     )
 
 
+@login_required(login_url='/login')
 def confirm(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
@@ -323,7 +352,7 @@ def confirm(request):
         }
     )
 
-
+@login_required(login_url='/login')
 def payment(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
@@ -334,7 +363,7 @@ def payment(request):
             'title': 'ชำระค่าบริการ'
         }
     )
-
+@staff_member_required(login_url='/login')
 def admin_mongo(request):
     assert isinstance(request, HttpRequest)
     status, result = api.get_all_collections_name()
@@ -351,6 +380,8 @@ def admin_mongo(request):
         }
     )
 
+
+@staff_member_required(login_url='/login')
 def admin_mongo_collection(request, collection_name):
     assert isinstance(request, HttpRequest)
     status, result = {

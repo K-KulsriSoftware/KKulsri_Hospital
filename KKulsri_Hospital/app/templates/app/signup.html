@@ -1,9 +1,9 @@
 {% extends 'app/layout.html' %} 
 
-{% load bootstrap %} {% load i18n %} {% block head_title %}{% trans "Signup" %}{% endblock %} {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+{% load bootstrap %} {% load i18n %} {% block head_title %}{% trans "ลงทะเบียน" %}{% endblock %} {% block content %}
+<h1>{% trans "ลงทะเบียนใช้งาน" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<p>{% blocktrans %}มีบัญชีแล้วหรือเปล่า ? กรุณา <a href="/login">ลงชื่อเข้าใช้</a>.{% endblocktrans %}</p>
 
 <form id="signup_form" method="post" action=".">
     {% csrf_token %} {{ form|bootstrap }} {% if redirect_field_value %}
