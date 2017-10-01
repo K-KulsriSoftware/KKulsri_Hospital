@@ -11,8 +11,8 @@ import app.forms
 import app.views
 
 # Uncomment the next lines to enable the admin:
-# from django.conf.urls import include
-# from django.contrib import admin
+from django.conf.urls import include
+from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^doctor-detail/', app.views.doctor_detail, name='doctor_detail '),
     url(r'^register/', app.views.register, name='register '),
     url(r'^member/', app.views.member, name='member '),
+    url(r'^signup/', app.views.signup, name='signup '),
     url(r'^departments/', app.views.departments, name='departments '),
     url(r'^regular-packages/', app.views.regular_packages, name='regular_packages '),
     url(r'^special-packages/(?P<package_id>\w{0,50})/$', app.views.special_packages, name='special_packages '),
@@ -56,5 +57,5 @@ urlpatterns = [
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 ]
