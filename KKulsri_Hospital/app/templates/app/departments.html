@@ -23,12 +23,11 @@
 					<div id="span1"> {{ department.department_name }} </div>
 					<div id="crossline"></div>
 					<div id="box">
-						{% for package in depart.packages %}
-							{% if package.department_id == department.department_id %}
+
+						{% for package_list in department.package_list %}
 							<ul class="department-ul">
-								<li class="department-li"><a href="/special-packages/?package_id={{ package.package_id }}"> {{  package.package_name }} <span class="department-span"> </span></a></li>
+								<li class="department-li"><a href="/special-packages/?package_id={{ package.package_id }}"><span class="department-span"> {{ package_list.package_name }}</span></a></li>
 							</ul>
-							{% endif %}
 						{% endfor %}
 					</div>
 
@@ -39,8 +38,4 @@
 	<!-- เพิ่มแผนกแบบนี้ -->
 
 {% endblock %}
-
-<!--{% block scripts %}
-<script src="{% static 'app/scripts/departments.js' %}"></script>
-{% endblock %}-->
 
