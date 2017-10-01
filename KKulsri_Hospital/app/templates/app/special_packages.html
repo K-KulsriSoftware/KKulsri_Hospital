@@ -1,51 +1,63 @@
-<!DOCTYPE html>
-
-{% extends "app/layout.html" %}
-
-{% block content %}
-
-	{% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/special_packages.css' %}" />
+<!DOCTYPE html> {% extends "app/layout.html" %} {% block content %} {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/css/special_packages.css' %}" />
 
 
-	<div>
+<div>
+    <div class="package-name">
+        <span>{{ package.package_name }}</span>
+    </div>
     <div id="allpage">
-    <div class="p1" style="width: 10px; height: 100%;background: #8dd9ca;display: inline-block;float: left;"><div class="p2" style="width:auto;margin-left: 10px;height: auto;display: inline-block;float: left;"></div><div style="width:100%;height:63px"></div></div>
-    <div id="span2"> &nbsp ราคาแพ็คเกจ : {{ package.package_cost }} <p></p></div>
+        <div class="p1" style="width: 10px; height: 100%;background: #8dd9ca;display: inline-block;float: left;">
+            <div class="p2" style="width:auto;margin-left: 10px;height: auto;display: inline-block;float: left;"></div>
+            <div style="width:100%;height:63px"></div>
+        </div>
+        <div id="span2"> &nbsp ราคาแพ็คเกจ : {{ package.package_cost }}
+            <p></p>
+        </div>
 
 
         <p> &nbsp <button class="selectButton1" type="button"><a href="/payment/">เลือกแพ็คเกจนี้</a></button></p>
 
-		<p><br></br></p>
+        <p><br></br>
+        </p>
 
         <div id="span1">&nbsp รายละเอียดการตรวจ</div>
         <ol>
             <li> {{ package.description }}</li>
         </ol>
 
-        <p> <br></br></p>
+        <p> <br></br>
+        </p>
 
         <div id="span1">&nbsp เงื่อนไขการเข้ารับบริการ</div>
         <ul class="b">
             {% for package_cond in package.conditions %}
-            <li><div id="span2"> {{ package_cond }}</div></li>
+            <li>
+                <div id="span2"> {{ package_cond }}</div>
+            </li>
             {% endfor %}
         </ul>
 
-        <p> <br></br></p>
+        <p> <br></br>
+        </p>
 
         <div id="span1">&nbsp หมายเหตุ</div>
         <ul class="b">
-            <li><div id="span2"> {{ package.package_notice }}</div></li>
+            <li>
+                <div id="span2"> {{ package.package_notice }}</div>
+            </li>
         </ul>
 
-        <p> <br></br> </p>
+        <p> <br></br>
+        </p>
 
         <div id="span1">&nbsp สถานที่ให้บริการ</div>
-            <p><div id="span2">&nbsp &nbsp &nbsp {{ package.building_name }} 
-            </div></p>
+        <p>
+            <div id="span2">&nbsp &nbsp &nbsp {{ package.building_name }}
+            </div>
+        </p>
 
-    <p> &nbsp &nbsp &nbsp &nbsp &nbsp<button class="selectButton2" type="button"><a href="/payment/">เลือกแพ็คเกจนี้</a></button></p>
-		</div>
-	</div>
+        <p> &nbsp &nbsp &nbsp &nbsp &nbsp<button class="selectButton2" type="button"><a href="/payment/">เลือกแพ็คเกจนี้</a></button></p>
+    </div>
+</div>
 {% endblock %}
