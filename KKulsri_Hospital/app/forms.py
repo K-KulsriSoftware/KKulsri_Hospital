@@ -6,7 +6,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
-from app.models import Profile
+# from app.models import Profile
 
 class BootstrapAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
@@ -20,11 +20,46 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'placeholder':'Password'}))
 
 
-# class RegistrationForm(UserCreationForm):
+class RegistrationForm(UserCreationForm):
+    username = forms.RegexField(
+        label=_("ชื่อผู้ใช้"), max_length=30, regex=r"^[\w.@+-]+$",
+        help_text=_("จำเป็นต้องกรอก. ไม่เกิน 30 ตัวอักษร ประกอบด้วย พยัญชนะ, ตัวเลข หรือ "
+                    "@/./+/-/_ เท่านั้น"),
+        error_messages={
+            'invalid': _("ชื่อผู้ใช้ ต้องประกอบด้วย พยัญชนะ, ตัวเลข หรือ "
+                         "@/./+/-/_ เท่านั้น")},
+    )
+    password1 = forms.CharField(
+        label=_("รหัสผ่าน"),)
+    password2 = forms.CharField(
+        label=_("พิมพ์รหัสผ่านอีกครั้ง"),)
+    first_name = forms.CharField(
+        label=_("ชื่อ"), required=True, max_length=30, help_text="Required")
+    last_name = forms.CharField(
+        label=_("นามสกุล"), required=True, max_length=30, help_text="Required")
+    email = forms.EmailField(
+        label=_("อีเมล"), required=True, max_length=100, help_text="Required")
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name',
+                  'email', 'password1', 'password2', )
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['first_name'].widget.attrs['class'] = 'form-control'
+        self.fields['last_name'].widget.attrs['class'] = 'form-control'
+        self.fields['email'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+
 #     patient_name_title = forms.CharField()
 #     patient_name = forms.CharField()
 #     patient_surname = forms.CharField()
-#     birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
+    # birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
 #     patient_img = forms.ImageField()
 #     id_card_number = forms.CharField()
 #     gender = forms.CharField()
@@ -42,12 +77,12 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 #     emergency_name = forms.CharField()
 #     emergency_phone = forms.CharField()
 #     emergency_addr = forms.CharField()
-#     email = forms.EmailField()
+    # email = forms.EmailField()
 #     congenital_disease = forms.CharField()
 
-#     class Meta:
-#         model = User
-        
+    # class Meta:
+    #     model = User
+    #     fields = ('username', 'password1', 'password2', "birth_date",)
 #         fields = ('username', 'password1', 'password2', "patient_name_title", "patient_name", "patient_surname", "birth_date", "patient_img",
 #                   "id_card_number", "gender", "blood_group_abo", "blood_group_rh",
 #                   "race", "nationallity", "Religion", "Status", "pateint_address",

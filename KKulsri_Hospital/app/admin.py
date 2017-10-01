@@ -1,6 +1,6 @@
-from django.contrib import admin
-from app.models import Profile
-from django.contrib.auth.models import User
+# from django.contrib import admin
+# from app.models import Profile
+# from django.contrib.auth.models import User
 
 # class ProfileInline(admin.StackedInline):
 #     model = Profile

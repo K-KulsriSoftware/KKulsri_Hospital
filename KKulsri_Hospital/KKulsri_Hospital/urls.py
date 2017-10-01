@@ -50,12 +50,12 @@ urlpatterns = [
             'next_page': '/',
         },
         name='logout'),
-    url(r'^register/', app.views.register, name='register '),
-    url(r'^signup/', app.views.signup, name='signup '),
-    
+    url(r'^register/', app.views.register, name='register'),
+    url(r'^signup/', app.views.signup, name='signup'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 ]
