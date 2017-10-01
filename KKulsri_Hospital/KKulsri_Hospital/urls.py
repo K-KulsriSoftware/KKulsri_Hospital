@@ -21,9 +21,7 @@ urlpatterns = [
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),
     url(r'^doctor-detail/', app.views.doctor_detail, name='doctor_detail '),
-    url(r'^register/', app.views.register, name='register '),
     url(r'^member/', app.views.member, name='member '),
-    url(r'^signup/', app.views.signup, name='signup '),
     url(r'^departments/', app.views.departments, name='departments '),
     url(r'^regular-packages/', app.views.regular_packages, name='regular_packages '),
     url(r'^special-packages/(?P<package_id>\w{0,50})/$', app.views.special_packages, name='special_packages '),
@@ -34,6 +32,7 @@ urlpatterns = [
     url(r'^admin-mongo/$', app.views.admin_mongo, name='admin-mongo '),
     url(r'^admin-mongo/collection/(?P<collection_name>\w{0,50})/$', app.views.admin_mongo_collection, name='admin-mongo-collection'),
     url(r'^doctor_search_api/', app.views.doctor_search_api, name='doctor_search_api'),
+    url(r'^doctor_auto_search_api/', app.views.doctor_auto_search_api, name='doctor_auto_search_api'),
     url(r'^login/$',
         django.contrib.auth.views.login,
         {
@@ -52,6 +51,8 @@ urlpatterns = [
             'next_page': '/',
         },
         name='logout'),
+    url(r'^register/', app.views.register, name='register'),
+    url(r'^signup/', app.views.signup, name='signup'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

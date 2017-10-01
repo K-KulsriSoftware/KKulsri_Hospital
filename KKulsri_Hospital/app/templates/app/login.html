@@ -20,11 +20,12 @@
             <section id="loginForm">
                 <form action="." method="post" class="form-horizontal">
                     {% csrf_token %} {% comment %}
-                    <h4>Use a local account to log in.</h4> {% endcomment %}
+                    <h4>Use a local account to log in.</h4>
                     <hr />
+                    {% endcomment %}
                     <div class="box-username">
                         <div class="title-username">
-                            <label for="id_username" class="col-md-2 control-label">User name</label>
+                            <label for="id_username" class="col-md-2 control-label">Username</label>
                         </div>
                         <div class="input-username">
                             {{ form.username }}
@@ -41,7 +42,7 @@
                     <div class="box-button-detail">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="hidden" name="next" value="/" />
-                            <input type="submit" value="Log in" class="btn btn-default" />
+                            <input type="submit" value="Log in" class="btn btn-default btn-login" />
                         </div>
                     </div>
                     <div style="text-align:center;font-size:16px;margin-top:5px;">
@@ -50,7 +51,7 @@
                     {% if form.errors %}
                     <br>
                     <div style="text-align:center;font-size:16px;margin-top:5px;">
-                        <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+                        <p class="validation-summary-errors">Please enter a correct username and password.</p>
                     </div>
                     {% endif %}
                 </form>
