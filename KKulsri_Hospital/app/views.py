@@ -284,7 +284,6 @@ def search_for_doctor(request):
         }
     )
 
-@staff_member_required(login_url='/login')
 def doctor_search_api(request):
     package_id = request.session['selected_package']
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
