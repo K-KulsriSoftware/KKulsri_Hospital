@@ -211,6 +211,12 @@ div.auto-result-block{
 div.div-name{
   margin-top: 10px;
   width:100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.div-name span{
+  white-space: nowrap;
 }
 
 span#heading{
