@@ -320,7 +320,11 @@ def confirm(request):
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
         return redirect('/doctor-detail/')
     if request.method == 'POST':
-        return redirect('/')
+        status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+        status, result = api.create_order(request.session['selected_package'], doctor['username'], request.user.username, '-', request.session['selected_date'])
+        if status:
+            return redirect('/')
+    # print(request.session['selected_date'])
     status, package = api.show_special_package_info(request.session['selected_package'])
     status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     month = [

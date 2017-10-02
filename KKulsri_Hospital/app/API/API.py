@@ -305,8 +305,8 @@ class API :
 		return self.orders_query_api.delete_order(order_id)
 
 	#input: order_id(str), package_id(str), doctor_id(str), username(str), notice,(str) cost(double), time(object)
-	def create_order(self, order_id = None, package_id = None, doctor_id = None, username = None, notice = None, cost = None, time = None) :
-		return self.orders_query_api.create_order(order_id, package_id, doctor_id, username, notice, cost, time)
+	# def create_order(self, order_id = None, package_id = None, doctor_id = None, username = None, notice = None, cost = None, time = None) :
+	# 	return self.orders_query_api.create_order(order_id, package_id, doctor_id, username, notice, cost, time)
 
 ###Jakapong Mo END
 
