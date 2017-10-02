@@ -168,6 +168,11 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            status, result = api.register(form.cleaned_data.get('username'), '', form.cleaned_data.get('first_name'), form.cleaned_data.get('last_name'), '',
+				 '', True, [], 2017, 10, 2,
+				 0, 0, '', '', '', 0,
+				 '', '', '', '', '', '',
+				 '', '', '', [], submit=True)
             return redirect('home')
     else:
         form = app.forms.RegistrationForm()
