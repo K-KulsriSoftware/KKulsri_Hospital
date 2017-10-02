@@ -18,6 +18,7 @@ class show_detail_api :
     		{
         		'$project':
         		{
+					'username': '$username',
 					'doctor_name_title' : '$doctor_name_title',
             		'doctor_name' : '$doctor_name',
             		'doctor_surname' : '$doctor_surname',
