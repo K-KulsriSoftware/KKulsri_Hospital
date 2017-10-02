@@ -33,6 +33,11 @@ $('li#manual').click(function(){
 });
 
 $('.btn-summit').click(function() {
+  if($('.input-days input[type="checkbox"]:checked').length === 0 || $('.input-time input[type="checkbox"]:checked').length === 0
+    || $('.input-gender input[type="checkbox"]:checked').length === 0) {
+    alert('กรุณาทำเครื่องหมายในเงื่อนไขการค้นหาทุกส่วน (ยกเว้นชื่อและนามสกุลของแพทย์)');
+    return;
+  }
   $('#result').empty();
   var data = {};
   data.days = '';
