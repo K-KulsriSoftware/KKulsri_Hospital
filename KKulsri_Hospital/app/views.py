@@ -176,7 +176,7 @@ def signup(request):
             return redirect('home')
     else:
         form = app.forms.RegistrationForm()
-    return render(request, 'app/signup.html', {'form': form})
+    return render(request, 'app/signup.html', {'form': form, 'title': 'สมัครสมาชิก'})
 
     # if request.method == 'POST':
     #     form = UserCreationForm(request.POST)
