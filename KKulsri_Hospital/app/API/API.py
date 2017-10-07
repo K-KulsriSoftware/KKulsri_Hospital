@@ -102,10 +102,10 @@ class API :
 		if check : return True, result
 		return self.show_profile_api.show_profile(username)
 
-	def show_detail(self, doctor_name=None, doctor_surname=None) :
+	def show_detail(self, doctor_id=None) :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
-		return self.show_detail_api.show_detail(doctor_name,doctor_surname)
+		return self.show_detail_api.show_detail(doctor_id)
 
 	def edit_profile(self, username=None, email=None, telphone_number=None, emergency_phone=None, submit=False) :
 		check, result = self.incomplete_input(locals())
