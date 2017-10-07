@@ -272,7 +272,7 @@ def search_for_doctor(request):
     if 'selected_package' not in request.session:
         return redirect('/departments/')
     if request.method == 'POST':
-        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
+        request.session['selected_doctor'] = request.POST['doctor_id']
         return redirect('/doctor-detail/')
     print(request.session['selected_package'])
     assert isinstance(request, HttpRequest)

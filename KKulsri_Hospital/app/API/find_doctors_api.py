@@ -31,7 +31,7 @@ class find_doctors_api :
 		        {
 		            'from' : 'doctors',
 		            'localField' : 'department_id',
-		            'foreignField' : '_id',
+		            'foreignField' : 'department_id',
 		            'as' : 'doctor'
 		        }
 		    },
@@ -53,6 +53,7 @@ class find_doctors_api :
 		    {
 		        '$project' :
 		        {
+					'doctor_id': '$doctor._id',
 		            'username' : '$doctor.username',
 		            'doctor_name_title' : '$doctor.doctor_name_title',
 		            'doctor_name' : '$doctor.doctor_name',
@@ -79,7 +80,7 @@ class find_doctors_api :
 			check = True
 			for day in days :
 				for working_time in doctor['working_time'][day] :
-					for now_check_time in range(working_time['start'], working_time['finish']) :
+					for now_check_time in range(int(working_time['start']), int(working_time['finish'])) :
 						if (time == 'ช่วงเช้า' and 9 <= now_check_time <= 12) or (time == 'ช่วงบ่าย' and 13 <= now_check_time <= 17) :
 							check = False
 			if check :
@@ -110,5 +111,6 @@ class find_doctors_api :
 				doctor.pop('_id', None)
 				doctor.pop('working_time', None)
 				doctor.pop('gender', None)
+				doctor['doctor_id'] = str(doctor['doctor_id'])
 				result_doctors.append(doctor)
 		return True, result_doctors
