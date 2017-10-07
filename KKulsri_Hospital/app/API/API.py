@@ -1,6 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import urllib.parse
 from pymongo import MongoClient
+import json
+
+''' 
+#for website
 from .find_doctors_api import find_doctors_api
 from .show_profile_api import show_profile_api
 from .show_detail_api import show_detail_api
@@ -20,11 +25,38 @@ from .patients_query_api import patients_query_api###Jakapong Mo
 from .packages_query_api import packages_query_api###Jakapong Mo
 from .orders_query_api import orders_query_api###Jakapong Mo
 from .get_collection_pattern_api import get_collection_pattern_api
+'''
+
+#for test api
+from find_doctors_api import find_doctors_api
+from show_profile_api import show_profile_api
+from show_detail_api import show_detail_api
+from edit_profile_api import edit_profile_api
+from register_api import register_api
+from show_general_list_api import show_general_list_api
+from show_departments_api import show_departments_api
+from show_special_package_info_api import show_special_package_info_api
+from create_order_api import create_order_api
+from show_confirmation_info_api import show_confirmation_info_api
+from doctor_query_api import doctor_query_api
+from department_query_api import department_query_api
+from user_query_api import user_query_api
+from building_query_api import building_query_api
+from show_doctor_in_department_api import show_doctor_in_department_api
+from patients_query_api import patients_query_api
+from packages_query_api import packages_query_api
+from orders_query_api import orders_query_api
+from get_collection_pattern_api import get_collection_pattern_api
 
 class API :
 
 	def __init__(self) :
-		self.client = MongoClient("kkulsri.cloudapp.net:27017")
+		with open('./config.json','r') as json_file :
+			data = json.load(json_file)
+			username = urllib.parse.quote_plus(data['username'])
+			password = urllib.parse.quote_plus(data['password'])
+			db = data['db']
+			self.client = MongoClient(f'mongodb://{username}:{password}@{db}')
 		self.db = self.client.kkulsridb
 		self.find_doctors_api = find_doctors_api(self.db)
 		self.show_profile_api = show_profile_api(self.db)
@@ -37,13 +69,13 @@ class API :
 		self.create_order_api = create_order_api(self.db)
 		self.show_confirmation_info_api = show_confirmation_info_api(self.db)
 		self.doctor_query_api = doctor_query_api(self.db)
-		self.department_query_api = department_query_api(self.db)##Watcharachat Tay
-		self.user_query_api = user_query_api(self.db)##Watcharachat Tay
-		self.building_query_api = building_query_api(self.db)##Watcharachat Tay
+		self.department_query_api = department_query_api(self.db)
+		self.user_query_api = user_query_api(self.db)
+		self.building_query_api = building_query_api(self.db)
 		self.show_doctor_in_department_api = show_doctor_in_department_api(self.db)
-		self.patients_query_api = patients_query_api(self.db)###Jakapong Mo
-		self.packages_query_api = packages_query_api(self.db)###Jakapong Mo
-		self.orders_query_api = orders_query_api(self.db)###Jakapong Mo
+		self.patients_query_api = patients_query_api(self.db)
+		self.packages_query_api = packages_query_api(self.db)
+		self.orders_query_api = orders_query_api(self.db)
 		self.get_collection_pattern_api = get_collection_pattern_api(self.db)
 
 
