@@ -7,7 +7,7 @@ from datetime import datetime
 api = API()
 
 #test find_doctors
-#status, result = api.find_doctors(package_id='p00001')
+status, result = api.find_doctors(package_id="59d890e99cb6f0707faf7034")
 #status, result = api.find_doctors(package_id='p00001',days=['mon'])
 #status, result = api.find_doctors(package_id='p00001',days=['mon','tue'],time='ช่วงเช้า')
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
@@ -90,8 +90,8 @@ status, result = api.insert_patient("watermelon22", "นางสาว", "ส�
 #status, result = api.get_all_packages()
 
 #test get_package_detail
-status, result = api.get_package_detail('p00001')
-status, result = api.get_package_detail()
+#status, result = api.get_package_detail('p00001')
+#status, result = api.get_package_detail()
 
 #test get_all_packages_name
 #status, result = api.get_all_packages_name()

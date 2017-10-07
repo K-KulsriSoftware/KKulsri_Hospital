@@ -4,7 +4,6 @@ import urllib.parse
 from pymongo import MongoClient
 import json
 
-
 #for website
 from .find_doctors_api import find_doctors_api
 from .show_profile_api import show_profile_api
@@ -25,7 +24,6 @@ from .patients_query_api import patients_query_api###Jakapong Mo
 from .packages_query_api import packages_query_api###Jakapong Mo
 from .orders_query_api import orders_query_api###Jakapong Mo
 from .get_collection_pattern_api import get_collection_pattern_api
-
 '''
 #for test api
 from find_doctors_api import find_doctors_api

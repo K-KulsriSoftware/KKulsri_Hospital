@@ -31,7 +31,7 @@ class find_doctors_api :
 		        {
 		            'from' : 'doctors',
 		            'localField' : 'department_id',
-		            'foreignField' : '_id',
+		            'foreignField' : 'department_id',
 		            'as' : 'doctor'
 		        }
 		    },
