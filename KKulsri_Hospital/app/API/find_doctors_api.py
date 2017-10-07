@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+from bson.objectid import ObjectId
 class find_doctors_api :
 
 	def __init__(self, db) :
@@ -23,7 +23,7 @@ class find_doctors_api :
 		    {
 		        '$match' :
 		        {
-		            'package_id' : package_id
+		            '_id' : ObjectId(package_id)
 		        }
 		    },
 		    {
@@ -31,7 +31,7 @@ class find_doctors_api :
 		        {
 		            'from' : 'doctors',
 		            'localField' : 'department_id',
-		            'foreignField' : 'department_id',
+		            'foreignField' : '_id',
 		            'as' : 'doctor'
 		        }
 		    },
@@ -40,7 +40,7 @@ class find_doctors_api :
 		        {
 		            'from' : 'departments',
 		            'localField' : 'department_id',
-		            'foreignField' : 'department_id',
+		            'foreignField' : '_id',
 		            'as' : 'department'
 		        }
 		    },
