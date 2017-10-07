@@ -8,7 +8,7 @@ import json
 #for website
 from .find_doctors_api import find_doctors_api
 from .show_profile_api import show_profile_api
-from .show_detail_api import show_detail_api
+from .show_doctor_detail_api import show_doctor_detail_api
 from .edit_profile_api import edit_profile_api
 from .register_api import register_api
 from .show_general_list_api import show_general_list_api
@@ -64,7 +64,7 @@ class API :
 		self.db = self.client.kkulsridb
 		self.find_doctors_api = find_doctors_api(self.db)
 		self.show_profile_api = show_profile_api(self.db)
-		self.show_detail_api = show_detail_api(self.db)
+		self.show_doctor_detail_api = show_doctor_detail_api(self.db)
 		self.edit_profile_api = edit_profile_api(self.db)
 		self.register_api = register_api(self.db)
 		self.show_general_list_api = show_general_list_api(self.db)
@@ -111,7 +111,7 @@ class API :
 	def show_doctor_detail(self, doctor_id=None) :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
-		return self.show_doctor_detail_api.show_detail(doctor_id)
+		return self.show_doctor_detail_api.show_doctor_detail(doctor_id)
 
 	def edit_profile(self, username=None, email=None, telphone_number=None, emergency_phone=None, submit=False) :
 		check, result = self.incomplete_input(locals())
