@@ -462,9 +462,7 @@ class get_collection_pattern_api :
 		]
 
 	def get_collection_pattern(self, collection_name) :
-		if collection_name == None :
-			return False, 'Incomplete input: collection_name'
-		elif collection_name == 'buildings' :
+		if collection_name == 'buildings' :
 			return True, self.get_buildings_pattern()
 		elif collection_name == 'departments' :
 			return True, self.get_departments_pattern()

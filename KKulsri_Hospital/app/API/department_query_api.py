@@ -51,8 +51,6 @@ class department_query_api :
 		return True, departments
 
 	def update_department_profile(self, department_id, department_name, department_description) :
-		if department_id == None or department_name == None or department_description == None:
-			return False, 'Incomplete input'
 		self.db.departments.update_one(
 			{
         		'department_id': department_id
@@ -68,8 +66,6 @@ class department_query_api :
 		return True, 'Successfully Updated'
 
 	def delete_department(self, department_id) :
-		if department_id == None :
-			return False, 'Incomplete input: department_id'
 		self.db.departments.delete_one(
 			{
 				'department_id' : department_id
@@ -98,8 +94,6 @@ class department_query_api :
 		return 0
 
 	def insert_department(self, department_name, department_description) :
-		if department_name == None or department_description == None:
-			return False, 'Incomplete input'
 		self.db.departments.insert(
 			{
 				'department_id' : get_new_department_id(),

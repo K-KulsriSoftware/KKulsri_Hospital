@@ -58,9 +58,6 @@ class orders_query_api :
 
 
 	def update_order(self, order_id, package_id, doctor_id, username, notice, cost, time) :
-		if order_id == None or package_id == None or doctor_id ==None or username == None or notice == None or cost == None or time == None:
-			return False, 'Incommplete Input'
-
 		self.db.orders.update_one(
     		{
         		'order_id': order_id
@@ -85,8 +82,6 @@ class orders_query_api :
 		return True, 'Successfully Updated'
 
 	def delete_order(self, order_id) :
-		if order_id == None :
-			return False, 'Incomplete input: order_id'
 		self.db.orders.delete_one(
             {
                 "order_id": order_id
@@ -96,9 +91,6 @@ class orders_query_api :
 
 
 	def create_order(self, order_id, package_id, doctor_id, username, notice, cost, time) :
-		if order_id == None or package_id == None or doctor_id ==None or username == None or notice == None or cost == None or time == None:
-			return False, 'Incommplete Input'
-
 		self.db.orders.insert(
 			{
                 'order_id' : order_id,

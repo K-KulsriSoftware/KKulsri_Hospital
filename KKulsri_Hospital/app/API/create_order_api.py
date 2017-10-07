@@ -38,8 +38,6 @@ class create_order_api :
 				return 'o000000'
 
 	def get_package_cost(self,package_id) :
-		if package_id == None :
-			return 'No input package ID specified'
 		cursor = self.db.packages.aggregate([
     		{
         		'$match' : 
@@ -74,8 +72,6 @@ class create_order_api :
 			}
     	)
 
-	def create_order(self,package_id, doctor_id, username, notice, time) :
-		if package_id == None or doctor_id == None or username == None or package_id == None or time == None :
-			return False,'Incomplete input: package_id, doctor_id, username, package_id, time'
+	def create_order(self, package_id, doctor_id, username, notice, time) :
 		self.insert_query(package_id, doctor_id, username, notice, time)
 		return True,'Successfully Added'

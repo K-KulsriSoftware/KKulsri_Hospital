@@ -51,8 +51,6 @@ class building_query_api :
 		return True, buildings
 
 	def update_building_profile(self, building_id, building_name) :
-		if building_id == None or building_name == None :
-			return False, 'Incomplete input'
 		self.db.buildings.update_one(
 			{
         		'building_id': building_id
@@ -67,8 +65,6 @@ class building_query_api :
 		return True, 'Successfully Updated'
 
 	def delete_building(self, building_id) :
-		if building_id == None :
-			return False, 'Incomplete input: building_id'
 		self.db.buildings.delete_one(
 			{
 				'building_id': building_id
@@ -97,8 +93,6 @@ class building_query_api :
 		return 0
 
 	def insert_building(self, building_name) :
-		if building_name == None :
-			return False, 'Incomplete input: building_name'
 		self.db.buildings.insert(
 			{
 				'building_id' : self.get_new_building_id(),
