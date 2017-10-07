@@ -159,3 +159,11 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 LOGIN_REDIRECT_URL = 'home'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = "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"
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'booktay'
+EMAIL_HOST_PASSWORD = 'p0W#1$TIZ9RSmQ9wq@ND'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
