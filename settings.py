@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'bootstrapform',
 
     'allauth',
-    # 'allauth.account',
+    'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable:
 
@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'KKulsri_Hospital.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+# DATABASES = {
 # 'default': {
 #         'NAME': 'member',
 #         'ENGINE': 'sqlserver_ado',
@@ -98,6 +99,7 @@ WSGI_APPLICATION = 'KKulsri_Hospital.wsgi.application'
 #         'USER': 'SA',
 #         'PASSWORD': 'IadU3Zdvrt&UV^c%$lIQ',
 #     }
+# }
 
 DATABASES = {
     'default': {
@@ -154,7 +156,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 LOGIN_REDIRECT_URL = 'home'
 

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, JsonResponse, HttpResponse
 from django.template import RequestContext
 from datetime import datetime
 from .API.API import API
@@ -18,10 +18,6 @@ import json
 import base64
 import app.forms
 
-api = API()
-
-from django.template.defaulttags import register
-
 from .forms import SignupForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -30,6 +26,11 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage, send_mail
+
+
+api = API()
+
+from django.template.defaulttags import register
 
 @register.filter
 def get_item(dictionary, key):
@@ -85,7 +86,7 @@ def doctor_detail(request):
         request.session['selected_date'] = json.loads(request.POST['date'])
         return redirect('/confirm/')
     assert isinstance(request, HttpRequest)
-    status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
+    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     if status:
         status, package = api.show_special_package_info(request.session['selected_package'])
         working_times = {}
@@ -93,7 +94,7 @@ def doctor_detail(request):
             if doctor['working_time'][day] != []:
                 working_times[day] = []
                 for time in doctor['working_time'][day]:
-                    for i in range(int(time['start']), int(time['finish'])):
+                    for i in range(time['start'], time['finish']):
                         working_times[day].append({'start': i, 'finish': i+1})
         print(working_times)
         return render(
@@ -168,7 +169,6 @@ def register(request):
             }
         )
 
-
 def signup(request):
     # if request.method == 'POST':
     #     form = app.forms.RegistrationForm(request.POST)
@@ -236,7 +236,6 @@ def signup(request):
 
     return render(request, 'app/signup.html', {'form': form})
 
-
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -256,10 +255,8 @@ def activate(request, uidb64, token):
 def account_activation_invalid(request):
     return render(request, 'app/account_activation_invalid.html')
 
-
 def account_activation_sent(request):
     return render(request, 'app/account_activation_sent.html')
-
 
 @login_required(login_url='/login')
 def member(request):
@@ -269,7 +266,7 @@ def member(request):
         request,
         'app/member.html',
         {
-            'title': 'ข้อมูลสมาชิก'
+            'title': 'แก้ไขข้อมูลสมาชิก'
         }
     )
 
@@ -331,7 +328,7 @@ def search_for_doctor(request):
     if 'selected_package' not in request.session:
         return redirect('/departments/')
     if request.method == 'POST':
-        request.session['selected_doctor'] = request.POST['doctor_id']
+        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
         return redirect('/doctor-detail/')
     print(request.session['selected_package'])
     assert isinstance(request, HttpRequest)
@@ -362,11 +359,10 @@ def doctor(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
-        request.session['selected_package'] = request.POST['package_id']
-        request.session['selected_doctor'] = request.POST['doctor_id']
+        request.session['selected_package'] = 'p00006'
+        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
         return redirect('/doctor-detail/')
     status, result = api.show_doctor_in_department()
-    print(result)
     return render(
         request,
         'app/doctor.html',
@@ -384,13 +380,13 @@ def confirm(request):
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
         return redirect('/doctor-detail/')
     if request.method == 'POST':
-        status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
+        status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
         status, result = api.create_order(request.session['selected_package'], doctor['username'], request.user.username, '-', request.session['selected_date'])
         if status:
             return redirect('/')
     # print(request.session['selected_date'])
     status, package = api.show_special_package_info(request.session['selected_package'])
-    status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
+    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     month = [
         'มกราคม' ,
         'กุมภาพันธ์' ,
