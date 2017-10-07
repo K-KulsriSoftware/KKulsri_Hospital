@@ -13,7 +13,7 @@ class show_departments_api :
         		{
             		'from' : 'departments',
             		'localField' : 'department_id',
-            		'foreignField' : 'department_id',
+            		'foreignField' : '_id',
             		'as' : 'department'
         		}
     		},
@@ -25,7 +25,7 @@ class show_departments_api :
             		{
                 		'$push' : 
                 		{
-                    		'package_id' : '$package_id',
+                    		'package_id' : '$_id',
                     		'package_name' : '$package_name'
                 		}
            			}
@@ -34,11 +34,17 @@ class show_departments_api :
     		{
         		'$project' : 
         		{
-            		'department_id' : '$_id.department_id',
+            		'department_id' : '$_id._id',
             		'department_name' : '$_id.department_name',
             		'package_list' : '$package_list'
         		}
-    		}
+    		},
+            {
+                '$unwind' : '$department_id'
+            },
+            {
+                '$unwind' : '$department_name'
+            }
 		])
 
 	def show_departments(self) :
