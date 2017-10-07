@@ -103,8 +103,6 @@ class find_doctors_api :
 		return True
 
 	def find_doctors(self, package_id, days, time, doctor_firstname, doctor_lastname, gender) :
-		if package_id == None :
-			return False, 'Incomplete input: package_id'
 		doctors = self.get_doctors_query(package_id)
 		result_doctors = []
 		for doctor in doctors :

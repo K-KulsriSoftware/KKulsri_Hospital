@@ -88,10 +88,11 @@ status, result = api.insert_patient("watermelon22", "นางสาว", "ส�
 
 #####
 
-status, result = api.get_all_packages()
+#status, result = api.get_all_packages()
 
 #test get_package_detail
-#status, result = api.get_package_detail('p00001')
+status, result = api.get_package_detail('p00001')
+status, result = api.get_package_detail()
 
 #test get_all_packages_name
 #status, result = api.get_all_packages_name()

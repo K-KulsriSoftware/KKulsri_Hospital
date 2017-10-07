@@ -56,10 +56,6 @@ class packages_query_api :
 
 
 	def update_package(self,package_id, package_name,  package_cost, department_id, description, conditions, package_notice, building_id) :
-
-		if package_id == None or package_name == None or package_cost == None or department_id == None or description == None or conditions == None or package_notice == None or building_id == None :
-			return False, 'Incommplete Input'
-
 		self.db.packages.update_one(
     		{
         		'package_id': package_id
@@ -81,8 +77,6 @@ class packages_query_api :
 		return True, 'Successfully Updated'
 
 	def delete_package(self, package_id) :
-		if package_id == None :
-			return False, 'Incomplete input: package_id'
 		self.db.packages.delete_one(
             {
                 "package_id": package_id
@@ -92,10 +86,6 @@ class packages_query_api :
 
 
 	def insert_package(self,package_id, package_name,  package_cost, department_id, description, conditions, package_notice, building_id) :
-
-		if package_id == None or package_name == None or package_cost == None or department_id == None or description == None or conditions == None or package_notice == None or building_id == None :
-			return False, 'Incommplete Input'
-
 		self.db.packages.insert(
 			{
                 'package_id': package_id ,

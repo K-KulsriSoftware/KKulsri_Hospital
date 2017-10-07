@@ -78,9 +78,21 @@ class API :
 		self.orders_query_api = orders_query_api(self.db)
 		self.get_collection_pattern_api = get_collection_pattern_api(self.db)
 
+	def incomplete_input(self, inputs) :
+		check = False
+		result = 'Incomplete input : '
+		for input in inputs :
+			if inputs[input] == None :
+				check = True
+				result += input + ', '
+		if check :
+			return check, result
+		return check, 'Complete input'
 
 	# input : package_id(str), day(list of str), time('ช่วงเช้า'  or 'ช่วงบ่าย'), doctor_firstname(str), doctor_lastname(str), gender('ชาย' or 'หญิง')
 	def find_doctors(self, package_id=None, days=None, time=None, doctor_firstname=None, doctor_lastname=None, gender=None) :
+		if package_id == None :
+			return False, 'Incomplete input: package_id'
 		return self.find_doctors_api.find_doctors(package_id,days,time,doctor_firstname,doctor_lastname,gender)
 
 	# input : package_id(str), user_id(str)
@@ -289,31 +301,31 @@ class API :
 			   blood_group_rh, race, nationallity, Religion, Status, patient_address, occupy, telphone_number,
 			   father_name, mother_name, emergency_name, emergency_phone, emergency_address, email, congenital_disease)
 
-#############
-	# input : -
 	def get_all_packages(self) :
 		return self.packages_query_api.get_all_packages()
 
-	# input : package_id(str)
-	def get_package_detail(self,package_id = None) :
+	def get_package_detail(self,package_id=None) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
 		return self.packages_query_api.get_package_detail(package_id)
 
-	# input : -
 	def get_all_packages_name(self) :
 		return self.packages_query_api.get_all_packages_name()
 
-	#input package_id(str), package_name(str), patient_name(str), package_cost(Double), department_id(Int), description(str), conditions(list), package_notice(str), building_id(double)
-	def update_package(self, package_id = None, package_name= None,  package_cost= None, department_id= None, description= None, conditions= None, package_notice= None, building_id= None) :
+	def update_package(self, package_id=None, package_name=None, package_cost=None, department_id=None, description=None, conditions=None, package_notice=None, building_id=None) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
 		return self.packages_query_api.update_package(package_id, package_name, package_cost, department_id, description, conditions, package_notice, building_id)
 
-	# input : package_id(str)
 	def delete_package(self, package_id = None) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
 		return self.packages_query_api.delete_package(package_id)
 
-	#input package_id(str), package_name(str), patient_name(str), package_cost(Double), department_id(Int), description(str), conditions(list), package_notice(str), building_id(double)
 	def insert_package(self,package_id = None, package_name = None,  package_cost = None, department_id = None, description = None, conditions = None, package_notice = None, building_id = None) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
 		return self.packages_query_api.insert_package(package_id, package_name,  package_cost, department_id, description, conditions, package_notice, building_id)
-
 
 #############
 	#input -
