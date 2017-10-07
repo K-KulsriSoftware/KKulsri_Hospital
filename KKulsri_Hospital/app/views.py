@@ -210,7 +210,7 @@ def member(request):
         request,
         'app/member.html',
         {
-            'title': 'แก้ไขข้อมูลสมาชิก'
+            'title': 'ข้อมูลสมาชิก'
         }
     )
 
