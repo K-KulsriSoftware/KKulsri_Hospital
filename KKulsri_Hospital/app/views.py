@@ -76,7 +76,7 @@ def doctor_detail(request):
         request.session['selected_date'] = json.loads(request.POST['date'])
         return redirect('/confirm/')
     assert isinstance(request, HttpRequest)
-    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+    status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
     if status:
         status, package = api.show_special_package_info(request.session['selected_package'])
         working_times = {}
@@ -84,7 +84,7 @@ def doctor_detail(request):
             if doctor['working_time'][day] != []:
                 working_times[day] = []
                 for time in doctor['working_time'][day]:
-                    for i in range(time['start'], time['finish']):
+                    for i in range(int(time['start']), int(time['finish'])):
                         working_times[day].append({'start': i, 'finish': i+1})
         print(working_times)
         return render(
@@ -303,10 +303,11 @@ def doctor(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
-        request.session['selected_package'] = 'p00006'
-        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
+        request.session['selected_package'] = request.POST['package_id']
+        request.session['selected_doctor'] = request.POST['doctor_id']
         return redirect('/doctor-detail/')
     status, result = api.show_doctor_in_department()
+    print(result)
     return render(
         request,
         'app/doctor.html',
@@ -324,13 +325,13 @@ def confirm(request):
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
         return redirect('/doctor-detail/')
     if request.method == 'POST':
-        status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+        status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
         status, result = api.create_order(request.session['selected_package'], doctor['username'], request.user.username, '-', request.session['selected_date'])
         if status:
             return redirect('/')
     # print(request.session['selected_date'])
     status, package = api.show_special_package_info(request.session['selected_package'])
-    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+    status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
     month = [
         'มกราคม' ,
         'กุมภาพันธ์' ,

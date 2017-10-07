@@ -35,8 +35,8 @@
                         <div class="col-md-12 doc_info" id="button">
                             <form action="." method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" name="doctor_name" value="{{ doctor.doctor_name }}">
-                                <input type="hidden" name="doctor_surname" value="{{ doctor.doctor_name_surname }}">
+                                <input type="hidden" name="doctor_id" value="{{ doctor.doctor_id }}">
+                                <input type="hidden" name="package_id" value="{{ department.package_id }}">
                                 <button class="btn btn-default my-btn" type="submit" id="de_doc">ดูรายละเอียดเพิ่มเติม</button>
                             </form>
                         </div>
