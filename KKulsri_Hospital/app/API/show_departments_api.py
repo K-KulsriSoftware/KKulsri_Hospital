@@ -44,6 +44,15 @@ class show_departments_api :
             },
             {
                 '$unwind' : '$department_name'
+            },
+            {
+                '$match' :
+                {
+                    'department_name' :
+                    {
+                        '$ne' : 'ศูนย์อายุรกรรม'
+                    }
+                }
             }
 		])
 

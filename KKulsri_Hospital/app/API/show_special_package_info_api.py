@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+from pymongo.objectid import ObjectId
 class show_special_package_info_api :
 
 	def __init__(self, db) :
@@ -20,7 +20,7 @@ class show_special_package_info_api :
     		{
         		'$match' : 
         		{
-            		'_id' : package_id
+            		'_id' : ObjectId(package_id)
             	}
     		},
     		{
