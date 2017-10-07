@@ -15,6 +15,7 @@ class show_doctor_in_department_api :
 					{
 						'$push' :
 						{
+							'doctor_id' : '$_id',
 							'doctor_name_title' : '$doctor_name_title',
 							'doctor_name' : '$doctor_name',
 							'doctor_name_surname' : '$doctor_surname',
@@ -28,7 +29,7 @@ class show_doctor_in_department_api :
 				{
 					'from' : 'departments',
 		            'localField' : '_id',
-		            'foreignField' : 'department_id',
+		            'foreignField' : '_id',
 		            'as' : 'department'
 				}
 			},
