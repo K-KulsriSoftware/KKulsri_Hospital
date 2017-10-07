@@ -13,7 +13,7 @@ class show_general_list_api :
         		{
         		    'from' : 'departments',
         		    'localField' : 'department_id',
-        	   		'foreignField' : 'department_id',
+        	   		'foreignField' : '_id',
             		'as' : 'department'
                 }
     		},

@@ -13,14 +13,14 @@ class show_special_package_info_api :
         		{
                 	'from' : 'buildings',
                 	'localField' : 'building_id',
-                	'foreignField' : 'building_id',
+                	'foreignField' : '_id',
                 	'as' : 'building'
             	}
     		},
     		{
         		'$match' : 
         		{
-            		'package_id' : package_id
+            		'_id' : package_id
             	}
     		},
     		{
@@ -43,6 +43,5 @@ class show_special_package_info_api :
 	def show_special_package_info(self, package_id) :
 		packages = self.get_packages_query(package_id)
 		for package in packages :
-			package.pop('_id',None)
 			return True, package
 		return False, 'No package'
