@@ -20,7 +20,7 @@ class show_general_list_api :
     		{
         		'$match' : 
         		{
-            		'department.department_name' : 'อายุรกรรม'
+            		'department.department_name' : 'ศูนย์อายุรกรรม'
             	}
     		},
     		{
