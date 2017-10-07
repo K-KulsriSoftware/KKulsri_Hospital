@@ -35,7 +35,6 @@ status, result = api.update_doctor_profile('d001', 'นายแพทย์', '
 							 			   'แพทย์เชี่ยวชาญทางด้านดวงตาง', ['aaa', 'bbb'], ['กขค'], ['ไทย', 'เกาหลี'],
 							  			   {"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]},
 							               [])
-
 '''
 
 #test delete_doctor

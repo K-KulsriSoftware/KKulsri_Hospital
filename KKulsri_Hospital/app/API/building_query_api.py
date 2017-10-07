@@ -3,10 +3,10 @@
 from pprint import pprint
 class building_query_api :
 
-	def __init__(self, db) :##
+	def __init__(self, db) :
 		self.db = db
 
-	def get_all_buildings(self) :##
+	def get_all_buildings(self) :
 		cursor = self.db.buildings.aggregate([
 			{
             	'$match' : {}
@@ -14,21 +14,19 @@ class building_query_api :
 		])
 		buildings = []
 		for building in cursor :
-			building.pop('_id', None)
 			buildings.append(building)
 		return True, buildings
 
-	def get_building_detail(self,building_id) :##
+	def get_building_detail(self,building_id) :
 		cursor = self.db.buildings.aggregate([
 			{
             	'$match' : 
             		{
-            			'building_id' : building_id
+            			'_id' : building_id
             		}
         	}
 		])
 		for building in cursor :
-			building.pop('_id', None)
 			return True, building
 		return False, "No match profile"
 
@@ -39,21 +37,20 @@ class building_query_api :
         	},
         	{
         		'$project' : {
-        			'building_id' : '$building_id',
+        			'building_id' : '$_id',
         			'building_name' : '$building_name',
         		}
         	}
 		])
 		buildings = []
 		for building in cursor :
-			building.pop('_id', None)
 			buildings.append(building)
 		return True, buildings
 
 	def update_building_profile(self, building_id, building_name) :
 		self.db.buildings.update_one(
 			{
-        		'building_id': building_id
+        		'_id': building_id
     		},
     		{
         		'$set': 
@@ -67,35 +64,14 @@ class building_query_api :
 	def delete_building(self, building_id) :
 		self.db.buildings.delete_one(
 			{
-				'building_id': building_id
+				'_id': building_id
 			}
 		)
 		return True, 'Successfully Removed'
 
-	def get_new_building_id(self) :
-		cursor = self.db.buildings.aggregate([
-			{
-				'$match' : {}
-			},
-			{
-				'$sort' :
-				{
-					'building_id' : -1
-				}
-			},
-			{
-				'$limit' : 1
-			}
-		])
-		for i in cursor :
-			i = i[building_id]
-			return i+1
-		return 0
-
 	def insert_building(self, building_name) :
 		self.db.buildings.insert(
 			{
-				'building_id' : self.get_new_building_id(),
 				'building_name' : building_name
 			}
 		)
