@@ -221,7 +221,6 @@ def departments(request):
         del request.session['selected_package']
     assert isinstance(request, HttpRequest)
     status, result = api.show_departments()
-    print(result)
     return render(
         request,
         'app/departments.html',
