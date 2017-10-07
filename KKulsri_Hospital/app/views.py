@@ -168,10 +168,15 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            status, result = api.register(form.cleaned_data.get('username'), '', form.cleaned_data.get('first_name'), form.cleaned_data.get('last_name'), '',
+				 '', True, [], 2017, 10, 2,
+				 0, 0, '', '', '', 0,
+				 '', '', '', '', '', '',
+				 '', '', '', [], submit=True)
             return redirect('home')
     else:
         form = app.forms.RegistrationForm()
-    return render(request, 'app/signup.html', {'form': form})
+    return render(request, 'app/signup.html', {'form': form, 'title': 'สมัครสมาชิก'})
 
     # if request.method == 'POST':
     #     form = UserCreationForm(request.POST)
@@ -279,7 +284,6 @@ def search_for_doctor(request):
         }
     )
 
-@staff_member_required(login_url='/login')
 def doctor_search_api(request):
     package_id = request.session['selected_package']
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
@@ -320,7 +324,11 @@ def confirm(request):
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
         return redirect('/doctor-detail/')
     if request.method == 'POST':
-        return redirect('/')
+        status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+        status, result = api.create_order(request.session['selected_package'], doctor['username'], request.user.username, '-', request.session['selected_date'])
+        if status:
+            return redirect('/')
+    # print(request.session['selected_date'])
     status, package = api.show_special_package_info(request.session['selected_package'])
     status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
     month = [

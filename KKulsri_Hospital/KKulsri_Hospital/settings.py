@@ -26,7 +26,7 @@ SECRET_KEY = '1602601c-0fde-412e-948e-7c449693fa0c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['kkulsri.cloudapp.net']
 
 
 # Application definition

@@ -11,7 +11,7 @@ $('li#auto').click(function(){
       $(data.result).each(function() {
         $('#auto-result').append(`<div class="result-block">
           <div class="div-img-circle"><img src="` + this.doctor_img + `" class="img-cir"/></div>
-          <div class="div-name"><span class="span-detail">` + this.doctor_name_title + this.doctor_name + ' ' + this.doctor_surname + `</span></div>
+          <div class="div-name"><span class="span-detail" title="`+ this.doctor_name_title + this.doctor_name + ' ' + this.doctor_surname +`">` + this.doctor_name_title + this.doctor_name + ' ' + this.doctor_surname + `</span></div>
           <span class="span-detail">` + this.department_name + `</span><br><form action="." method="POST">
           <input type="hidden" name="csrfmiddlewaretoken" value="` + CSRFtoken + `">
           <input type="hidden" name="doctor_name" value="` + this.doctor_name + `"><input type="hidden" name="doctor_surname" value="` + this.doctor_surname + `">
@@ -33,6 +33,11 @@ $('li#manual').click(function(){
 });
 
 $('.btn-summit').click(function() {
+  if($('.input-days input[type="checkbox"]:checked').length === 0 || $('.input-time input[type="checkbox"]:checked').length === 0
+    || $('.input-gender input[type="checkbox"]:checked').length === 0) {
+    alert('กรุณาทำเครื่องหมายในเงื่อนไขการค้นหาทุกส่วน (ยกเว้นชื่อและนามสกุลของแพทย์)');
+    return;
+  }
   $('#result').empty();
   var data = {};
   data.days = '';
@@ -83,7 +88,7 @@ $('.btn-summit').click(function() {
       $(data.result).each(function() {
         $('#result').append(`<div class="result-block">
           <div class="div-img-circle"><img src="` + this.doctor_img + `" class="img-cir"/></div>
-          <div class="div-name"><span class="span-detail">` + this.doctor_name_title + this.doctor_name + ' ' + this.doctor_surname + `</span></div>
+          <div class="div-name"><span class="span-detail" title="`+ this.doctor_name_title + this.doctor_name + ' ' + this.doctor_surname +`">` + this.doctor_name_title + this.doctor_name + ' ' + this.doctor_surname + `</span></div>
           <span class="span-detail">` + this.department_name + `</span><br><form action="." method="POST">
           <input type="hidden" name="csrfmiddlewaretoken" value="` + CSRFtoken + `">
           <input type="hidden" name="doctor_name" value="` + this.doctor_name + `"><input type="hidden" name="doctor_surname" value="` + this.doctor_surname + `">

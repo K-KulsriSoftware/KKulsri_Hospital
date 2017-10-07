@@ -60,7 +60,7 @@ class create_order_api :
 	def insert_query(self, package_id, doctor_id, username, notice, time) :
 		self.db.orders.insert(
 			{
-    			"order_id" : self.generate_new_order_id(),
+    			"order_id" : self.get_new_order_id(),
     			"package_id" : package_id,
     			"doctor_id" : doctor_id,
     			"user_id" : username,
