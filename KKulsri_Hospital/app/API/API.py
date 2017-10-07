@@ -4,6 +4,7 @@ import urllib.parse
 from pymongo import MongoClient
 import json
 
+
 #for website
 from .find_doctors_api import find_doctors_api
 from .show_profile_api import show_profile_api
@@ -25,31 +26,36 @@ from .packages_query_api import packages_query_api###Jakapong Mo
 from .orders_query_api import orders_query_api###Jakapong Mo
 from .get_collection_pattern_api import get_collection_pattern_api
 
+'''
 #for test api
-# from find_doctors_api import find_doctors_api
-# from show_profile_api import show_profile_api
-# from show_detail_api import show_detail_api
-# from edit_profile_api import edit_profile_api
-# from register_api import register_api
-# from show_general_list_api import show_general_list_api
-# from show_departments_api import show_departments_api
-# from show_special_package_info_api import show_special_package_info_api
-# from create_order_api import create_order_api
-# from show_confirmation_info_api import show_confirmation_info_api
-# from doctor_query_api import doctor_query_api
-# from department_query_api import department_query_api
-# from user_query_api import user_query_api
-# from building_query_api import building_query_api
-# from show_doctor_in_department_api import show_doctor_in_department_api
-# from patients_query_api import patients_query_api
-# from packages_query_api import packages_query_api
-# from orders_query_api import orders_query_api
-# from get_collection_pattern_api import get_collection_pattern_api
+from find_doctors_api import find_doctors_api
+from show_profile_api import show_profile_api
+from show_doctor_detail_api import show_doctor_detail_api
+from edit_profile_api import edit_profile_api
+from register_api import register_api
+from show_general_list_api import show_general_list_api
+from show_departments_api import show_departments_api
+from show_special_package_info_api import show_special_package_info_api
+from create_order_api import create_order_api
+from show_confirmation_info_api import show_confirmation_info_api
+from doctor_query_api import doctor_query_api
+from department_query_api import department_query_api
+from user_query_api import user_query_api
+from building_query_api import building_query_api
+from show_doctor_in_department_api import show_doctor_in_department_api
+from patients_query_api import patients_query_api
+from packages_query_api import packages_query_api
+from orders_query_api import orders_query_api
+from get_collection_pattern_api import get_collection_pattern_api
+'''
 
 class API :
 
 	def __init__(self) :
-		with open('./app/API/config.json','r') as json_file :
+		#for test api
+		#with open('./config.json', 'r') as json_file :
+		#for website
+		with open('./app/API/config.json', 'r') as json_file :
 			data = json.load(json_file)
 			username = urllib.parse.quote_plus(data['username'])
 			password = urllib.parse.quote_plus(data['password'])
@@ -102,10 +108,10 @@ class API :
 		if check : return True, result
 		return self.show_profile_api.show_profile(username)
 
-	def show_detail(self, doctor_id=None) :
+	def show_doctor_detail(self, doctor_id=None) :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
-		return self.show_detail_api.show_detail(doctor_id)
+		return self.show_doctor_detail_api.show_detail(doctor_id)
 
 	def edit_profile(self, username=None, email=None, telphone_number=None, emergency_phone=None, submit=False) :
 		check, result = self.incomplete_input(locals())
