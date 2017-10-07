@@ -34,9 +34,6 @@ class show_detail_api :
 		])
 	
 	def show_detail(self, doctor_name, doctor_surname) :
-		if doctor_name == None or doctor_surname == None :
-			return False, 'Incomplete input: doctor_name, doctor_surname'
-
 		doctors = self.get_doctor_query(doctor_name,doctor_surname)
 		for doctor in doctors :
 			doctor.pop('_id',None)

@@ -22,8 +22,6 @@ class edit_profile_api :
 		)
 		
 	def edit_profile(self, username, email, telphone_number, emergency_phone, submit) :
-		if username == None or email == None or telphone_number == None or emergency_phone == None :
-			return False, 'Incomplete input: email, telphone_number, emergency_phone'
 		if submit :
 			self.update_query(username, email, telphone_number, emergency_phone)
 			return True,'Successfully Updated'

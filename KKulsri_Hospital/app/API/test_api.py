@@ -13,6 +13,7 @@ api = API()
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
 #status, result = api.find_doctors(days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
+#status, result = api.find_doctors(package_id='p00001',days=[],time='',gender='')
 
 #test auto_find_doctors
 #status, result = api.auto_find_doctors(package_id='p00001')
@@ -34,7 +35,6 @@ status, result = api.update_doctor_profile('d001', 'นายแพทย์', '
 							 			   'แพทย์เชี่ยวชาญทางด้านดวงตาง', ['aaa', 'bbb'], ['กขค'], ['ไทย', 'เกาหลี'],
 							  			   {"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]},
 							               [])
-
 '''
 
 #test delete_doctor
@@ -90,7 +90,8 @@ status, result = api.insert_patient("watermelon22", "นางสาว", "ส�
 #status, result = api.get_all_packages()
 
 #test get_package_detail
-#status, result = api.get_package_detail('p00001')
+status, result = api.get_package_detail('p00001')
+status, result = api.get_package_detail()
 
 #test get_all_packages_name
 #status, result = api.get_all_packages_name()

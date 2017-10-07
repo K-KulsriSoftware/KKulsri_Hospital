@@ -41,9 +41,6 @@ class show_special_package_info_api :
 		])
 
 	def show_special_package_info(self, package_id) :
-		if package_id == None :
-			return False,'Incomplete input: package_id'
-
 		packages = self.get_packages_query(package_id)
 		for package in packages :
 			package.pop('_id',None)
