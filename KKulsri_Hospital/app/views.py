@@ -283,6 +283,22 @@ def member(request):
 
 def edit_member_info(request):
     assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        email = request.POST['email']
+        status = request.POST['status']
+        telephone_number = request.POST['telephone_number']
+        emergency_phone = request.POST['emergency_phone']
+        status, member_detail = api.get_patients_detail(request.user.username)
+        
+        # เอาค่า email, status ..... เอาไปใส่ใน field ของ dict member_detail แล้วเอา member_detail แต่ละ field ไปแทนใน paramenter ใน function ข้างล่าง
+
+        query_status, result = api.update_patient_profile(username, patient_name_title, patient_name, 
+		                       patient_surname, patient_img, id_card_number, gender,
+                 		       order_ids, birthday_year, birthday_month, birthday_day, 
+                 		       blood_group_abo, blood_group_rh, race, nationallity,
+				 		       religion, status, patient_address, occupy, telphone_number, 
+				 		       father_name, mother_name, emergency_name,
+				 		       emergency_phone, emergency_address, email, congenital_disease)
     blood_abo = ['-', 'A', 'B', 'O', 'AB']
     blood_rh = ['', 'RH ลบ', 'RH บวก']
     status, member_detail = api.get_patients_detail(request.user.username)
