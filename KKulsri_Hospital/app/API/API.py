@@ -26,6 +26,7 @@ from .orders_query_api import orders_query_api###Jakapong Mo
 from .get_collection_pattern_api import get_collection_pattern_api
 from .get_patient_orders_api import get_patient_orders_api
 from .get_doctor_orders_api import get_doctor_orders_api
+from .add_account_api import add_account_api
 '''
 #for test api
 from find_doctors_api import find_doctors_api
@@ -49,6 +50,7 @@ from orders_query_api import orders_query_api
 from get_collection_pattern_api import get_collection_pattern_api
 from get_patient_orders_api import get_patient_orders_api
 from get_doctor_orders_api import get_doctor_orders_api
+from add_account_api import add_account_api
 '''
 class API :
 
@@ -84,6 +86,7 @@ class API :
 		self.get_collection_pattern_api = get_collection_pattern_api(self.db)
 		self.get_patient_orders_api = get_patient_orders_api(self.db)
 		self.get_doctor_orders_api = get_doctor_orders_api(self.db)
+		self.add_account_api = add_account_api(self.db)
 
 	def incomplete_input(self, inputs) :
 		check = False
@@ -395,3 +398,8 @@ class API :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
 		return self.get_doctor_orders_api.get_doctor_orders(doctor_username)
+
+	def add_account(self, username, password) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
+		return self.add_account_api.add_account(username, password)
