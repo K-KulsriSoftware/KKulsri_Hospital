@@ -12,7 +12,7 @@ class add_account_api :
 			{
 				'$match' :
 				{
-					'$username' : username
+					'username' : username
 				}
 			}
 		])
