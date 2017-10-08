@@ -274,7 +274,6 @@ def member(request):
     assert isinstance(request, HttpRequest)
     blood_abo = ['-', 'A', 'B', 'O', 'AB']
     blood_rh = ['', 'RH ลบ', 'RH บวก']
-    print(request.session['user']['username'])
     status, member_detail = api.get_patients_detail(request.session['user']['username'])
     member_detail['blood_group_abo'] = blood_abo[member_detail['blood_group_abo']]
     member_detail['blood_group_rh'] = blood_rh[member_detail['blood_group_rh']]
@@ -332,7 +331,6 @@ def departments(request):
         del request.session['selected_package']
     assert isinstance(request, HttpRequest)
     status, result = api.show_departments()
-    print(request.session['user'])
     return render(
         request,
         'app/departments.html',
