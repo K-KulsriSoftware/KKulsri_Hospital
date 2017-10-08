@@ -35,6 +35,9 @@ from django.core.mail import EmailMessage, send_mail
 def get_item(dictionary, key):
     return dictionary.get(key)
 
+def check_logged_in(request):
+    return 'user' in request.session and request.session['user']['is_authenticated']
+
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -49,8 +52,9 @@ def home(request):
     return redirect('/departments')
 
 
-@login_required(login_url='/login/')
 def contact(request):
+    if not check_logged_in(request):
+        return redirect('/login/?next=/contact/')
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
     return render(
@@ -60,6 +64,7 @@ def contact(request):
             'title':'Contact',
             'message':'Your contact page.',
             'year':datetime.now().year,
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -73,6 +78,7 @@ def about(request):
             'title':'About',
             'message':'Your application description page.',
             'year':datetime.now().year,
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -103,7 +109,8 @@ def doctor_detail(request):
                 'title': 'ข้อมูลแพทย์',
                 'doctor': doctor,
                 'selected_package': package,
-                'working_time': working_times
+                'working_time': working_times,
+                'logged_user': request.session.get('user')
             }
         )
     else:
@@ -260,23 +267,26 @@ def account_activation_sent(request):
     return render(request, 'app/account_activation_sent.html')
 
 
-@login_required(login_url='/login')
 def member(request):
     """Renders the about page."""
+    if not check_logged_in(request):
+        return redirect('/login/?next=/member/')
     assert isinstance(request, HttpRequest)
     blood_abo = ['-', 'A', 'B', 'O', 'AB']
     blood_rh = ['', 'RH ลบ', 'RH บวก']
-    status, member_detail = api.get_patients_detail(request.user.username)
+    print(request.session['user']['username'])
+    status, member_detail = api.get_patients_detail(request.session['user']['username'])
     member_detail['blood_group_abo'] = blood_abo[member_detail['blood_group_abo']]
     member_detail['blood_group_rh'] = blood_rh[member_detail['blood_group_rh']]
-    status, orders = api.get_patient_orders(request.user.username)
+    status, orders = api.get_patient_orders(request.session['user']['username'])
     return render(
         request,
         'app/member.html',
         {
             'title': 'ข้อมูลสมาชิก',
             'member_detail': member_detail,
-            'orders': orders
+            'orders': orders,
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -287,7 +297,7 @@ def edit_member_info(request):
         status = request.POST['status']
         telephone_number = request.POST['telephone_number']
         emergency_phone = request.POST['emergency_phone']
-        query_status, member_detail = api.get_patients_detail(request.user.username)
+        query_status, member_detail = api.get_patients_detail(request.session['user']['username'])
         
         # เอาค่า email, status ..... เอาไปใส่ใน field ของ dict member_detail แล้วเอา member_detail แต่ละ field ไปแทนใน paramenter ใน function ข้างล่าง
         member_detail['email'] = email
@@ -303,7 +313,7 @@ def edit_member_info(request):
 				 		       member_detail['emergency_phone'], member_detail['emergency_address'], member_detail['email'], member_detail['congenital_disease'])
     blood_abo = ['-', 'A', 'B', 'O', 'AB']
     blood_rh = ['', 'RH ลบ', 'RH บวก']
-    status, member_detail = api.get_patients_detail(request.user.username)
+    status, member_detail = api.get_patients_detail(request.session['user']['username'])
     member_detail['blood_group_abo'] = blood_abo[member_detail['blood_group_abo']]
     member_detail['blood_group_rh'] = blood_rh[member_detail['blood_group_rh']]
     return render(
@@ -312,6 +322,7 @@ def edit_member_info(request):
         {
             'title': 'แก้ไขข้อมูลสมาชิก',
             'member_detail': member_detail,
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -326,7 +337,8 @@ def departments(request):
         'app/departments.html',
         {
             'title': 'แผนกและแพ็คเกจ',
-            'departments': result
+            'departments': result,
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -343,7 +355,8 @@ def regular_packages(request):
         'app/regular-package.html',
         {
             'title': 'ตรวจสุขภาพทั่วไป',
-            'packages': result
+            'packages': result,
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -362,7 +375,8 @@ def special_packages(request, package_id):
         {
             'title': 'รายละเอียดแพ็คเกจ',
             'package': result,
-            'package_id': package_id
+            'package_id': package_id,
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -380,7 +394,8 @@ def search_for_doctor(request):
         request,
         'app/doctor-search.html',
         {
-            'title': 'ค้นหาแพทย์'
+            'title': 'ค้นหาแพทย์',
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -413,19 +428,21 @@ def doctor(request):
         'app/doctor.html',
         {
             'title': 'แผนกและแพทย์',
-            'departments': result
+            'departments': result,
+            'logged_user': request.session.get('user')
         }
     )
 
 
-@login_required(login_url='/login')
 def confirm(request):
+    if not check_logged_in(request):
+        return redirect('/login/?next=/confirm/')
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
         return redirect('/doctor-detail/')
     if request.method == 'POST':
-        status, result = api.create_order(request.session['selected_package'], request.session['selected_doctor'], request.user.username, '-', request.session['selected_date'])
+        status, result = api.create_order(request.session['selected_package'], request.session['selected_doctor'], request.session['user']['username'], '-', request.session['selected_date'])
         if status:
             return redirect('/')
     # print(request.session['selected_date'])
@@ -456,19 +473,23 @@ def confirm(request):
             'selected_month': month[request.session['selected_date']['month'] - 1],
             'selected_year': request.session['selected_date']['year'],
             'selected_start_hr': request.session['selected_date']['start_hr'],
-            'selected_finish_hr': request.session['selected_date']['finish_hr']
+            'selected_finish_hr': request.session['selected_date']['finish_hr'],
+            'logged_user': request.session.get('user')
         }
     )
 
 @login_required(login_url='/login')
 def payment(request):
     """Renders the about page."""
+    if not check_logged_in(request):
+        return redirect('/login/?next=/payment/')
     assert isinstance(request, HttpRequest)
     return render(
         request,
         'app/payment.html',
         {
-            'title': 'ชำระค่าบริการ'
+            'title': 'ชำระค่าบริการ',
+            'logged_user': request.session.get('user')
         }
     )
 @staff_member_required(login_url='/login')
@@ -484,7 +505,8 @@ def admin_mongo(request):
             'header_title': 'mongoDB Admin',
             'collections': result,
             'DATABASE': True,
-            'logo_link': '/admin-mongo'
+            'logo_link': '/admin-mongo',
+            'logged_user': request.session.get('user')
         }
     )
 
@@ -511,26 +533,39 @@ def admin_mongo_collection(request, collection_name):
             'data': result,
             'COLLECTION': True,
             'toolbar': True,
-            'logo_link': '/admin-mongo'
+            'logo_link': '/admin-mongo',
+            'logged_user': request.session.get('user')
         }
     )
 
 def login(request):
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
-        pass
+        status, username = api.verify_password(request.POST['username'], request.POST['password'])
+        if status:
+            request.session['user'] = {'username': request.POST['username'], 'is_authenticated': True}
+            if 'next' in request.GET:
+                return redirect(request.GET['next'])
+            else:
+                return redirect('/')
+        else:
+            return render(
+                request,
+                'app/login.html',
+                {
+                    'title': 'Log in',
+                    'error': True
+                }
+            )
     return render(
         request,
         'app/login.html',
         {
             'title': 'Log in',
-            # 'error': True
         }
     )
 
 def logout(request):
     assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/login.html',
-    )
+    request.session['user']['is_authenticated'] = False
+    return redirect('/')
