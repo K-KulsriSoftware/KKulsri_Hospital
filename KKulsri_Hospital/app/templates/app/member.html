@@ -47,12 +47,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Cell 1</td>
-                            <td>Cell 2</td>
-                            <td>Cell 2</td>
-                            <td>Cell 2</td>
-                        </tr>
+                        {% if orders %}
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.package_name }}</td>
+                                    <td>{{ order.doctor_name_title }}{{ order.doctor_name }} {{ order.doctor_surname }}</td>
+                                    <td>{{ order.bought_time|date:"d/m/Y, H:i" }}</td>
+                                    <td>{{ order.start_time|date:"d/m/Y, H:i" }} - {{ order.finish_time|date:"H:i" }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

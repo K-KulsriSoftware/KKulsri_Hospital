@@ -265,11 +265,13 @@ def account_activation_sent(request):
 def member(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    status, orders = api.get_patient_orders(request.user.username)
     return render(
         request,
         'app/member.html',
         {
-            'title': 'ข้อมูลสมาชิก'
+            'title': 'ข้อมูลสมาชิก',
+            'orders': orders
         }
     )
 
