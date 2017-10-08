@@ -57,8 +57,8 @@ class patients_query_api :
 
 
 	def update_patient_profile(self, username, patient_name_title, patient_name, patient_surname, patient_img, id_card_number, gender,
-				                order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
-				                Religion, Status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+				                birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
+				                religion, status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
 				                emergency_phone, emergency_address, email, congenital_disease) :
 		self.db.patients.update_one(
     		{
@@ -73,14 +73,13 @@ class patients_query_api :
         			'patient_img' : patient_img,
         			'id_card_number' : id_card_number,
         			'gender' : gender,
-    				'order_ids' : order_ids,
     				'birthday' : datetime(birthday_year, birthday_month, birthday_day),
     				'blood_group_abo' : blood_group_abo,
     				'blood_group_rh' : blood_group_rh,
     				'race' : race,
     				'nationallity' : nationallity,
-    				'Religion' : Religion,
-    				'Status' : Status,
+    				'religion' : religion,
+    				'status' : status,
     				'patient_address' : patient_address,
     				'occupy' : occupy,
     				'telphone_number' : telphone_number,
@@ -105,8 +104,8 @@ class patients_query_api :
 		return True, 'Successfully Removed'
 
 	def insert_patient(self, username, patient_name_title, patient_name, patient_surname, patient_img, id_card_number, gender,
-                 order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
-				 Religion, Status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+                 birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
+				 religion, status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
 				 emergency_phone, emergency_address, email, congenital_disease) :
 		self.db.patients.insert(
 			{
@@ -117,14 +116,13 @@ class patients_query_api :
     			'patient_img' : patient_img,
     			'id_card_number' : id_card_number,
     			'gender' : gender,
-				'order_ids' : order_ids,
 				'birthday' : datetime(birthday_year, birthday_month, birthday_day),
 				'blood_group_abo' : blood_group_abo,
 				'blood_group_rh' : blood_group_rh,
 				'race' : race,
 				'nationallity' : nationallity,
-				'Religion' : Religion,
-				'Status' : Status,
+				'religion' : religion,
+				'status' : status,
 				'patient_address' : patient_address,
 				'occupy' : occupy,
 				'telphone_number' : telphone_number,
