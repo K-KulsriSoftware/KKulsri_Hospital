@@ -121,7 +121,6 @@ def register(request):
         patient_img = request.POST['patient_img']
         id_card_number = request.POST['id_card_number']
         gender = request.POST['gender']
-        order_ids = request.POST['order_ids']
         birthday_year = request.POST['birthday_year']
         birthday_month = request.POST['birthday_month']
         birthday_day = request.POST['birthday_day']
@@ -145,7 +144,7 @@ def register(request):
         # เติมให้ครบ
 
         status, result = api.register(username, patient_name_title, patient_name, patient_surname, patient_img,
-                                      id_card_number, gender, order_ids, birthday_year, birthday_month, birthday_day,
+                                      id_card_number, gender, birthday_year, birthday_month, birthday_day,
                                       blood_group_abo, blood_group_rh, race, nationallity, Religion, Status,
                                       pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
                                       emergency_phone, emergency_addr, email, congenital_disease, submit)
@@ -301,7 +300,7 @@ def edit_member_info(request):
                  		       member_detail['blood_group_abo'], member_detail['blood_group_rh'], member_detail['race'], member_detail['nationallity'],
 				 		       member_detail['religion'], member_detail['status'], member_detail['patient_address'], member_detail['occupy'], member_detail['telephone_number'], 
 				 		       member_detail['father_name'], member_detail['mother_name'], member_detail['emergency_name'],
-				 		       member_detail['emergency_phone'], member_detail['emergency_addr'], member_detail['email'], member_detail['congenital_disease'])
+				 		       member_detail['emergency_phone'], member_detail['emergency_address'], member_detail['email'], member_detail['congenital_disease'])
     blood_abo = ['-', 'A', 'B', 'O', 'AB']
     blood_rh = ['', 'RH ลบ', 'RH บวก']
     status, member_detail = api.get_patients_detail(request.user.username)
