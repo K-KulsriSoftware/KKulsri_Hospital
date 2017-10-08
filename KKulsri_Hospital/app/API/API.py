@@ -128,16 +128,16 @@ class API :
 		return self.edit_profile_api.edit_profile(username,email,telphone_number,emergency_phone,submit)
 
 	def register(self, username=None, patient_name_title=None, patient_name=None, patient_surname=None, 
-		         patient_img=None, id_card_number=None, gender=None, order_ids=None, birthday_year=None, 
+		         patient_img=None, id_card_number=None, gender=None, birthday_year=None, 
 		         birthday_month=None, birthday_day=None, blood_group_abo=None, blood_group_rh=None, race=None, 
 		         nationallity=None, religion=None, status=None, patient_address=None, occupy=None, 
-		         telphone_number=None, father_name=None, mother_name=None, emergency_name=None, 
+		         telephone_number=None, father_name=None, mother_name=None, emergency_name=None, 
 		         emergency_phone=None, emergency_address=None, email=None, congenital_disease=None, submit=False) :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
 		return self.register_api.register(username, patient_name_title, patient_name, patient_surname, patient_img, id_card_number, gender,
-					 order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
-					 religion, status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+					 birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
+					 religion, status, patient_address, occupy, telephone_number, father_name, mother_name, emergency_name,
 					 emergency_phone, emergency_address, email, congenital_disease, submit)
 
 	def show_general_list(self) :
