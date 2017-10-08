@@ -27,6 +27,7 @@ from .get_collection_pattern_api import get_collection_pattern_api
 from .get_patient_orders_api import get_patient_orders_api
 from .get_doctor_orders_api import get_doctor_orders_api
 from .add_account_api import add_account_api
+from .verify_password_api import verify_password_api
 '''
 #for test api
 from find_doctors_api import find_doctors_api
@@ -51,6 +52,7 @@ from get_collection_pattern_api import get_collection_pattern_api
 from get_patient_orders_api import get_patient_orders_api
 from get_doctor_orders_api import get_doctor_orders_api
 from add_account_api import add_account_api
+from verify_password_api import verify_password_api
 '''
 class API :
 
@@ -87,6 +89,7 @@ class API :
 		self.get_patient_orders_api = get_patient_orders_api(self.db)
 		self.get_doctor_orders_api = get_doctor_orders_api(self.db)
 		self.add_account_api = add_account_api(self.db)
+		self.verify_password_api = verify_password_api(self.db)
 
 	def incomplete_input(self, inputs) :
 		check = False
@@ -403,3 +406,8 @@ class API :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
 		return self.add_account_api.add_account(username, password)
+
+	def verify_password(self, username, password) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
+		return self.verify_password_api.verify_password(username, password)
