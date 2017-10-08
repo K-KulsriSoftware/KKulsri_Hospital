@@ -283,11 +283,17 @@ def member(request):
 
 def edit_member_info(request):
     assert isinstance(request, HttpRequest)
+    blood_abo = ['-', 'A', 'B', 'O', 'AB']
+    blood_rh = ['', 'RH ลบ', 'RH บวก']
+    status, member_detail = api.get_patients_detail(request.user.username)
+    member_detail['blood_group_abo'] = blood_abo[member_detail['blood_group_abo']]
+    member_detail['blood_group_rh'] = blood_rh[member_detail['blood_group_rh']]
     return render(
         request,
         'app/edit-member.html',
         {
-            'title': 'แก้ไขข้อมูลสมาชิก'
+            'title': 'แก้ไขข้อมูลสมาชิก',
+            'member_detail': member_detail,
         }
     )
 
