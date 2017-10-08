@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from datetime import datetime, timedelta
 from bson.objectid import ObjectId
 class create_order_api :
 
@@ -27,7 +27,7 @@ class create_order_api :
         return False
 
     def find_bought_time(self) :
-        time = datetime.now()
+        time = datetime.now() - timedelta(hours = 7)
         year = int(time.strftime('%Y'))
         month = int(time.strftime('%m'))
         date = int(time.strftime('%d'))
