@@ -34,12 +34,30 @@ class create_order_api :
         min = int(time.strftime('%M'))
         return {'year' : year, 'month' : month, 'date' : date, 'hr' : hr, 'min' : min}
 
-    def insert_query(self, package_id, doctor_id, patient_id, notice, time, bought_time) :
+    def get_patient_id(self, patient_username):
+        cursor = self.db.patient.aggregate([
+            {
+                '$match' : 
+                {
+                    'username' : patient_username
+                }
+            },
+            {
+                '$project' : 
+                {
+                    'patient_id' : '$_id'
+                }
+            },
+        ])
+        for temp in cursor:
+            return temp['patient_id']
+    
+    def insert_query(self, package_id, doctor_id, patient_username, notice, time, bought_time) :
         self.db.orders.insert(
             {
                 'package_id' : ObjectId(package_id),
                 'doctor_id' : ObjectId(doctor_id),
-                'patient_id' : ObjectId(patient_id),
+                'patient_id' : self.get_patient_id(patient_username),
                 'cost' : self.get_package_cost(package_id),
                 'time' : 
                 {
