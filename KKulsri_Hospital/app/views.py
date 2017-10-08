@@ -545,10 +545,8 @@ def login(request):
         status, username = api.verify_password(request.POST['username'], request.POST['password'])
         if status:
             request.session['user'] = {'username': request.POST['username'], 'is_authenticated': True}
-            if 'next' in request.GET:
-                return redirect(request.GET['next'])
-            else:
-                return redirect('/')
+            return redirect(request.POST['next'])
+            
         else:
             return render(
                 request,
@@ -558,11 +556,17 @@ def login(request):
                     'error': True
                 }
             )
+    if request.session['user']['is_authenticated']:
+        return redirect('/')
+    next_page = '/'
+    if 'next' in request.GET:
+        next_page = request.GET['next']
     return render(
         request,
         'app/login.html',
         {
             'title': 'Log in',
+            'next': next_page
         }
     )
 
