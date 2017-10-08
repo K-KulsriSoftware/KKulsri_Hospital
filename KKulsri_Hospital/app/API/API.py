@@ -26,30 +26,30 @@ from .orders_query_api import orders_query_api###Jakapong Mo
 from .get_collection_pattern_api import get_collection_pattern_api
 from .get_patient_orders_api import get_patient_orders_api
 from .get_doctor_orders_api import get_doctor_orders_api
-
+'''
 #for test api
-# from find_doctors_api import find_doctors_api
-# from show_profile_api import show_profile_api
-# from show_doctor_detail_api import show_doctor_detail_api
-# from edit_profile_api import edit_profile_api
-# from register_api import register_api
-# from show_general_list_api import show_general_list_api
-# from show_departments_api import show_departments_api
-# from show_special_package_info_api import show_special_package_info_api
-# from create_order_api import create_order_api
-# from show_confirmation_info_api import show_confirmation_info_api
-# from doctor_query_api import doctor_query_api
-# from department_query_api import department_query_api
-# from user_query_api import user_query_api
-# from building_query_api import building_query_api
-# from show_doctor_in_department_api import show_doctor_in_department_api
-# from patients_query_api import patients_query_api
-# from packages_query_api import packages_query_api
-# from orders_query_api import orders_query_api
-# from get_collection_pattern_api import get_collection_pattern_api
-# from get_patient_orders_api import get_patient_orders_api
-# from get_doctor_orders_api import get_doctor_orders_api
-
+from find_doctors_api import find_doctors_api
+from show_profile_api import show_profile_api
+from show_doctor_detail_api import show_doctor_detail_api
+from edit_profile_api import edit_profile_api
+from register_api import register_api
+from show_general_list_api import show_general_list_api
+from show_departments_api import show_departments_api
+from show_special_package_info_api import show_special_package_info_api
+from create_order_api import create_order_api
+from show_confirmation_info_api import show_confirmation_info_api
+from doctor_query_api import doctor_query_api
+from department_query_api import department_query_api
+from user_query_api import user_query_api
+from building_query_api import building_query_api
+from show_doctor_in_department_api import show_doctor_in_department_api
+from patients_query_api import patients_query_api
+from packages_query_api import packages_query_api
+from orders_query_api import orders_query_api
+from get_collection_pattern_api import get_collection_pattern_api
+from get_patient_orders_api import get_patient_orders_api
+from get_doctor_orders_api import get_doctor_orders_api
+'''
 class API :
 
 	def __init__(self) :
@@ -289,7 +289,7 @@ class API :
 		                       patient_surname=None, patient_img=None, id_card_number=None, gender=None,
                  		       birthday_year=None, birthday_month=None, birthday_day=None, 
                  		       blood_group_abo=None, blood_group_rh=None, race=None, nationallity=None,
-				 		       religion=None, status=None, patient_address=None, occupy=None, telphone_number=None, 
+				 		       religion=None, status=None, patient_address=None, occupy=None, telephone_number=None, 
 				 		       father_name=None, mother_name=None, emergency_name=None,
 				 		       emergency_phone=None, emergency_address=None, email=None, congenital_disease=None) :
 		check, result = self.incomplete_input(locals())
@@ -297,7 +297,7 @@ class API :
 		return self.patients_query_api.update_patient_profile(username, patient_name_title, patient_name, 
 			   patient_surname, patient_img, id_card_number, gender, birthday_year, birthday_month, 
 			   birthday_day, blood_group_abo, blood_group_rh, race, nationallity, religion, status, 
-			   patient_address, occupy, telphone_number, father_name, mother_name, emergency_name, 
+			   patient_address, occupy, telephone_number, father_name, mother_name, emergency_name, 
 			   emergency_phone, emergency_address, email, congenital_disease)
 
 	def delete_patient(self, username=None) :
