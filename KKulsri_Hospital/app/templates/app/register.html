@@ -10,7 +10,7 @@
     <div class="plam">
         <div class="teub"></div>
         <div class="marr">
-            <div class="col1">
+            <!-- <div class="col1">
                 <div class="ddus"><span>username</span></div>
                 <div class="us">
                     <input type="text" id="iUsername" class="inuser" name="username">
@@ -21,15 +21,15 @@
                     <div class="us">
                         <input type="password" id="iPassword" class="inuser">
                     </div>
-            </div>
-            <div class="col1">
+            </div> -->
+            <!-- <div class="col1">
                     <div class="ddcon"><span>confirm password </span></div>
                     <div class="us">
                         <input type="password" id="iConfirmPassword" class="inuser">
                     </div>
-                </div>
+                </div> -->
             <div class="col1">
-                <div class="ddidcard"><span>เลขบัตรประชาชน </span></div>
+                <div class="ddidcard"><span>เลขประจำตัวประชาชน </span></div>
                 <div class="id">
                     <input type="text" id="iIDCard" class="inid" name="id_card_number">
                 </div>
@@ -52,9 +52,9 @@
                     <input type="date" id="iBirthday" class="inbirth" name="">
                 </div-->
                 <div class="dbir">
-                    <input type="text" id="iMonth" class="inbirth" name="birthday_month" placeholder="02">
-                    <input type="text" id="iDay" class="inbirth" name="birthday_day" placeholder="23">
-                    <input type="text" id="iYear" class="inyear" name="birthday_year" placeholder="2560">
+                    <input type="text" id="iMonth" class="inbirth" name="birthday_month" placeholder="วัน">
+                    <input type="text" id="iDay" class="inbirth" name="birthday_day" placeholder="เดือน">
+                    <input type="text" id="iYear" class="inyear" name="birthday_year" placeholder="ปี">
                 </div>
                 <div class="dold"><span>อายุ</span>
                     <input type="number" id="iAge" class="inold" name="">
@@ -98,11 +98,11 @@
                     <input type="text" id="iLive" class="inlive" name="pateint_address">
                 </div>
             </div>
-            <div class="col1">
+            <!-- <div class="col1">
                 <div class="dlive2">
                     <input type="text" id="iLive2" class="inlive2" name="pateint_address">
                 </div>
-            </div>
+            </div> -->
             <div class="col1">
                 <div class="dlok"><span>โรคประจำตัว </span>
                     <input type="text" id="iLok" class="inlok" name="congenital_disease">
@@ -159,6 +159,4 @@
             <div class="col1"></div>
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 {% endblock %}
