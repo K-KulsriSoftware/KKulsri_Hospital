@@ -297,11 +297,11 @@ def edit_member_info(request):
         member_detail['emergency_phone'] = emergency_phone
         query_status, result = api.update_patient_profile(member_detail['username'], member_detail['patient_name_title'], member_detail['patient_name'], 
 		                       member_detail['patient_surname'], member_detail['patient_img'], member_detail['id_card_number'], member_detail['gender'],
-                 		       member_detail['order_ids'], member_detail['birthday_year'], member_detail['birthday_month'], member_detail['birthday_day'], 
+                 		       member_detail['birthday'].year, member_detail['birthday'].month, member_detail['birthday'].day, 
                  		       member_detail['blood_group_abo'], member_detail['blood_group_rh'], member_detail['race'], member_detail['nationallity'],
 				 		       member_detail['religion'], member_detail['status'], member_detail['patient_address'], member_detail['occupy'], member_detail['telephone_number'], 
 				 		       member_detail['father_name'], member_detail['mother_name'], member_detail['emergency_name'],
-				 		       member_detail['emergency_phone'], member_detail['emergency_address'], member_detail['email'], member_detail['congenital_disease'])
+				 		       member_detail['emergency_phone'], member_detail['emergency_addr'], member_detail['email'], member_detail['congenital_disease'])
     blood_abo = ['-', 'A', 'B', 'O', 'AB']
     blood_rh = ['', 'RH ลบ', 'RH บวก']
     status, member_detail = api.get_patients_detail(request.user.username)
