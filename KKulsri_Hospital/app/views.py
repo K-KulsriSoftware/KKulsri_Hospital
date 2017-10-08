@@ -181,11 +181,11 @@ def signup(request):
         raw_password = request.POST['password1']
         status, result = api.add_account(username, raw_password)
         if status:
-            status, result = api.register(form.cleaned_data.get('username'), '', form.cleaned_data.get('first_name'), form.cleaned_data.get('last_name'), '',
-                    '', True, [], 2017, 10, 2,
+            status, result = api.register(username, '', '', '', '',
+                    '', True, 2017, 10, 2,
                     0, 0, '', '', '', 0,
                     '', '', '', '', '', '',
-                    '', '', '', [], submit=True)
+                    '', '', '', [], True)
             return redirect('/')
         else:
             return render(request, 'app/signup.html', {'title': 'Log in', 'alert': 'Username นี้มีผู้ใช้งานแล้ว'})
