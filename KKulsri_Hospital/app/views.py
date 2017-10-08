@@ -35,6 +35,9 @@ from django.core.mail import EmailMessage, send_mail
 def get_item(dictionary, key):
     return dictionary.get(key)
 
+def check_logged_in(request):
+    return hasattr(request, 'user') and 'username' in request.user and request.user['username'] != ''
+
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -49,8 +52,9 @@ def home(request):
     return redirect('/departments')
 
 
-@login_required(login_url='/login/')
 def contact(request):
+    if not check_logged_in(request):
+        return redirect('/login/?next=/contact/')
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
     return render(
@@ -518,19 +522,31 @@ def admin_mongo_collection(request, collection_name):
 def login(request):
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
-        pass
+        status, username = api.verify_password(request.POST['username'], request.POST['password'])
+        if status:
+            request.user = {'username': request.POST['username']}
+            if 'next' in request.GET:
+                return redirect(request.GET['next'])
+            else:
+                return redirect('/')
+        else:
+            return render(
+                request,
+                'app/login.html',
+                {
+                    'title': 'Log in',
+                    'error': True
+                }
+            )
     return render(
         request,
         'app/login.html',
         {
             'title': 'Log in',
-            # 'error': True
         }
     )
 
 def logout(request):
     assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/login.html',
-    )
+    del request.user
+    return redirect('/')

@@ -31,4 +31,4 @@ class add_account_api :
             	'password' : password
         	}
 		)
-		return True, 'Successfully Inserte'
+		return True, 'Successfully Insert'
