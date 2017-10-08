@@ -265,12 +265,18 @@ def account_activation_sent(request):
 def member(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    blood_abo = ['-', 'A', 'B', 'O', 'AB']
+    blood_rh = ['', 'RH ลบ', 'RH บวก']
+    status, member_detail = api.get_patients_detail(request.user.username)
+    member_detail['blood_group_abo'] = blood_abo[member_detail['blood_group_abo']]
+    member_detail['blood_group_rh'] = blood_rh[member_detail['blood_group_rh']]
     status, orders = api.get_patient_orders(request.user.username)
     return render(
         request,
         'app/member.html',
         {
             'title': 'ข้อมูลสมาชิก',
+            'member_detail': member_detail,
             'orders': orders
         }
     )

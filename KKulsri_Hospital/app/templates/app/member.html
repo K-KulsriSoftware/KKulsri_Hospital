@@ -6,23 +6,23 @@
     <div class="row member">
         <div class="col-sm-4"><img class="member-image"></div>
         <div class="col-sm-8 member-content">
-            <h3>นายแพทย์กนกพล กุลศรี</h3>
+            <h3>{{ member_detail.patient_name_title }}{{ member_detail.patient_name }} {{ member_detail.patient_surname }}</h3>
             <div class="member-content">
                 <div class="row">
                     <div class="col-xs-4"><span>เลขประจำตัวประชาชน </span></div>
-                    <div class="col-xs-8"><span>Text</span></div>
+                    <div class="col-xs-8"><span>{{ member_detail.id_card_number }}</span></div>
                 </div>
                 <div class="row">
                     <div class="col-xs-4"><span>หมู่เลือด </span></div>
-                    <div class="col-xs-8"><span>Text</span></div>
+                    <div class="col-xs-8"><span>{{ member_detail.blood_group_abo }} {{ member_detail.blood_group_rh }}</span></div>
                 </div>
                 <div class="row">
                     <div class="col-xs-4"><span>เบอร์โทรศัพท์ </span></div>
-                    <div class="col-xs-8"><span>Text</span></div>
+                    <div class="col-xs-8"><span>{{ member_detail.telephone_number }}</span></div>
                 </div>
                 <div class="row">
                     <div class="col-xs-4"><span>อีเมล </span></div>
-                    <div class="col-xs-8"><span>Text</span></div>
+                    <div class="col-xs-8"><span>{{ member_detail.email }}</span></div>
                 </div>
             </div>
             <div class="change-info-wrapper">
