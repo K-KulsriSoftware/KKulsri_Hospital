@@ -36,7 +36,7 @@ def get_item(dictionary, key):
     return dictionary.get(key)
 
 def check_logged_in(request):
-    return 'user' in request.session and request.session['user']['is_authenticated']
+    return 'user' in request.session and request.session['user'].get('is_authenticated')
 
 def home(request):
     """Renders the home page."""
@@ -120,23 +120,26 @@ def doctor_detail(request):
 def register(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    if not request.session.get('just_regis'):
+        raise Http404("Page not found")
     if request.method == 'POST':
-        username = request.POST['username']
         patient_name_title = request.POST['patient_name_title']
         patient_name = request.POST['patient_name']
         patient_surname = request.POST['patient_surname']
-        patient_img = request.POST['patient_img']
+        # patient_img = request.POST['patient_img']
         id_card_number = request.POST['id_card_number']
-        gender = request.POST['gender']
-        birthday_year = request.POST['birthday_year']
-        birthday_month = request.POST['birthday_month']
-        birthday_day = request.POST['birthday_day']
-        blood_group_abo = request.POST['blood_group_abo']
-        blood_group_rh = request.POST['blood_group_rh']
+        gender = request.POST['gender'] == 'ชาย'
+        birthday_year = int(request.POST['birthday_year'])
+        birthday_month = int(request.POST['birthday_month'])
+        birthday_day = int(request.POST['birthday_day'])
+        blood_abo = ['-', 'A', 'B', 'O', 'AB']
+        blood_rh = ['', '-', '+']
+        blood_group_abo = blood_abo.index(request.POST['blood_group_abo']) if request.POST['blood_group_abo'] in blood_abo else 0
+        blood_group_rh = blood_rh.index(request.POST['blood_group_rh']) if request.POST['blood_group_rh'] in blood_rh else 0
         race = request.POST['race']
         nationallity = request.POST['nationallity']
-        Religion = request.POST['Religion']
-        Status = request.POST['Status']
+        Religion = request.POST['religion']
+        Status = int(request.POST['Status'])
         pateint_address = request.POST['pateint_address']
         occupy = request.POST['occupy']
         telphone_number = request.POST['telphone_number']
@@ -146,23 +149,25 @@ def register(request):
         emergency_phone = request.POST['emergency_phone']
         emergency_addr = request.POST['emergency_addr']
         email = request.POST['email']
-        congenital_disease = request.POST['congenital_disease']
-        submit = request.POST['submit']
+        congenital_disease = request.POST['congenital_disease'].split(',')
         # เติมให้ครบ
 
-        status, result = api.register(username, patient_name_title, patient_name, patient_surname, patient_img,
+        status, result = api.register(request.session['user']['username'], patient_name_title, patient_name, patient_surname, '',
                                       id_card_number, gender, birthday_year, birthday_month, birthday_day,
                                       blood_group_abo, blood_group_rh, race, nationallity, Religion, Status,
                                       pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
-                                      emergency_phone, emergency_addr, email, congenital_disease, submit)
+                                      emergency_phone, emergency_addr, email, congenital_disease, True)
         if status:
+            del request.session['just_regis']
+            print(request.session['user'])
             return redirect('/')
         else:
             return render(
                 request,
                 'app/register.html',
                 {
-                    'title': 'สมัครสมาชิก'
+                    'title': 'สมัครสมาชิก',
+                    'logged_user': request.session.get('user')
                 }
             )
     else:
@@ -170,7 +175,8 @@ def register(request):
             request,
             'app/register.html',
             {
-                'title': 'สมัครสมาชิก'
+                'title': 'สมัครสมาชิก',
+                'logged_user': request.session.get('user')
             }
         )
 
@@ -186,7 +192,9 @@ def signup(request):
                     0, 0, '', '', '', 0,
                     '', '', '', '', '', '',
                     '', '', '', [], True)
-            return redirect('/')
+            request.session['user'] = {'username': request.POST['username'], 'is_authenticated': True}
+            request.session['just_regis'] = True
+            return redirect('/register')
         else:
             return render(request, 'app/signup.html', {'title': 'Log in', 'alert': 'Username นี้มีผู้ใช้งานแล้ว'})
     
@@ -505,7 +513,7 @@ def login(request):
                 }
             )
     if 'user' in request.session : #mind add
-        if request.session['user']['is_authenticated']: #mind one tab
+        if request.session['user'].get('is_authenticated'): #mind one tab
             return redirect('/') #mind one tab
     next_page = '/'
     if 'next' in request.GET:
