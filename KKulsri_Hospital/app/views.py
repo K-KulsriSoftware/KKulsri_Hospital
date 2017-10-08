@@ -176,71 +176,21 @@ def register(request):
 
 
 def signup(request):
-    # if request.method == 'POST':
-    #     form = app.forms.RegistrationForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         username = form.cleaned_data.get('username')
-    #         raw_password = form.cleaned_data.get('password1')
-    #         user = authenticate(username=username, password=raw_password)
-    #         login(request, user)
-    #         status, result = api.register(form.cleaned_data.get('username'), '', form.cleaned_data.get('first_name'), form.cleaned_data.get('last_name'), '',
-	# 			 '', True, [], 2017, 10, 2,
-	# 			 0, 0, '', '', '', 0,
-	# 			 '', '', '', '', '', '',
-	# 			 '', '', '', [], submit=True)
-    #         return redirect('home')
-    # else:
-    #     form = app.forms.RegistrationForm()
-    # return render(request, 'app/signup.html', {'form': form, 'title': 'สมัครสมาชิก'})
-
-    # if request.method == 'POST':
-    #     form = UserCreationForm(request.POST)
-    #     if form.is_valid():
-    #         # state 1
-    #         # user = form.save()
-    #         # user.refresh_from_db()  # load the profile instance created by the signal
-    #         # user.profile.birth_date = form.cleaned_data.get('birth_date')
-    #         # user.save()
-    #         # raw_password = form.cleaned_data.get('password1')
-    #         # user = authenticate(username=user.username, password=raw_password)
-    #         # login(request, user)
-    #         # return redirect('home')
-    #         # state 2
-    #         form.save()
-    #         username = form.cleaned_data.get('username')
-    #         raw_password = form.cleaned_data.get('password1')
-    #         user = authenticate(username=username, password=raw_password)
-    #         login(request, user)
-    #         return redirect('home')
-    # else:
-    #     form = UserCreationForm()
-    # return render(request, 'app/signup.html', {'form': form})
-
     if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
-
-            current_site = get_current_site(request)
-            message = render_to_string('app/acc_active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            mail_subject = 'Activate your blog account.'
-            # user.email_user(mail_subject, message)
-            user_mail = form.cleaned_data.get('email')
-            send_mail(mail_subject, message, 'siwanont.devtest@gmail.com',  [
-                      user_mail, ], fail_silently=False)
-            return redirect('/account_activation_sent')
-    else:
-        form = SignupForm()
-
-    return render(request, 'app/signup.html', {'form': form})
+        username = request.POST['username']
+        raw_password = request.POST['password1']
+        status, result = api.add_account(username, raw_password)
+        if status:
+            status, result = api.register(form.cleaned_data.get('username'), '', form.cleaned_data.get('first_name'), form.cleaned_data.get('last_name'), '',
+                    '', True, [], 2017, 10, 2,
+                    0, 0, '', '', '', 0,
+                    '', '', '', '', '', '',
+                    '', '', '', [], submit=True)
+            return redirect('/')
+        else:
+            return render(request, 'app/signup.html', {'title': 'Log in', 'alert': 'Username นี้มีผู้ใช้งานแล้ว'})
+    
+    return render(request, 'app/signup.html', {'title': 'Log in'})
 
 
 def activate(request, uidb64, token):
@@ -554,7 +504,7 @@ def login(request):
                     'error': True
                 }
             )
-    if request.session['user']['is_authenticated']:
+    if 'user' in request.session and request.session['user']['is_authenticated']:
         return redirect('/')
     next_page = '/'
     if 'next' in request.GET:
