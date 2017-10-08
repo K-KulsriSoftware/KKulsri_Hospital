@@ -26,7 +26,7 @@ class show_general_list_api :
     		{
         		'$project' : 
         		{
-            		'package_id' : '$package_id',
+            		'package_id' : '$_id',
             		'package_name' : '$package_name',
             		'package_cost' : '$package_cost',
             		'description' : '$description'
