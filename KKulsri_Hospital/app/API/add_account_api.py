@@ -12,7 +12,7 @@ class add_account_api :
 			{
 				'$match' :
 				{
-					'$username' : username
+					'username' : username
 				}
 			}
 		])
@@ -31,4 +31,4 @@ class add_account_api :
             	'password' : password
         	}
 		)
-		return True, 'Successfully Inserte'
+		return True, 'Successfully Insert'

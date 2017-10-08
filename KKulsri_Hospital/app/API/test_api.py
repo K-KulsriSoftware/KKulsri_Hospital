@@ -273,6 +273,13 @@ status,result = api.show_confirmation_info('p00003','d002', 'admao',
 #test get_doctor_orders()
 #status, result = api.get_doctor_orders('d0006')
 
+#test add_account()
+#status, result = api.add_account('mind', 'jirateep')
+
+#test verify_password()
+#status, result = api.verify_password('mind', '5555')
+status, result = api.verify_password('mind', 'jirateep')
+
 if status :
 	pprint(result)
 else :
