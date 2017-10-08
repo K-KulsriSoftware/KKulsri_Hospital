@@ -384,8 +384,7 @@ def confirm(request):
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
         return redirect('/doctor-detail/')
     if request.method == 'POST':
-        status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
-        status, result = api.create_order(request.session['selected_package'], doctor['username'], request.user.username, '-', request.session['selected_date'])
+        status, result = api.create_order(request.session['selected_package'], request.session['selected_doctor'], request.user.username, '-', request.session['selected_date'])
         if status:
             return redirect('/')
     # print(request.session['selected_date'])
