@@ -53,7 +53,11 @@ urlpatterns = [
         name='logout'),
     url(r'^register/', app.views.register, name='register'),
     url(r'^signup/', app.views.signup, name='signup'),
-
+    url(r'^account_activation_sent/',
+        app.views.account_activation_sent, name='account_activation_sent'),
+    url(r'^account_activation_invalid/',
+        app.views.account_activation_invalid, name='account_activation_invalid'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',app.views.activate, name='activate'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
