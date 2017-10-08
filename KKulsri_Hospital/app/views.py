@@ -522,6 +522,10 @@ def login(request):
     return render(
         request,
         'app/login.html',
+        {
+            'title': 'Log in',
+            # 'error': True
+        }
     )
 
 def logout(request):

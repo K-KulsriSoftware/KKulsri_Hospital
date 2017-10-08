@@ -24,7 +24,7 @@ class add_account_api :
 		
 		if self.already_used(username) :
 			return False, 'this username is used'
-		password = pbkdf2_sha256.hash(password)
+		password = pbkdf2_sha256.encrypt(password, rounds=200000, salt_size=16)
 		self.db.users.insert(
 			{
             	'username' : username,
