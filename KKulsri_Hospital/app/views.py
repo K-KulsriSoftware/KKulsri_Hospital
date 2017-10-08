@@ -515,4 +515,22 @@ def admin_mongo_collection(request, collection_name):
         }
     )
 
+def login(request):
+    assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        pass
+    return render(
+        request,
+        'app/login.html',
+        {
+            'title': 'Log in',
+            # 'error': True
+        }
+    )
 
+def logout(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/login.html',
+    )

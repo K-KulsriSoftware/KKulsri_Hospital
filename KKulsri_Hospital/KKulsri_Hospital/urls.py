@@ -34,24 +34,8 @@ urlpatterns = [
     url(r'^admin-mongo/collection/(?P<collection_name>\w{0,50})/$', app.views.admin_mongo_collection, name='admin-mongo-collection'),
     url(r'^doctor_search_api/', app.views.doctor_search_api, name='doctor_search_api'),
     url(r'^doctor_auto_search_api/', app.views.doctor_auto_search_api, name='doctor_auto_search_api'),
-    url(r'^login/$',
-        django.contrib.auth.views.login,
-        {
-            'template_name': 'app/login.html',
-            'authentication_form': app.forms.BootstrapAuthenticationForm,
-            'extra_context':
-            {
-                'title': 'Log in',
-                'year': datetime.now().year,
-            }
-        },
-        name='login'),
-    url(r'^logout$',
-        django.contrib.auth.views.logout,
-        {
-            'next_page': '/',
-        },
-        name='logout'),
+    url(r'^login/$', app.views.login,name='login'),
+    url(r'^logout$', app.views.logout),
     url(r'^register/', app.views.register, name='register'),
     url(r'^signup/', app.views.signup, name='signup'),
     url(r'^account_activation_sent/',

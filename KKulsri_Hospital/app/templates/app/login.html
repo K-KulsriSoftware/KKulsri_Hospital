@@ -28,7 +28,7 @@
                             <label for="id_username" class="col-md-2 control-label">Username</label>
                         </div>
                         <div class="input-username">
-                            {{ form.username }}
+                            <input type="text">
                         </div>
                     </div>
                     <div class="box-password">
@@ -36,7 +36,7 @@
                             <label for="id_password" class="col-md-2 control-label">Password</label>
                         </div>
                         <div class="input-password">
-                            {{ form.password }}
+                            <input type="text">
                         </div>
                     </div>
                     <div class="box-button-detail">
@@ -48,7 +48,7 @@
                     <div style="text-align:center;font-size:16px;margin-top:5px;">
                         <a href="/signup/" style="color:gray">สมัครสมาชิก</a>
                     </div>
-                    {% if form.errors %}
+                    {% if error %}
                     <br>
                     <div style="text-align:center;font-size:16px;margin-top:5px;">
                         <p class="validation-summary-errors">Please enter a correct username and password.</p>
