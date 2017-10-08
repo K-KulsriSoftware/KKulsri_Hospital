@@ -554,8 +554,9 @@ def login(request):
                     'error': True
                 }
             )
-    if request.session['user']['is_authenticated']:
-        return redirect('/')
+    if 'user' in request.session : #mind add
+        if request.session['user']['is_authenticated']: #mind one tab
+            return redirect('/') #mind one tab
     next_page = '/'
     if 'next' in request.GET:
         next_page = request.GET['next']
