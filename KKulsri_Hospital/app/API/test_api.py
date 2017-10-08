@@ -235,7 +235,7 @@ status, result = api.register("watermelon", "นางสาว", "สมหญ�
 
 #test create_order
 
-status,result = api.create_order('59d8bc02612d9a6b5fb41c33', '59d8ca694ddf3286ea4e5f4f', 'ongnial', 'test notice',
+status,result = api.create_order('59d8bc02612d9a6b5fb41c33', '59d8ca694ddf3286ea4e5f4f', 'ongniel', 'test notice',
 				{
     	    		'year' : 2018,
 					'date' : 17,

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from datetime import datetime, timedelta
 from bson.objectid import ObjectId
 class create_order_api :
 
@@ -24,10 +24,10 @@ class create_order_api :
         ])
         for temp in cursor:
             return True, temp['package_cost']
-        return False
+        return False, 'patient error'
 
     def find_bought_time(self) :
-        time = datetime.now()
+        time = datetime.now() - timedelta(hours = 7)
         year = int(time.strftime('%Y'))
         month = int(time.strftime('%m'))
         date = int(time.strftime('%d'))
@@ -52,7 +52,7 @@ class create_order_api :
         ])
         for temp in cursor:
             return True, temp['patient_id']
-        return False
+        return False, 'patient error'
     
     def insert_query(self, package_id, doctor_id, patient_id, package_cost, notice, time, bought_time) :
         self.db.orders.insert(
@@ -71,7 +71,7 @@ class create_order_api :
             }
         )
 
-    def create_order(self, package_id, doctor_id, patient_id, notice, time) :
+    def create_order(self, package_id, doctor_id, patient_username, notice, time) :
         bought_time = self.find_bought_time()
         check_patient, patient_id = self.get_patient_id(patient_username)
         check_package, package_cost = self.get_package_cost(package_id)
