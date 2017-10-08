@@ -7,7 +7,7 @@ from datetime import datetime
 api = API()
 
 #test find_doctors
-status, result = api.find_doctors(package_id="59d890e99cb6f0707faf7034")
+#status, result = api.find_doctors(package_id="59d890e99cb6f0707faf7034")
 #status, result = api.find_doctors(package_id='p00001',days=['mon'])
 #status, result = api.find_doctors(package_id='p00001',days=['mon','tue'],time='ช่วงเช้า')
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
@@ -264,7 +264,10 @@ status,result = api.show_confirmation_info('p00003','d002', 'admao',
 #status, result = api.show_doctor_in_department()
 
 #test get_patient_orders()
-status, result = api.get_patient_orders('ongniel')
+#status, result = api.get_patient_orders('ongniel')
+
+#test get_doctor_orders()
+status, result = api.get_doctor_orders('d0006')
 
 if status :
 	pprint(result)

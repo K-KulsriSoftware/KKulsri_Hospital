@@ -1,36 +1,36 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-class get_patient_orders_api :
+class get_doctor_orders_api :
 
     def __init__(self, db) :
         self.db = db
 
-    def get_patient_orders_query(self, patient_username) :
+    def get_doctor_orders_query(self, doctor_username) :
     	return self.db.orders.aggregate([
             {
-            	'$lookup' :
-				{
-					'from' : 'patients',
-		            'localField' : 'patient_id',
-		            'foreignField' : '_id',
-		            'as' : 'patient'
-				}
+                '$lookup' :
+                {
+                    'from' : 'doctors',
+                    'localField' : 'doctor_id',
+                    'foreignField' : '_id',
+                    'as' : 'doctor'
+                }
             },
             {
             	'$match' :
             	{
-            		'patient.username' : patient_username
+            		'doctor.username' : doctor_username
             	}
             },
             {
             	'$lookup' :
-            	{
-            		'from' : 'doctors',
-		            'localField' : 'doctor_id',
-		            'foreignField' : '_id',
-		            'as' : 'doctor'
-            	}
+                {
+                    'from' : 'patients',
+                    'localField' : 'patient_id',
+                    'foreignField' : '_id',
+                    'as' : 'patient'
+                }
             },
             {
             	'$lookup' :
@@ -78,13 +78,13 @@ class get_patient_orders_api :
             	'$project' :
             	{
             		'order_id' : '$_id',
+                    'doctor_id' : '$doctor_id',
+                    'doctor_username' : '$doctor.username',
             		'patient_id' : '$patient_id',
             		'patient_username' : '$patient.username',
-            		'doctor_id' : '$doctor_id',
-            		'doctor_username' : '$doctor.username',
-            		'doctor_name_title' : '$doctor.doctor_name_title',
-            		'doctor_name' : '$doctor.doctor_name',
-            		'doctor_surname' : '$doctor.doctor_surname',
+            		'patient_name_titile' : '$patient.patient_name_title',
+            		'patient_name' : '$patient.patient_name',
+            		'patient_surname' : '$patient.patient_surname',
             		'package_id' : '$package_id',
             		'package_name' : '$package.package_name',
             		'department_id' : '$department._id',
@@ -100,8 +100,8 @@ class get_patient_orders_api :
             }
         ])
 
-    def get_patient_orders(self, patient_username) :
-    	cursor = self.get_patient_orders_query(patient_username)
+    def get_doctor_orders(self, doctor_username) :
+    	cursor = self.get_doctor_orders_query(doctor_username)
     	orders = []
     	for order in cursor :
     		order.pop('_id', None)
