@@ -24,6 +24,7 @@ from .patients_query_api import patients_query_api###Jakapong Mo
 from .packages_query_api import packages_query_api###Jakapong Mo
 from .orders_query_api import orders_query_api###Jakapong Mo
 from .get_collection_pattern_api import get_collection_pattern_api
+from .get_patient_orders_api import get_patient_orders_api
 '''
 #for test api
 from find_doctors_api import find_doctors_api
@@ -45,6 +46,7 @@ from patients_query_api import patients_query_api
 from packages_query_api import packages_query_api
 from orders_query_api import orders_query_api
 from get_collection_pattern_api import get_collection_pattern_api
+from get_patient_orders_api import get_patient_orders_api
 
 
 class API :
@@ -79,6 +81,7 @@ class API :
 		self.packages_query_api = packages_query_api(self.db)
 		self.orders_query_api = orders_query_api(self.db)
 		self.get_collection_pattern_api = get_collection_pattern_api(self.db)
+		self.get_patient_orders_api = get_patient_orders_api(self.db)
 
 	def incomplete_input(self, inputs) :
 		check = False
@@ -145,10 +148,10 @@ class API :
 		if check : return True, result
 		return self.show_confirmation_info_api.show_confirmation_info(package_id, doctor_id, username, time)
 
-	def create_order(self,package_id=None, doctor_id=None, username=None, notice='', time=None) :
+	def create_order(self,package_id=None, doctor_id=None, patient_id=None, notice='', time=None) :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
-		return self.create_order_api.create_order(package_id, doctor_id, username, notice, time)
+		return self.create_order_api.create_order(package_id, doctor_id, patient_id, notice, time)
 
 ###############
 
@@ -380,3 +383,8 @@ class API :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
 		return self.get_collection_pattern_api.get_collection_pattern(collection_name)
+
+	def get_patient_orders(self, patient_username) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
+		return self.get_patient_orders_api.get_patient_orders(patient_username)
