@@ -281,6 +281,15 @@ def member(request):
         }
     )
 
+def edit_member_info(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/edit-member.html',
+        {
+            'title': 'แก้ไขข้อมูลสมาชิก'
+        }
+    )
 
 def departments(request):
     """Renders the about page."""
