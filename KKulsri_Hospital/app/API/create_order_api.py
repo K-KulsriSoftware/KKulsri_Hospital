@@ -23,7 +23,8 @@ class create_order_api :
             },
         ])
         for temp in cursor:
-            return temp['package_cost']
+            return True, temp['package_cost']
+        return False
 
     def find_bought_time(self) :
         time = datetime.now()
@@ -35,7 +36,7 @@ class create_order_api :
         return {'year' : year, 'month' : month, 'date' : date, 'hr' : hr, 'min' : min}
 
     def get_patient_id(self, patient_username):
-        cursor = self.db.patient.aggregate([
+        cursor = self.db.patients.aggregate([
             {
                 '$match' : 
                 {
@@ -50,15 +51,16 @@ class create_order_api :
             },
         ])
         for temp in cursor:
-            return temp['patient_id']
+            return True, temp['patient_id']
+        return False
     
-    def insert_query(self, package_id, doctor_id, patient_username, notice, time, bought_time) :
+    def insert_query(self, package_id, doctor_id, patient_id, package_cost, notice, time, bought_time) :
         self.db.orders.insert(
             {
                 'package_id' : ObjectId(package_id),
                 'doctor_id' : ObjectId(doctor_id),
-                'patient_id' : self.get_patient_id(patient_username),
-                'cost' : self.get_package_cost(package_id),
+                'patient_id' : patient_id,
+                'cost' : package_cost,
                 'time' : 
                 {
                     'start' : datetime(time['year'], time['month'], time['date'], time['start_hr'], 0),
@@ -71,5 +73,10 @@ class create_order_api :
 
     def create_order(self, package_id, doctor_id, patient_id, notice, time) :
         bought_time = self.find_bought_time()
-        self.insert_query(package_id, doctor_id, patient_id, notice, time, bought_time)
-        return True, 'Successfully Added'
+        check_patient, patient_id = self.get_patient_id(patient_username)
+        check_package, package_cost = self.get_package_cost(package_id)
+        if check_package and check_patient :
+            self.insert_query(package_id, doctor_id, patient_id, package_cost, notice, time, bought_time)
+            return True, 'Successfully Added'
+        else :
+            return False, 'No patient or package'
