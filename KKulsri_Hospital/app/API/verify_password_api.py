@@ -20,7 +20,7 @@ class verify_password_api :
 			return True, temp['password']
 		return False, 'No user'
 
-	def verify_password(username, password):
+	def verify_password(self, username, password):
 		check, hash_password = self.get_password(username)
 		if check :
 			if pbkdf2_sha256.verify(password, hash_password) :
