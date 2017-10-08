@@ -15,7 +15,6 @@ class orders_query_api :
 		])
 		orders = []
 		for order in cursor :
-			order.pop('_id', None)
 			orders.append(order)
 		return True, orders
 
@@ -27,12 +26,11 @@ class orders_query_api :
 			{
             	'$match' :
             		{
-            			'order_id' : order_id
+            			'_id' : order_id
             		}
         	}
 		])
 		for order in cursor :
-			order.pop('_id', None)
 			return True, order
 		return False, "No match order"
 
@@ -44,9 +42,9 @@ class orders_query_api :
         	},
         	{
         		'$project' : {
-        			'order_id' : '$order_id',
+        			'order_id' : '$_id',
         			'package_id' : '$package_id',
-                    'user_id' : '$user_id'
+                    'patient_id' : '$patient_id'
         		}
         	}
 		])
@@ -57,20 +55,17 @@ class orders_query_api :
 		return True, orders
 
 
-	def update_order(self, order_id, package_id, doctor_id, username, notice, cost, time) :
-		if order_id == None or package_id == None or doctor_id ==None or username == None or notice == None or cost == None or time == None:
-			return False, 'Incommplete Input'
-
+	def update_order(self, order_id, package_id, doctor_id, patient_id, notice, cost, time) :
 		self.db.orders.update_one(
     		{
-        		'order_id': order_id
+        		'_id': order_id
     		},
     		{
         		'$set':
         		{
             			'package_id' : package_id,
             			'doctor_id' : doctor_id,
-            			'user_id' : username,
+            			'patient_id' : patient_id,
             			'cost' : cost ,
             			'time' :
             			{
@@ -85,26 +80,21 @@ class orders_query_api :
 		return True, 'Successfully Updated'
 
 	def delete_order(self, order_id) :
-		if order_id == None :
-			return False, 'Incomplete input: order_id'
 		self.db.orders.delete_one(
             {
-                "order_id": order_id
+                "_id": order_id
             }
         )
 		return True, 'Successfully Removed'
 
 
-	def create_order(self, order_id, package_id, doctor_id, username, notice, cost, time) :
-		if order_id == None or package_id == None or doctor_id ==None or username == None or notice == None or cost == None or time == None:
-			return False, 'Incommplete Input'
-
+	def create_order(self, order_id, package_id, doctor_id, patient_id, notice, cost, time) :
 		self.db.orders.insert(
 			{
                 'order_id' : order_id,
                 'package_id' : package_id,
                 'doctor_id' : doctor_id,
-                'user_id' : username,
+                'patient_id' : patient_id,
                 'cost' : cost ,
                 'time' :
                 {

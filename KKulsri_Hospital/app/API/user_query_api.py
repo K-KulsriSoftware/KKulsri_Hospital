@@ -51,8 +51,6 @@ class user_query_api :
 		return True, users
 
 	def update_user_profile(self, username, password) :
-		if username == None or password == None :
-			return False, 'Incomplete input'
 		self.db.users.update_one(
 			{
         		'username': username
@@ -67,8 +65,6 @@ class user_query_api :
 		return True, 'Successfully Updated'
 
 	def delete_user(self, username) :
-		if username == None :
-			return False, 'Incomplete input: username'
 		self.db.users.delete_one(
 			{
 				"username": username

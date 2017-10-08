@@ -13,20 +13,20 @@ class show_general_list_api :
         		{
         		    'from' : 'departments',
         		    'localField' : 'department_id',
-        	   		'foreignField' : 'department_id',
+        	   		'foreignField' : '_id',
             		'as' : 'department'
                 }
     		},
     		{
         		'$match' : 
         		{
-            		'department.department_name' : 'อายุรกรรม'
+            		'department.department_name' : 'ศูนย์อายุรกรรม'
             	}
     		},
     		{
         		'$project' : 
         		{
-            		'package_id' : '$package_id',
+            		'package_id' : '$_id',
             		'package_name' : '$package_name',
             		'package_cost' : '$package_cost',
             		'description' : '$description'

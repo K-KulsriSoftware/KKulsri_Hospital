@@ -1,24 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from bson.objectid import ObjectId
 
-class show_detail_api :
+class show_doctor_detail_api :
 
 	def __init__(self, db) :
 		self.db = db
 
-	def get_doctor_query(self, doctor_name, doctor_surname) :
+	def get_doctor_query(self, doctor_id) :
 		return self.db.doctors.aggregate([
     		{
         		'$match' :
         		{
-            		'doctor_name' : doctor_name,
-					'doctor_surname' : doctor_surname
+            		'_id' : ObjectId(doctor_id)
         		}
     		},
     		{
         		'$project':
         		{
-					'username': '$username',
+        			'doctor_id' : '$_id',
+					'username' : '$username',
 					'doctor_name_title' : '$doctor_name_title',
             		'doctor_name' : '$doctor_name',
             		'doctor_surname' : '$doctor_surname',
@@ -33,11 +34,8 @@ class show_detail_api :
      		}
 		])
 	
-	def show_detail(self, doctor_name, doctor_surname) :
-		if doctor_name == None or doctor_surname == None :
-			return False, 'Incomplete input: doctor_name, doctor_surname'
-
-		doctors = self.get_doctor_query(doctor_name,doctor_surname)
+	def show_doctor_detail(self, doctor_id) :
+		doctors = self.get_doctor_query(doctor_id)
 		for doctor in doctors :
 			doctor.pop('_id',None)
 			return True, doctor

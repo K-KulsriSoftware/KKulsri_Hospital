@@ -7,12 +7,13 @@ from datetime import datetime
 api = API()
 
 #test find_doctors
-#status, result = api.find_doctors(package_id='p00001')
+#status, result = api.find_doctors(package_id="59d890e99cb6f0707faf7034")
 #status, result = api.find_doctors(package_id='p00001',days=['mon'])
 #status, result = api.find_doctors(package_id='p00001',days=['mon','tue'],time='ช่วงเช้า')
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
 #status, result = api.find_doctors(days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
 #status, result = api.find_doctors(package_id='p00001',days=['wed','sat'],time='ช่วงบ่าย',gender='ชาย')
+#status, result = api.find_doctors(package_id='p00001',days=[],time='',gender='')
 
 #test auto_find_doctors
 #status, result = api.auto_find_doctors(package_id='p00001')
@@ -34,7 +35,6 @@ status, result = api.update_doctor_profile('d001', 'นายแพทย์', '
 							 			   'แพทย์เชี่ยวชาญทางด้านดวงตาง', ['aaa', 'bbb'], ['กขค'], ['ไทย', 'เกาหลี'],
 							  			   {"mon" : [{"start" : 9, "finish" : 10}, {"start" : 14, "finish" : 18}], "tue" : [{"start" : 9, "finish" : 10}]},
 							               [])
-
 '''
 
 #test delete_doctor
@@ -91,6 +91,7 @@ status, result = api.insert_patient("watermelon22", "นางสาว", "ส�
 
 #test get_package_detail
 #status, result = api.get_package_detail('p00001')
+#status, result = api.get_package_detail()
 
 #test get_all_packages_name
 #status, result = api.get_all_packages_name()
@@ -135,13 +136,13 @@ status, result = api.update_order(order_id = "o0000099", package_id = "p0000999"
 
 #test insert_order
 '''
-status, result = api.create_order(order_id = "o0000099", package_id = "p0000999", doctor_id = "d0099", username = "99", notice = "9", cost = 9.9,
+status, result = api.create_order(order_id = 'o000001', package_id = 'p0000999', doctor_id = 'd0099', username = '99', notice = '9', cost = 9.9,
 								time = {
-				    	    		"year" : 2018,
-									"date" : 13,
-									"month" : 11,
-									"start_hr" : 9,
-									"finish_hr" : 10,
+				    	    		'year' : 2018,
+									'date' : 13,
+									'month' : 11,
+									'start_hr' : 9,
+									'finish_hr' : 10,
 				    			} )
 '''
 #######Jakapong Mo END
@@ -233,16 +234,16 @@ status, result = api.register("watermelon", "นางสาว", "สมหญ�
 #status,result = api.show_special_package_info('p00002')
 
 #test create_order
-'''
-status,result = api.create_order('p00003','d002', 'admao', 'test notice',
+
+status,result = api.create_order('59d8bc02612d9a6b5fb41c33', '59d8ca694ddf3286ea4e5f4f', 'ongniel', 'test notice',
 				{
-    	    		"year" : 2018,
-					"date" : 13,
-					"month" : 11,
-					"start_hr" : 9,
-					"finish_hr" : 10,
+    	    		'year' : 2018,
+					'date' : 17,
+					'month' : 12,
+					'start_hr' : 9,
+					'finish_hr' : 10,
     			})
-'''
+
 
 #test show_confirmation_info
 '''
@@ -261,6 +262,12 @@ status,result = api.show_confirmation_info('p00003','d002', 'admao',
 
 #test show_doctor_in_department()
 #status, result = api.show_doctor_in_department()
+
+#test get_patient_orders()
+#status, result = api.get_patient_orders('ongniel')
+
+#test get_doctor_orders()
+#status, result = api.get_doctor_orders('d0006')
 
 if status :
 	pprint(result)

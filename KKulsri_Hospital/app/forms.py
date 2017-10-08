@@ -20,6 +20,14 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'placeholder':'Password'}))
 
 
+
+class SignupForm(UserCreationForm):
+    email = forms.EmailField(max_length=200, help_text='Required')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
 class RegistrationForm(UserCreationForm):
     username = forms.RegexField(
         label=_("ชื่อผู้ใช้"), max_length=30, regex=r"^[\w.@+-]+$",
@@ -30,9 +38,9 @@ class RegistrationForm(UserCreationForm):
                          "@/./+/-/_ เท่านั้น")},
     )
     password1 = forms.CharField(
-        label=_("รหัสผ่าน"),)
+        label=_("รหัสผ่าน"),widget=forms.PasswordInput,)
     password2 = forms.CharField(
-        label=_("พิมพ์รหัสผ่านอีกครั้ง"),)
+        label=_("พิมพ์รหัสผ่านอีกครั้ง"),widget=forms.PasswordInput,)
     first_name = forms.CharField(
         label=_("ชื่อ"), required=True, max_length=30, help_text="Required")
     last_name = forms.CharField(

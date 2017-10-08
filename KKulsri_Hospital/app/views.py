@@ -22,6 +22,15 @@ api = API()
 
 from django.template.defaulttags import register
 
+from .forms import SignupForm
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .tokens import account_activation_token
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage, send_mail
+
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
@@ -76,7 +85,7 @@ def doctor_detail(request):
         request.session['selected_date'] = json.loads(request.POST['date'])
         return redirect('/confirm/')
     assert isinstance(request, HttpRequest)
-    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+    status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
     if status:
         status, package = api.show_special_package_info(request.session['selected_package'])
         working_times = {}
@@ -84,7 +93,7 @@ def doctor_detail(request):
             if doctor['working_time'][day] != []:
                 working_times[day] = []
                 for time in doctor['working_time'][day]:
-                    for i in range(time['start'], time['finish']):
+                    for i in range(int(time['start']), int(time['finish'])):
                         working_times[day].append({'start': i, 'finish': i+1})
         print(working_times)
         return render(
@@ -159,19 +168,25 @@ def register(request):
             }
         )
 
+
 def signup(request):
-    if request.method == 'POST':
-        form = app.forms.RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = app.forms.RegistrationForm()
-    return render(request, 'app/signup.html', {'form': form})
+    # if request.method == 'POST':
+    #     form = app.forms.RegistrationForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         username = form.cleaned_data.get('username')
+    #         raw_password = form.cleaned_data.get('password1')
+    #         user = authenticate(username=username, password=raw_password)
+    #         login(request, user)
+    #         status, result = api.register(form.cleaned_data.get('username'), '', form.cleaned_data.get('first_name'), form.cleaned_data.get('last_name'), '',
+	# 			 '', True, [], 2017, 10, 2,
+	# 			 0, 0, '', '', '', 0,
+	# 			 '', '', '', '', '', '',
+	# 			 '', '', '', [], submit=True)
+    #         return redirect('home')
+    # else:
+    #     form = app.forms.RegistrationForm()
+    # return render(request, 'app/signup.html', {'form': form, 'title': 'สมัครสมาชิก'})
 
     # if request.method == 'POST':
     #     form = UserCreationForm(request.POST)
@@ -196,19 +211,110 @@ def signup(request):
     #     form = UserCreationForm()
     # return render(request, 'app/signup.html', {'form': form})
 
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+
+            current_site = get_current_site(request)
+            message = render_to_string('app/acc_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            mail_subject = 'Activate your blog account.'
+            # user.email_user(mail_subject, message)
+            user_mail = form.cleaned_data.get('email')
+            send_mail(mail_subject, message, 'siwanont.devtest@gmail.com',  [
+                      user_mail, ], fail_silently=False)
+            return redirect('/account_activation_sent')
+    else:
+        form = SignupForm()
+
+    return render(request, 'app/signup.html', {'form': form})
+
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return redirect('home')
+    else:
+        return redirect('/account_activation_invalid')
+
+
+def account_activation_invalid(request):
+    return render(request, 'app/account_activation_invalid.html')
+
+
+def account_activation_sent(request):
+    return render(request, 'app/account_activation_sent.html')
+
 
 @login_required(login_url='/login')
 def member(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    blood_abo = ['-', 'A', 'B', 'O', 'AB']
+    blood_rh = ['', 'RH ลบ', 'RH บวก']
+    status, member_detail = api.get_patients_detail(request.user.username)
+    member_detail['blood_group_abo'] = blood_abo[member_detail['blood_group_abo']]
+    member_detail['blood_group_rh'] = blood_rh[member_detail['blood_group_rh']]
+    status, orders = api.get_patient_orders(request.user.username)
     return render(
         request,
         'app/member.html',
         {
-            'title': 'แก้ไขข้อมูลสมาชิก'
+            'title': 'ข้อมูลสมาชิก',
+            'member_detail': member_detail,
+            'orders': orders
         }
     )
 
+def edit_member_info(request):
+    assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        email = request.POST['email']
+        status = request.POST['status']
+        telephone_number = request.POST['telephone_number']
+        emergency_phone = request.POST['emergency_phone']
+        status, member_detail = api.get_patients_detail(request.user.username)
+        
+        # เอาค่า email, status ..... เอาไปใส่ใน field ของ dict member_detail แล้วเอา member_detail แต่ละ field ไปแทนใน paramenter ใน function ข้างล่าง
+        member_detail['email'] = email
+        member_detail['status'] = status
+        member_detail['telephone_number'] = telephone_number
+        member_detail['emergency_phone'] = emergency_phone
+        query_status, result = api.update_patient_profile(member_detail['username'], member_detail['patient_name_title'], member_detail['patient_name'], 
+		                       member_detail['patient_surname'], member_detail['patient_img'], member_detail['id_card_number'], member_detail['gender'],
+                 		       member_detail['birthday'].year, member_detail['birthday'].month, member_detail['birthday'].day, 
+                 		       member_detail['blood_group_abo'], member_detail['blood_group_rh'], member_detail['race'], member_detail['nationallity'],
+				 		       member_detail['religion'], member_detail['status'], member_detail['patient_address'], member_detail['occupy'], member_detail['telephone_number'], 
+				 		       member_detail['father_name'], member_detail['mother_name'], member_detail['emergency_name'],
+				 		       member_detail['emergency_phone'], member_detail['emergency_addr'], member_detail['email'], member_detail['congenital_disease'])
+    blood_abo = ['-', 'A', 'B', 'O', 'AB']
+    blood_rh = ['', 'RH ลบ', 'RH บวก']
+    status, member_detail = api.get_patients_detail(request.user.username)
+    member_detail['blood_group_abo'] = blood_abo[member_detail['blood_group_abo']]
+    member_detail['blood_group_rh'] = blood_rh[member_detail['blood_group_rh']]
+    return render(
+        request,
+        'app/edit-member.html',
+        {
+            'title': 'แก้ไขข้อมูลสมาชิก',
+            'member_detail': member_detail,
+        }
+    )
 
 def departments(request):
     """Renders the about page."""
@@ -267,7 +373,7 @@ def search_for_doctor(request):
     if 'selected_package' not in request.session:
         return redirect('/departments/')
     if request.method == 'POST':
-        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
+        request.session['selected_doctor'] = request.POST['doctor_id']
         return redirect('/doctor-detail/')
     print(request.session['selected_package'])
     assert isinstance(request, HttpRequest)
@@ -279,7 +385,6 @@ def search_for_doctor(request):
         }
     )
 
-@staff_member_required(login_url='/login')
 def doctor_search_api(request):
     package_id = request.session['selected_package']
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
@@ -299,10 +404,11 @@ def doctor(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
-        request.session['selected_package'] = 'p00006'
-        request.session['selected_doctor'] = {'doctor_name': request.POST['doctor_name'], 'doctor_surname': request.POST['doctor_surname']}
+        request.session['selected_package'] = request.POST['package_id']
+        request.session['selected_doctor'] = request.POST['doctor_id']
         return redirect('/doctor-detail/')
     status, result = api.show_doctor_in_department()
+    print(result)
     return render(
         request,
         'app/doctor.html',
@@ -320,13 +426,12 @@ def confirm(request):
     if 'selected_package' not in request.session or 'selected_doctor' not in request.session or 'selected_date' not in request.session:
         return redirect('/doctor-detail/')
     if request.method == 'POST':
-        status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
-        status, result = api.create_order(request.session['selected_package'], doctor['username'], request.user.username, '-', request.session['selected_date'])
+        status, result = api.create_order(request.session['selected_package'], request.session['selected_doctor'], request.user.username, '-', request.session['selected_date'])
         if status:
             return redirect('/')
     # print(request.session['selected_date'])
     status, package = api.show_special_package_info(request.session['selected_package'])
-    status, doctor = api.show_detail(request.session['selected_doctor']['doctor_name'], request.session['selected_doctor']['doctor_surname'])
+    status, doctor = api.show_doctor_detail(request.session['selected_doctor'])
     month = [
         'มกราคม' ,
         'กุมภาพันธ์' ,

@@ -47,8 +47,6 @@ class show_profile_api :
 		])
 
 	def show_profile(self, username) :
-		if username == None :
-			return False, 'Incomplete input: username'
 		patients = self.get_patients_profile_query(username)
 		for patient in patients:
 			patient.pop('_id',None)

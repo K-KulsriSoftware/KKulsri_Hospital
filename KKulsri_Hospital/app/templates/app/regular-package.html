@@ -24,18 +24,20 @@
         </div> -->
 
         {% for package in packages%}
-        <div class="row-data">
-            <div class="row-data-name">
-                <span class="row-data-name-span">{{package.package_name}}</span>
-            </div>
-            <div class="row-data-button">
-                <form action="." method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="package" value="{{ package.package_id }}">
-                    <button class="btn btn-default plam" type="submit" id={{package_package_id}}><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
-                </form>
-            </div>
-        </div>
+            {% if package.package_name != 'นัดหมายแพทย์' %}
+                <div class="row-data">
+                    <div class="row-data-name">
+                        <span class="row-data-name-span">{{package.package_name}}</span>
+                    </div>
+                    <div class="row-data-button">
+                        <form action="." method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="package" value="{{ package.package_id }}">
+                            <button class="btn btn-default plam" type="submit" id={{package_package_id}}><span class="choosebtn">เลือก</span><span class="icon-choobtn glyphicon glyphicon-shopping-cart"></span></button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
 
         <div class="detail-conditions">

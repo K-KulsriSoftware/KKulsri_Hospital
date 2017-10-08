@@ -15,6 +15,7 @@ class show_doctor_in_department_api :
 					{
 						'$push' :
 						{
+							'doctor_id' : '$_id',
 							'doctor_name_title' : '$doctor_name_title',
 							'doctor_name' : '$doctor_name',
 							'doctor_name_surname' : '$doctor_surname',
@@ -28,7 +29,7 @@ class show_doctor_in_department_api :
 				{
 					'from' : 'departments',
 		            'localField' : '_id',
-		            'foreignField' : 'department_id',
+		            'foreignField' : '_id',
 		            'as' : 'department'
 				}
 			},
@@ -45,7 +46,34 @@ class show_doctor_in_department_api :
             },
             {
                 '$unwind' : '$department_description'
-            }
+            },
+			{
+				'$lookup': 
+				{
+					'from': 'packages',
+					'localField': '_id',
+					'foreignField': 'department_id',
+					'as': 'package'
+				}
+			},
+			{
+				'$unwind': '$package'
+			},
+			{
+				'$match': 
+				{
+					'package.package_name': 'นัดหมายแพทย์'
+				}
+			},
+			{
+				'$project' :
+				{
+					'department_name' : 1,
+					'department_description' : 1,
+					'doctors' : 1,
+					'package_id' : '$package._id'
+				}
+			},
 		])
 
 	def show_doctor_in_department(self) :

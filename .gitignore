@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 /KKulsri_Hospital/KKulsri_Environment
+
+KKulsri_Hospital/app/API/config.json

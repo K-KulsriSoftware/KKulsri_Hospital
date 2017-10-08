@@ -61,8 +61,6 @@ class show_confirmation_info_api :
 		])
 
 	def show_confirmation_info(self,package_id, doctor_id, username, time) :
-		if package_id == None or doctor_id == None or package_id == None or time == None :
-			return False,'Incomplete input: package_id, doctor_id, package_id, time'
 		packages = self.get_packages_query(package_id)
 		res_package = ''
 		for package in packages:

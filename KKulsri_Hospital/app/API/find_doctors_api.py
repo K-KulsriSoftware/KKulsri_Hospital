@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+from bson.objectid import ObjectId
 class find_doctors_api :
 
 	def __init__(self, db) :
@@ -23,7 +23,7 @@ class find_doctors_api :
 		    {
 		        '$match' :
 		        {
-		            'package_id' : package_id
+		            '_id' : ObjectId(package_id)
 		        }
 		    },
 		    {
@@ -40,7 +40,7 @@ class find_doctors_api :
 		        {
 		            'from' : 'departments',
 		            'localField' : 'department_id',
-		            'foreignField' : 'department_id',
+		            'foreignField' : '_id',
 		            'as' : 'department'
 		        }
 		    },
@@ -53,6 +53,7 @@ class find_doctors_api :
 		    {
 		        '$project' :
 		        {
+					'doctor_id': '$doctor._id',
 		            'username' : '$doctor.username',
 		            'doctor_name_title' : '$doctor.doctor_name_title',
 		            'doctor_name' : '$doctor.doctor_name',
@@ -66,32 +67,33 @@ class find_doctors_api :
 		])
 
 	def check_correct_conditions(self, doctor, days, time, doctor_firstname, doctor_lastname, gender) :
-		if doctor_firstname != None :
+		if doctor_firstname != None and doctor_firstname != '' :
 			if not doctor_firstname in doctor['doctor_name'] :
 				return False
-		if doctor_lastname != None :
+		if doctor_lastname != None and doctor_firstname != '' :
 			if not doctor_lastname in doctor['doctor_surname'] :
 				return False
-		if gender != None :
+		if gender != None and gender != '' :
 			if self.translate_gender(gender) != doctor['gender'] :
 				return False
-		if days != None and time != None :
+		if days != None and time != None and days != [] and time != '' :
 			check = True
 			for day in days :
-				for working_time in doctor['working_time'][day] :
-					for now_check_time in range(working_time['start'], working_time['finish']) :
-						if (time == 'ช่วงเช้า' and 9 <= now_check_time <= 12) or (time == 'ช่วงบ่าย' and 13 <= now_check_time <= 17) :
-							check = False
+				if day in doctor['working_time']:
+					for working_time in doctor['working_time'][day] :
+						for now_check_time in range(int(working_time['start']), int(working_time['finish'])) :
+							if (time == 'ช่วงเช้า' and 9 <= now_check_time <= 12) or (time == 'ช่วงบ่าย' and 13 <= now_check_time <= 17) :
+								check = False
 			if check :
 				return False
-		elif days != None :
+		elif days != None and days != [] :
 			check = True
 			for day in days :
 				if len(doctor['working_time'][day]) > 0 :
 					check = False
 			if check :
 				return False
-		elif time != None :
+		elif time != None and time != '' :
 			check = True
 			for day in doctor['working_time'] :
 				for working_time in doctor['working_time'][day] :
@@ -103,8 +105,6 @@ class find_doctors_api :
 		return True
 
 	def find_doctors(self, package_id, days, time, doctor_firstname, doctor_lastname, gender) :
-		if package_id == None :
-			return False, 'Incomplete input: package_id'
 		doctors = self.get_doctors_query(package_id)
 		result_doctors = []
 		for doctor in doctors :
@@ -112,5 +112,6 @@ class find_doctors_api :
 				doctor.pop('_id', None)
 				doctor.pop('working_time', None)
 				doctor.pop('gender', None)
+				doctor['doctor_id'] = str(doctor['doctor_id'])
 				result_doctors.append(doctor)
 		return True, result_doctors
