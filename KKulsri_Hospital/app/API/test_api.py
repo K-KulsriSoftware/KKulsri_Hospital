@@ -234,16 +234,16 @@ status, result = api.register("watermelon", "นางสาว", "สมหญ�
 #status,result = api.show_special_package_info('p00002')
 
 #test create_order
-'''
-status,result = api.create_order('59d8bc02612d9a6b5fb41c33', '59d8ca694ddf3286ea4e5f4f', '59d89ca57434c9e2a98088f3', 'test notice',
+
+status,result = api.create_order('59d8bc02612d9a6b5fb41c33', '59d8ca694ddf3286ea4e5f4f', 'ongnial', 'test notice',
 				{
     	    		'year' : 2018,
-					'date' : 13,
-					'month' : 11,
+					'date' : 17,
+					'month' : 12,
 					'start_hr' : 9,
 					'finish_hr' : 10,
     			})
-'''
+
 
 #test show_confirmation_info
 '''
@@ -267,7 +267,7 @@ status,result = api.show_confirmation_info('p00003','d002', 'admao',
 #status, result = api.get_patient_orders('ongniel')
 
 #test get_doctor_orders()
-status, result = api.get_doctor_orders('d0006')
+#status, result = api.get_doctor_orders('d0006')
 
 if status :
 	pprint(result)
