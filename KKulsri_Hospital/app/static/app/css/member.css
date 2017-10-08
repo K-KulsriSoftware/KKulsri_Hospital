@@ -1,5 +1,8 @@
+.member-image-wrapper {
+  overflow: hidden;
+}
+
 img.member-image{
-  width:100%;
   height:300px;
 }
 
