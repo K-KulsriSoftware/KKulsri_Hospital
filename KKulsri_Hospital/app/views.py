@@ -287,7 +287,7 @@ def edit_member_info(request):
         status = request.POST['status']
         telephone_number = request.POST['telephone_number']
         emergency_phone = request.POST['emergency_phone']
-        status, member_detail = api.get_patients_detail(request.user.username)
+        query_status, member_detail = api.get_patients_detail(request.user.username)
         
         # เอาค่า email, status ..... เอาไปใส่ใน field ของ dict member_detail แล้วเอา member_detail แต่ละ field ไปแทนใน paramenter ใน function ข้างล่าง
         member_detail['email'] = email
