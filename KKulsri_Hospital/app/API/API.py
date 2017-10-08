@@ -3,7 +3,7 @@
 import urllib.parse
 from pymongo import MongoClient
 import json
-
+'''
 #for website
 from .find_doctors_api import find_doctors_api
 from .show_profile_api import show_profile_api
@@ -45,15 +45,15 @@ from patients_query_api import patients_query_api
 from packages_query_api import packages_query_api
 from orders_query_api import orders_query_api
 from get_collection_pattern_api import get_collection_pattern_api
-'''
+
 
 class API :
 
 	def __init__(self) :
 		#for test api
-		#with open('./config.json', 'r') as json_file :
+		with open('./config.json', 'r') as json_file :
 		#for website
-		with open('./app/API/config.json', 'r') as json_file :
+		#with open('./app/API/config.json', 'r') as json_file :
 			data = json.load(json_file)
 			username = urllib.parse.quote_plus(data['username'])
 			password = urllib.parse.quote_plus(data['password'])
@@ -145,10 +145,10 @@ class API :
 		if check : return True, result
 		return self.show_confirmation_info_api.show_confirmation_info(package_id, doctor_id, username, time)
 
-	def create_order(self,package_id=None, doctor_id=None, username=None, notice='', time=None, bought_time=None) :
+	def create_order(self,package_id=None, doctor_id=None, username=None, notice='', time=None) :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
-		return self.create_order_api.create_order(package_id, doctor_id, username, notice, time, bought_time)
+		return self.create_order_api.create_order(package_id, doctor_id, username, notice, time)
 
 ###############
 

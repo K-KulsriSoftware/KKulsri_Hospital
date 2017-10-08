@@ -136,13 +136,13 @@ status, result = api.update_order(order_id = "o0000099", package_id = "p0000999"
 
 #test insert_order
 '''
-status, result = api.create_order(order_id = "o0000099", package_id = "p0000999", doctor_id = "d0099", username = "99", notice = "9", cost = 9.9,
+status, result = api.create_order(order_id = 'o000001', package_id = 'p0000999', doctor_id = 'd0099', username = '99', notice = '9', cost = 9.9,
 								time = {
-				    	    		"year" : 2018,
-									"date" : 13,
-									"month" : 11,
-									"start_hr" : 9,
-									"finish_hr" : 10,
+				    	    		'year' : 2018,
+									'date' : 13,
+									'month' : 11,
+									'start_hr' : 9,
+									'finish_hr' : 10,
 				    			} )
 '''
 #######Jakapong Mo END
@@ -234,16 +234,14 @@ status, result = api.register("watermelon", "นางสาว", "สมหญ�
 #status,result = api.show_special_package_info('p00002')
 
 #test create_order
-'''
-status,result = api.create_order('p00003','d002', 'admao', 'test notice',
+status,result = api.create_order('59d8bc02612d9a6b5fb41c33', '59d8ca694ddf3286ea4e5f4f', '59d89ca57434c9e2a98088f3', 'test notice',
 				{
-    	    		"year" : 2018,
-					"date" : 13,
-					"month" : 11,
-					"start_hr" : 9,
-					"finish_hr" : 10,
+    	    		'year' : 2018,
+					'date' : 13,
+					'month' : 11,
+					'start_hr' : 9,
+					'finish_hr' : 10,
     			})
-'''
 
 #test show_confirmation_info
 '''
