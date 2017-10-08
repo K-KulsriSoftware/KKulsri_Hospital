@@ -332,6 +332,7 @@ def departments(request):
         del request.session['selected_package']
     assert isinstance(request, HttpRequest)
     status, result = api.show_departments()
+    print(request.session['user'])
     return render(
         request,
         'app/departments.html',
@@ -567,5 +568,6 @@ def login(request):
 
 def logout(request):
     assert isinstance(request, HttpRequest)
-    request.session['user']['is_authenticated'] = False
+    request.session['user'] = {'is_authenticated': False}
+    print(request.session['user'])
     return redirect('/')
