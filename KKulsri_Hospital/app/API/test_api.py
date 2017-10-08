@@ -74,6 +74,10 @@ status, result = api.update_patient_profile("watermelon", "นาง", "สม�
 							  "วิศรุต ชำนาญคอม", "วริศรา หล่อเภรี", "มหาอินทร์ การช่างเยี่ยม", "0845263254", "98/14 ทองหล่อ กทม",
 							  "st@gmail.com", [])
 '''
+status, result = api.update_patient_profile("booktay", "นาย", "องเนียล", "คัง", "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/15726866_1370353863009540_4965290848458318950_n.jpg?oh=c044e7f534bde74389423b1f508fe367&oe=5A3B122E", "11002233004506", True, 1989,
+							  12, 31, 1, 2, "ไทย", "ไทย", "พุทธ", 1, "37/16 สุขุมวิทย์ กทม", "นักศึกษา", "0881020304",
+							  "คังแดเชียล", "อง ซองอู", "คิม แจฮวาน", "0845263254", "98/14 ทองหล่อ กทม",
+							  "jaehwan@wannaone.th", [])
 #test delete_patient
 #status, result = api.delete_patient(username='eiei')
 
@@ -234,7 +238,7 @@ status, result = api.register("watermelon", "นางสาว", "สมหญ�
 #status,result = api.show_special_package_info('p00002')
 
 #test create_order
-
+'''
 status,result = api.create_order('59d8bc02612d9a6b5fb41c33', '59d8ca694ddf3286ea4e5f4f', 'ongniel', 'test notice',
 				{
     	    		'year' : 2018,
@@ -243,7 +247,7 @@ status,result = api.create_order('59d8bc02612d9a6b5fb41c33', '59d8ca694ddf3286ea
 					'start_hr' : 9,
 					'finish_hr' : 10,
     			})
-
+'''
 
 #test show_confirmation_info
 '''
