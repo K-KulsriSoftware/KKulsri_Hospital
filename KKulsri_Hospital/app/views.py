@@ -187,11 +187,11 @@ def signup(request):
         raw_password = request.POST['password1']
         status, result = api.add_account(username, raw_password)
         if status:
-            status, result = api.register(username, '', '', '', '',
-                    '', True, 2017, 10, 2,
-                    0, 0, '', '', '', 0,
-                    '', '', '', '', '', '',
-                    '', '', '', [], True)
+            # status, result = api.register(username, '', '', '', '',
+            #         '', True, 2017, 10, 2,
+            #         0, 0, '', '', '', 0,
+            #         '', '', '', '', '', '',
+            #         '', '', '', [], True)
             request.session['user'] = {'username': request.POST['username'], 'is_authenticated': True}
             request.session['just_regis'] = True
             return redirect('/register')
