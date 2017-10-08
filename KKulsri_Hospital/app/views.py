@@ -291,14 +291,17 @@ def edit_member_info(request):
         status, member_detail = api.get_patients_detail(request.user.username)
         
         # เอาค่า email, status ..... เอาไปใส่ใน field ของ dict member_detail แล้วเอา member_detail แต่ละ field ไปแทนใน paramenter ใน function ข้างล่าง
-
-        query_status, result = api.update_patient_profile(username, patient_name_title, patient_name, 
-		                       patient_surname, patient_img, id_card_number, gender,
-                 		       order_ids, birthday_year, birthday_month, birthday_day, 
-                 		       blood_group_abo, blood_group_rh, race, nationallity,
-				 		       religion, status, patient_address, occupy, telphone_number, 
-				 		       father_name, mother_name, emergency_name,
-				 		       emergency_phone, emergency_address, email, congenital_disease)
+        member_detail['email'] = email
+        member_detail['status'] = status
+        member_detail['telephone_number'] = telephone_number
+        member_detail['emergency_phone'] = emergency_phone
+        query_status, result = api.update_patient_profile(member_detail['username'], member_detail['patient_name_title'], member_detail['patient_name'], 
+		                       member_detail['patient_surname'], member_detail['patient_img'], member_detail['id_card_number'], member_detail['gender'],
+                 		       member_detail['order_ids'], member_detail['birthday_year'], member_detail['birthday_month'], member_detail['birthday_day'], 
+                 		       member_detail['blood_group_abo'], member_detail['blood_group_rh'], member_detail['race'], member_detail['nationallity'],
+				 		       member_detail['religion'], member_detail['status'], member_detail['patient_address'], member_detail['occupy'], member_detail['telephone_number'], 
+				 		       member_detail['father_name'], member_detail['mother_name'], member_detail['emergency_name'],
+				 		       member_detail['emergency_phone'], member_detail['emergency_address'], member_detail['email'], member_detail['congenital_disease'])
     blood_abo = ['-', 'A', 'B', 'O', 'AB']
     blood_rh = ['', 'RH ลบ', 'RH บวก']
     status, member_detail = api.get_patients_detail(request.user.username)
