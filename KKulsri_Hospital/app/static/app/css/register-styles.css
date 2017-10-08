@@ -31,7 +31,7 @@ div.row.space_top{
   margin:20px 0 0 0;
 }
 
-div.plam{
+div.edge-top{
   border-color:#c0dfd9;
   border-style:solid;
   border-width:1px;
@@ -63,7 +63,7 @@ input#input_username{
   font-size:20px;
 }
 
-div.teub{
+div.tab-top{
   height:10px;
   background-color:#8dd9ca;
   border-radius:5px;
@@ -76,7 +76,7 @@ div.col-md-3{
 }
 
 @media (min-width:768px) {
-  div.plamm{
+  div.title-register{
     height:45px;
     margin-left:8%;
     width:22%;
@@ -170,7 +170,7 @@ div.col-md-1{
   width:65px;
 }
 
-span.name{
+span.box-patient-name{
   font-size:16px;
   color:#3b3a36;
 }
@@ -251,8 +251,8 @@ input{
 
 @media (min-width:768px) {
   input.inold{
-    width:45%;
-    margin-left:10px;
+    width:44%;
+    margin-left:5px;
   }
 }
 
@@ -264,8 +264,8 @@ input{
 
 @media (min-width:768px) {
   input.insex{
-    width:50%;
-    margin-left:10px;
+    width:44%;
+    margin-left:5px;
   }
 }
 
@@ -275,8 +275,15 @@ div.col-md-2.colblood{
 
 @media (min-width:768px) {
   input.inblood{
-    width:45%;
-    margin-left:10px;
+    width:47%;
+    margin-left:5px;
+  }
+}
+
+@media (min-width:768px) {
+  input.inrh{
+    width:50%;
+    margin-left:5px;
   }
 }
 
@@ -326,7 +333,7 @@ div.col-md-2.colinlastname{
 }
 
 @media (min-width:768px) {
-  div.name{
+  div.box-patient-name{
     width:33%;
     float:left;
     display:inline-block;
@@ -347,13 +354,13 @@ div.col-md-2.colinlastname{
 
 @media (min-width:768px) {
   input.inyear{
-    width:36%;
+    width:30%;
   }
 }
 
 @media (min-width:768px) {
-  div.dbir{
-    width:25%;
+  div.box-birthday{
+    width:20%;
   }
 }
 
@@ -362,29 +369,30 @@ div.col-md-2.colinlastname{
   /*height:40px;*/
 }
 
-div.marr div {
+div.box-content div {
   float:left;
 }
 
 @media (min-width:768px) {
-  div.dold{
-    width:17%;
+  div.box-age{
+    width:14%;
   }
 }
-
+/*
 @media (min-width:768px) {
   div.blood{
     width:17%;
   }
 }
+*/
 
 @media (min-width:768px) {
-  div.dlok{
+  div.box-congenital-disease{
     width:47%;
   }
 }
 
-div.dtel{
+div.box-telphone-number{
   width:97%;
 }
 
@@ -419,7 +427,7 @@ div.dtel{
 }
 
 @media (min-width:768px) {
-  div.marr{
+  div.box-content{
     width:100%;
     height:auto;
     margin-left:35px;
@@ -434,20 +442,26 @@ div.dtel{
 }
 
 @media (min-width:768px) {
-  div.surname{
+  div.box-patient-surname{
     width:38%;
   }
 }
 
 @media (min-width:768px) {
-  div.dsex{
-    width:17%;
+  div.box-gender{
+    width:15%;
   }
 }
 
 @media (min-width:768px) {
-  div.dblood{
-    width:22%;
+  div.box-blood{
+    width:25%;
+  }
+}
+
+@media (min-width:768px) {
+  div.box-rh{
+    width:13%;
   }
 }
 
@@ -486,7 +500,7 @@ div.col1.confirmcheckbox{
 }
 
 @media (min-width:768px) {
-  div.dnationn{
+  div.box-nationality{
     width:24%;
   }
 }
@@ -499,7 +513,7 @@ div.col1.confirmcheckbox{
 }
 
 @media (min-width:768px) {
-  div.dregion{
+  div.box-religion{
     width:22%;
   }
 }
@@ -512,7 +526,7 @@ div.col1.confirmcheckbox{
 }
 
 @media (min-width:768px) {
-  div.dnow{
+  div.box-status{
     width:27%;
   }
 }
@@ -535,7 +549,7 @@ input.innow{
 }
 
 @media (min-width:768px) {
-  div.dlive{
+  div.box-occupy{
     width:58%;
   }
 }
@@ -547,7 +561,7 @@ input.innow{
   }
 }
 
-div.dlive2{
+div.box-occupy-continue{
   width:100%;
 }
 
@@ -565,7 +579,7 @@ div.dlive2{
 }
 
 @media (min-width:768px) {
-  div.demail{
+  div.box-email{
     width:50%;
   }
 }
@@ -586,7 +600,7 @@ div.d{
   width:700px;
 }
 
-div.dfather{
+div.box-father-name{
   width:97%;
 }
 
@@ -672,28 +686,28 @@ select#INow.innow{
   }
 }
 
-div.ddus{
+div.box-username{
   width:170px;
 }
 
-div.ddpass{
+div.box-password{
   width:170px;
 }
 
-div.ddcon{
+div.box-confirm-password{
   width:170px;
 }
 
-span.ddidcard{
+span.box-id-card-number{
   width:170px;
 }
 
-div.ddidcard{
+div.box-id-card-number{
   width:170px;
 }
 
 @media (min-width:768px) {
-  div.ddmr{
+  div.box-patient-name-title{
     width:12%;
   }
 }
@@ -739,7 +753,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.plamm{
+  div.title-register{
     height:45px;
     margin-left:8%;
     width:22%;
@@ -776,7 +790,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.ddmr{
+  div.box-patient-name-title{
     width:9.5%;
   }
 }
@@ -790,7 +804,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.name{
+  div.box-patient-name{
     width:37%;
     float:left;
     display:inline-block;
@@ -805,7 +819,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.surname{
+  div.box-patient-surname{
     width:40%;
   }
 }
@@ -826,7 +840,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.marr{
+  div.box-content{
     width:100%;
     height:auto;
     margin-left:50px;
@@ -853,53 +867,66 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.dbir{
+  div.box-birthday{
     width:20%;
   }
 }
 
 @media (min-width:1024px) {
   input.inold{
-    width:49%;
+    width:45%;
     margin-left:10px;
   }
 }
 
 @media (min-width:1024px) {
-  div.dold{
+  div.box-age{
     width:18%;
   }
 }
 
 @media (min-width:1024px) {
-  div.dsex{
-    width:19%;
+  div.box-gender{
+    width:14%;
   }
 }
-
+/*
 @media (min-width:1024px) {
-  div.dblood{
+  div.box-blood{
     width:23%;
   }
 }
-
+*/
 @media (min-width:1024px) {
   input.insex{
-    width:49%;
+    width:44%;
     margin-left:10px;
   }
 }
 
 @media (min-width:1024px) {
   input.inblood{
-    width:43%;
+    width:47%;
     margin-left:10px;
   }
 }
 
 @media (min-width:1024px) {
-  div.dblood{
-    width:24%;
+  input.inrh{
+    width:49%;
+    margin-left:10px;
+  }
+}
+
+@media (min-width:1024px) {
+  div.box-blood{
+    width:21%;
+  }
+}
+
+@media (min-width:1024px) {
+  div.box-rh{
+    width:10%;
   }
 }
 
@@ -923,7 +950,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.dnationn{
+  div.box-nationality{
     width:26%;
   }
 }
@@ -936,7 +963,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.dregion{
+  div.box-religion{
     width:24%;
   }
 }
@@ -952,7 +979,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.dnow{
+  div.box-status{
     width:25%;
   }
 }
@@ -977,7 +1004,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.dlive{
+  div.box-occupy{
     width:62%;
   }
 }
@@ -996,7 +1023,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.dlok{
+  div.box-congenital-disease{
     width:43%;
   }
 }
@@ -1009,7 +1036,7 @@ div.ddidcard{
 }
 
 @media (min-width:1024px) {
-  div.demail{
+  div.box-email{
     width:54%;
   }
 }
