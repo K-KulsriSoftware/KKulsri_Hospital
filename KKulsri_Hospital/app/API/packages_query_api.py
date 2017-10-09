@@ -85,7 +85,7 @@ class packages_query_api :
 		return True, 'Successfully Removed'
 
 
-	def insert_package(self,package_id, package_name,  package_cost, department_id, description, conditions, package_notice, building_id) :
+	def insert_package(self, package_id, package_name,  package_cost, department_id, description, conditions, package_notice, building_id) :
 		self.db.packages.insert(
 			{
                 'package_id': package_id ,

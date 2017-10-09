@@ -324,6 +324,10 @@ class API :
 			   blood_group_rh, race, nationallity, religion, status, patient_address, occupy, telphone_number,
 			   father_name, mother_name, emergency_name, emergency_phone, emergency_address, email, congenital_disease)
 
+	def check_already_used_this_username(self, username=None) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
+		return self.patients_query_api.check_already_used_this_username(username)
 #############
 
 	def get_all_packages(self) :
