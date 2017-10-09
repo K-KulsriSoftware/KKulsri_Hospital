@@ -65,7 +65,7 @@ class API :
 			username = urllib.parse.quote_plus(data['username'])
 			password = urllib.parse.quote_plus(data['password'])
 			db = data['db']
-			self.client = MongoClient(f'mongodb://{username}:{password}@{db}')
+			self.client = MongoClient('mongodb://%s:%s@%s' % (username, password, db))
 		self.db = self.client.kkulsridb
 		self.find_doctors_api = find_doctors_api(self.db)
 		self.show_profile_api = show_profile_api(self.db)
