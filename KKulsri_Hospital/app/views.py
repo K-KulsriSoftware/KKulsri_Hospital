@@ -501,6 +501,9 @@ def login(request):
     if request.method == 'POST':
         status, username = api.verify_password(request.POST['username'], request.POST['password'])
         if status:
+            status, result = api.check_already_used_this_username(request.POST['username'])
+            if not status:
+                request.session['just_regis'] = True
             request.session['user'] = {'username': request.POST['username'], 'is_authenticated': True}
             return redirect(request.POST['next'])
             

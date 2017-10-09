@@ -137,8 +137,8 @@ class patients_query_api :
 	    )
 		return True,'Successfully Added'
 
-    def check_already_used_this_username(self, username) :
-        cursor = self.db.patients.aggregate([
+	def check_already_used_this_username(self, username) :
+		cursor = self.db.patients.aggregate([
         	{
         		'$match' :
         		{
@@ -146,6 +146,6 @@ class patients_query_api :
         		}
         	}
         ])
-        for temp in cursor :
-        	return True, 'User Already Used'
-        return False, 'User Inactivate'
+		for temp in cursor :
+			return True, 'User Already Used'
+		return False, 'User Inactivate'
