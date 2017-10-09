@@ -360,6 +360,7 @@ def doctor_search_api(request):
     package_id = request.session['selected_package']
     days = request.GET.get('days').split(',') if request.GET.get('days') != None else None
     time = request.GET.get('time')
+    print(time)
     doctor_firstname = request.GET.get('doctor_firstname')
     doctor_lastname = request.GET.get('doctor_surname')
     gender = request.GET.get('gender')
