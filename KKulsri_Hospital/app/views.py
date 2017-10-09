@@ -152,11 +152,11 @@ def register(request):
         congenital_disease = request.POST['congenital_disease'].split(',')
         # เติมให้ครบ
 
-        status, result = api.register(request.session['user']['username'], patient_name_title, patient_name, patient_surname, '',
+        status, result = api.update_patient_profile(request.session['user']['username'], patient_name_title, patient_name, patient_surname, '',
                                       id_card_number, gender, birthday_year, birthday_month, birthday_day,
                                       blood_group_abo, blood_group_rh, race, nationallity, Religion, Status,
                                       pateint_address, occupy, telphone_number, father_name, mother_name, emergency_name,
-                                      emergency_phone, emergency_addr, email, congenital_disease, True)
+                                      emergency_phone, emergency_addr, email, congenital_disease)
         if status:
             del request.session['just_regis']
             print(request.session['user'])
@@ -187,11 +187,11 @@ def signup(request):
         raw_password = request.POST['password1']
         status, result = api.add_account(username, raw_password)
         if status:
-            # status, result = api.register(username, '', '', '', '',
-            #         '', True, 2017, 10, 2,
-            #         0, 0, '', '', '', 0,
-            #         '', '', '', '', '', '',
-            #         '', '', '', [], True)
+            status, result = api.register(username, '', '', '', '',
+                    '', True, 2017, 10, 2,
+                    0, 0, '', '', '', 0,
+                    '', '', '', '', '', '',
+                    '', '', '', [], True)
             request.session['user'] = {'username': request.POST['username'], 'is_authenticated': True}
             request.session['just_regis'] = True
             return redirect('/register')
