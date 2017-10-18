@@ -26,7 +26,7 @@ SECRET_KEY = '1602601c-0fde-412e-948e-7c449693fa0c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['localhost', 'kkulsri.cloudapp.net']
+# ALLOWED_HOSTS = ['']
 
 
 # Application definition
@@ -46,13 +46,14 @@ INSTALLED_APPS = [
     'bootstrapform',
 
     'allauth',
-    # 'allauth.account',
+    'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable:
 
 ]
 
 # AUTH_USER_MODEL = 'app.User'
+
 SITE_ID = 1
 
 MIDDLEWARE_CLASSES = [
@@ -89,15 +90,6 @@ WSGI_APPLICATION = 'KKulsri_Hospital.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-# 'default': {
-#         'NAME': 'member',
-#         'ENGINE': 'sqlserver_ado',
-#         'HOST': 'kkulsri.cloudapp.net',
-#         'PORT': '1433',
-#         'USER': 'SA',
-#         'PASSWORD': 'IadU3Zdvrt&UV^c%$lIQ',
-#     }
 
 DATABASES = {
     'default': {
@@ -153,17 +145,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 LOGIN_REDIRECT_URL = 'home'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = "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"
+SENDGRID_API_KEY = ""
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'booktay'
-EMAIL_HOST_PASSWORD = 'p0W#1$TIZ9RSmQ9wq@ND'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+try:
+   from config import *
+except ImportError:
+   pass

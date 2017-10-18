@@ -262,3 +262,4 @@ __pycache__/
 /KKulsri_Hospital/KKulsri_Environment
 
 KKulsri_Hospital/app/API/config.json
+KKulsri_Hospital/KKulsri_Hospital/config.py
