@@ -89,8 +89,9 @@ class find_doctors_api :
 		elif days != None and days != [] :
 			check = True
 			for day in days :
-				if len(doctor['working_time'][day]) > 0 :
-					check = False
+				if day in doctor['working_time']:
+					if len(doctor['working_time'][day]) > 0 :
+						check = False
 			if check :
 				return False
 		elif time != None and time != '' :

@@ -4,7 +4,7 @@
 {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/member.css' %}" />
     <div class="row member">
-        <div class="col-sm-4 member-image-wrapper"><img class="member-image" src="{{ member_detail.patient_img }}"></div>
+        <div class="col-sm-4 member-image-wrapper"><img class="member-image" src="{% if member_detail.patient_img %}{{ member_detail.patient_img }}{% else %}{% static 'app/images/user.jpg' %}{% endif %}"></div>
         <div class="col-sm-8 member-content">
             <h3>{{ member_detail.patient_name_title }}{{ member_detail.patient_name }} {{ member_detail.patient_surname }}</h3>
             <div class="member-content">

@@ -26,6 +26,8 @@ from .orders_query_api import orders_query_api###Jakapong Mo
 from .get_collection_pattern_api import get_collection_pattern_api
 from .get_patient_orders_api import get_patient_orders_api
 from .get_doctor_orders_api import get_doctor_orders_api
+from .add_account_api import add_account_api
+from .verify_password_api import verify_password_api
 '''
 #for test api
 from find_doctors_api import find_doctors_api
@@ -49,6 +51,8 @@ from orders_query_api import orders_query_api
 from get_collection_pattern_api import get_collection_pattern_api
 from get_patient_orders_api import get_patient_orders_api
 from get_doctor_orders_api import get_doctor_orders_api
+from add_account_api import add_account_api
+from verify_password_api import verify_password_api
 '''
 class API :
 
@@ -84,6 +88,8 @@ class API :
 		self.get_collection_pattern_api = get_collection_pattern_api(self.db)
 		self.get_patient_orders_api = get_patient_orders_api(self.db)
 		self.get_doctor_orders_api = get_doctor_orders_api(self.db)
+		self.add_account_api = add_account_api(self.db)
+		self.verify_password_api = verify_password_api(self.db)
 
 	def incomplete_input(self, inputs) :
 		check = False
@@ -122,16 +128,16 @@ class API :
 		return self.edit_profile_api.edit_profile(username,email,telphone_number,emergency_phone,submit)
 
 	def register(self, username=None, patient_name_title=None, patient_name=None, patient_surname=None, 
-		         patient_img=None, id_card_number=None, gender=None, order_ids=None, birthday_year=None, 
+		         patient_img=None, id_card_number=None, gender=None, birthday_year=None, 
 		         birthday_month=None, birthday_day=None, blood_group_abo=None, blood_group_rh=None, race=None, 
 		         nationallity=None, religion=None, status=None, patient_address=None, occupy=None, 
-		         telphone_number=None, father_name=None, mother_name=None, emergency_name=None, 
+		         telephone_number=None, father_name=None, mother_name=None, emergency_name=None, 
 		         emergency_phone=None, emergency_address=None, email=None, congenital_disease=None, submit=False) :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
 		return self.register_api.register(username, patient_name_title, patient_name, patient_surname, patient_img, id_card_number, gender,
-					 order_ids, birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
-					 religion, status, patient_address, occupy, telphone_number, father_name, mother_name, emergency_name,
+					 birthday_year, birthday_month, birthday_day, blood_group_abo, blood_group_rh, race, nationallity,
+					 religion, status, patient_address, occupy, telephone_number, father_name, mother_name, emergency_name,
 					 emergency_phone, emergency_address, email, congenital_disease, submit)
 
 	def show_general_list(self) :
@@ -318,6 +324,10 @@ class API :
 			   blood_group_rh, race, nationallity, religion, status, patient_address, occupy, telphone_number,
 			   father_name, mother_name, emergency_name, emergency_phone, emergency_address, email, congenital_disease)
 
+	def check_already_used_this_username(self, username=None) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
+		return self.patients_query_api.check_already_used_this_username(username)
 #############
 
 	def get_all_packages(self) :
@@ -395,3 +405,13 @@ class API :
 		check, result = self.incomplete_input(locals())
 		if check : return True, result
 		return self.get_doctor_orders_api.get_doctor_orders(doctor_username)
+
+	def add_account(self, username, password) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
+		return self.add_account_api.add_account(username, password)
+
+	def verify_password(self, username, password) :
+		check, result = self.incomplete_input(locals())
+		if check : return True, result
+		return self.verify_password_api.verify_password(username, password)
